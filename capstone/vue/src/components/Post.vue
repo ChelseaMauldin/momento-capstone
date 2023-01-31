@@ -5,6 +5,7 @@
     <p>{{ post.likes }}</p>
     <p>{{ post.caption }}</p>
     <p>{{ post.comments }}</p>
+    <input class="comment-input" v-if="$store.state.token != ''" type="text" placeholder="Write a comment..." >
   </div>
 </template>
 
@@ -16,4 +17,8 @@ export default {
 </script>
 
 <style>
+.comment-input {
+  border-style: none;
+}
+
 </style>
