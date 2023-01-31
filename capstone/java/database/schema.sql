@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users, profiles, posts, comments, ratings;
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -8,6 +8,42 @@ CREATE TABLE users (
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
+);
+
+CREATE TABLE profiles (
+    profile_id SERIAL NOT NULL,
+    user_id integer NOT NULL,
+    email varchar(100) NOT NULL,
+    name varchar(100) NOT NULL,
+    profile_image varchar(100),
+    CONSTRAINT PK_profile PRIMARY KEY (profile_id),
+    CONSTRAINT FK_profile_user FOREIGN KEY (user_id) REFERENCES users (user_id)
+);
+
+CREATE TABLE posts (
+    post_id SERIAL NOT NULL,
+    username varchar(100) NOT NULL,
+    photo_url varchar(100) NOT NULL,
+    likes integer NOT NULL,
+    caption varchar(300),
+    CONSTRAINT PK_post PRIMARY KEY (post_id),
+    CONSTRAINT FK_post_user FOREIGN KEY (username) REFERENCES users (username)
+);
+
+CREATE TABLE comments (
+    comment_id SERIAL NOT NULL,
+    post_id int NOT NULL,
+    comment varchar(300) NOT NULL,
+    CONSTRAINT PK_comment PRIMARY KEY (comment_id),
+    CONSTRAINT FK_comment_post FOREIGN KEY (post_id) REFERENCES posts (post_id)
+);
+
+CREATE TABLE ratings (
+    rating_id SERIAL NOT NULL,
+    post_id int NOT NULL,
+    rating int NOT NULL,
+    CONSTRAINT PK_rating PRIMARY KEY (rating_id),
+    CONSTRAINT FK_rating_post FOREIGN KEY (post_id) REFERENCES posts (post_id)
 );
 
 COMMIT TRANSACTION;
