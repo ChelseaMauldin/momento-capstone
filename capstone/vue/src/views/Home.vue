@@ -28,7 +28,7 @@ export default {
     };
   },
   created() {
-    apiService.displayPost().then((response) => {
+    apiService.displayPosts().then((response) => {
       console.log(response.data);
       this.listOfPosts = response.data;
     });

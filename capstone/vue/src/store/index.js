@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-
+import apiService from "../services/APIService.js"
 Vue.use(Vuex)
 
 /*
@@ -19,7 +19,8 @@ if(currentToken != null) {
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    likes: Number
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -37,6 +38,20 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    ADD_LIKE(state, post){
+      apiService.displayPost(post.post_id).then(response => {
+        if(response.status==200){
+           post.likes = response.data.likes;
+        }
+      })
+    },
+    REMOVE_LIKE(state, post){
+      apiService.displayPost(post.post_id).then(response => {
+        if(response.status==200){
+           post.likes = response.data.likes;
+        }
+      })
     }
   }
 })

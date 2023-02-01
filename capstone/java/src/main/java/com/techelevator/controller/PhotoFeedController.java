@@ -25,6 +25,11 @@ public class PhotoFeedController {
         return dao.getPosts();
     }
 
+    @RequestMapping(path="/posts/{id}", method = RequestMethod.GET)
+    public Post getPost(@PathVariable int id){
+        return dao.getPost(id);
+    }
+
     @RequestMapping(path="/post/{id}/comments", method = RequestMethod.GET)
     public List<Comment> getComments(@PathVariable int id){
         return commentDao.getCommentsByPost(id);

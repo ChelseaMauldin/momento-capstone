@@ -49,7 +49,13 @@ public class JdbcPostDao implements PostDao{
 
     @Override
     public Post getPost(int id) {
-        return null;
+        String sql = "SELECT * FROM posts WHERE post_id=?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
+        Post post = new Post();
+        if (result.next()) {
+            post = mapRowToPost(result);
+        }
+        return post;
     }
 
     @Override
@@ -59,11 +65,17 @@ public class JdbcPostDao implements PostDao{
 
     @Override
     public void likePost(int id) {
-
+        String sql = "UPDATE posts \n" +
+                "SET likes = (SELECT likes FROM posts WHERE post_id=?) + 1\n" +
+                "WHERE post_id=?";
+        jdbcTemplate.update(sql, id, id);
     }
 
     @Override
     public void unLikePost(int id) {
-        
+        String sql = "UPDATE posts \n" +
+                "SET likes = (SELECT likes FROM posts WHERE post_id=?) - 1\n" +
+                "WHERE post_id=?";
+        jdbcTemplate.update(sql, id, id);
     }
 }
