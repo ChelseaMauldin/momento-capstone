@@ -56,4 +56,14 @@ public class JdbcPostDao implements PostDao{
     public void createPost(Post post) {
 
     }
+
+    @Override
+    public void likePost(int id) {
+
+    }
+
+    @Override
+    public void unLikePost(int id) {
+        
+    }
 }
