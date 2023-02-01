@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>
-      <router-link v-bind:to="{ name: 'login' }">Login</router-link>
-      <!-- &nbsp;|&nbsp; -->
-      <router-link
+      <i class="fa-solid fa-house-user">&nbsp;<router-link class="link-text" v-bind:to="{ name: 'home' }">Home</router-link></i>
+      <i v-if="$store.state.token == ''" class="fa-solid fa-arrow-right-to-bracket">&nbsp;<router-link class="link-text" v-bind:to="{ name: 'login' }">Login</router-link></i>
+      <i v-if="$store.state.token != ''" class="fa-solid fa-arrow-right-to-bracket"><router-link class="link-text"
         v-bind:to="{ name: 'logout' }"
-        v-if="$store.state.token != ''"
         >Logout</router-link
-      >
+      ></i>
+      <!-- &nbsp;|&nbsp; -->
+      
     </div>
     <div id="page">
       <div class="title">
@@ -31,10 +31,20 @@
 }
 
 #nav {
+  padding-top: 50px;
   grid-area: nav;
   display: flex;
   flex-direction: column;
   background: rgba(171, 71, 188, 0.2);
+  text-align: center;
+}
+#nav i {
+  margin: 5px 10px 10px 10px;
+}
+
+#nav i .link-text {
+  text-decoration: none;
+  color: black;
 }
 
 #page {
