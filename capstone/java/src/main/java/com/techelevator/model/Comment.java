@@ -8,16 +8,26 @@ public class Comment {
     private int commentId;
     @JsonProperty("post_id")
     private int postId;
+    private String commenter;
     private String comment;
 
-    public Comment(int commentId, int postId, String comment) {
+    public Comment(int commentId, int postId, String commenter, String comment) {
         this.commentId = commentId;
         this.postId = postId;
         this.comment = comment;
+        this.commenter = commenter;
     }
 
     public Comment() {
 
+    }
+
+    public String getCommenter() {
+        return commenter;
+    }
+
+    public void setCommenter(String commenter) {
+        this.commenter = commenter;
     }
 
     public int getCommentId() {

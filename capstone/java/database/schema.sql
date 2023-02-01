@@ -33,9 +33,11 @@ CREATE TABLE posts (
 CREATE TABLE comments (
     comment_id SERIAL NOT NULL,
     post_id int NOT NULL,
+	commenter varchar(50) NOT NULL,
     comment varchar(300) NOT NULL,
     CONSTRAINT PK_comment PRIMARY KEY (comment_id),
-    CONSTRAINT FK_comment_post FOREIGN KEY (post_id) REFERENCES posts (post_id)
+    CONSTRAINT FK_comment_post FOREIGN KEY (post_id) REFERENCES posts (post_id),
+	CONSTRAINT FK_commenter FOREIGN KEY (commenter) REFERENCES users (username) 
 );
 
 CREATE TABLE ratings (

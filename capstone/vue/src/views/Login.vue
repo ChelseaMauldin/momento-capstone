@@ -1,4 +1,8 @@
 <template>
+  <div class="main">
+    <div class="image">
+      <img id="image" src="https://res.cloudinary.com/depdfgnxo/image/upload/v1675269863/pexels-photo-952264_hxjydg.webp" alt="camera hanging from strap"/>
+    </div>
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
       <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
@@ -37,6 +41,7 @@
       
     
     </form>
+  </div>
   </div>
 </template>
 
@@ -106,6 +111,17 @@ input, .need-account{
 
 .sign-in {
 margin: 0 10px;
+}
+
+.main{
+  margin-top:100px;
+  display:flex;
+}
+#image{
+  width:200px;
+}
+#login{
+  margin-left:35px;
 }
 
 </style>
