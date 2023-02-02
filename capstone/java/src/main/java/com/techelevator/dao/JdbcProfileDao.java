@@ -3,10 +3,14 @@ package com.techelevator.dao;
 import com.techelevator.model.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
+@CrossOrigin
 public class JdbcProfileDao implements ProfileDao {
     private JdbcTemplate jdbcTemplate;
 
@@ -16,7 +20,7 @@ public class JdbcProfileDao implements ProfileDao {
 
     @Override
     public Profile getProfile(String username) {
-        String sql = "SELECT * FROM profiles WHERE username=?";
+        String sql = "SELECT * FROM profiles p JOIN users u ON p.user_id = u.user_id WHERE username=?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
         Profile profile = new Profile();
         if (result.next()) {
