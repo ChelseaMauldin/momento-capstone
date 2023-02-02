@@ -8,6 +8,8 @@ public interface PostDao {
 
     public List<Post> getPosts();
 
+    public List<Post> getPostsByUsername(String username);
+
     public Post getPost(int id);
 
     public void createPost(Post post);

@@ -36,6 +36,21 @@ public class JdbcPostDao implements PostDao{
         return posts;
     }
 
+    public List<Post> getPostsByUsername(String username) {
+        String sql = "SELECT * FROM posts WHERE username = ?" +
+                "ORDER BY post_id DESC";
+
+        List<Post> posts = new ArrayList<>();
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
+
+        while(result.next()) {
+            Post post = mapRowToPost(result);
+            posts.add(post);
+        }
+        return posts;
+    }
+
     private static Post mapRowToPost(SqlRowSet result){
             Post post = new Post();
             post.setPostId(result.getInt("post_id"));
