@@ -19,5 +19,10 @@ VALUES(2, 'user', 'Omg, what a cool shoe. What brand is it?');
 INSERT INTO comments (post_id, commenter, comment)
 VALUES (2, 'user', 'We are going to steal your shoes...jk....or not...wink wink');
 
+INSERT INTO profiles (user_id, email, name, profile_image, profile_bio)
+VALUES (1, 'fakeemail1@yahoo.com', 'RickUser', 'https://res.cloudinary.com/depdfgnxo/image/upload/v1675111884/ulbgynnx380mxbesgact.jpg', 'I like laptops');
+
+INSERT INTO profiles (user_id, email, name, profile_image, profile_bio)
+VALUES (2, 'fakeemail2@yahoo.com', 'NikeLover', 'https://res.cloudinary.com/depdfgnxo/image/upload/v1675111162/cld-sample-5.jpg', 'I like shoes');
 
 COMMIT TRANSACTION;
