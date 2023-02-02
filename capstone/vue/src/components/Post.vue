@@ -1,6 +1,6 @@
 <template>
   <div class="post-container">
-    <h3 class="username">{{ post.username }}</h3>
+    <h3 class="username"><router-link v-bind:to="{name: 'profile', params: {username: post.username}}">{{ post.username }}</router-link></h3>
     <img :src="post.photo_url" alt="`${post.username}'s image`" />
     <div class="reactions">
       <i id= "likeIcon" v-if="!liked" v-on:click="addLike(post.post_id)" class="likeButton fa-regular fa-heart"></i>

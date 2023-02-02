@@ -20,6 +20,9 @@ export default {
 
     unlike(post_id){
         return axios.put(`/post/${post_id}/unlike`)
+    },
+    displayProfile(username){
+        return axios.get(`/profiles/${username}`)
     }
 
 
