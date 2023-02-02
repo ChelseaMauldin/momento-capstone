@@ -16,6 +16,7 @@ CREATE TABLE profiles (
     email varchar(100) NOT NULL,
     name varchar(100) NOT NULL,
     profile_image varchar(100),
+    profile_bio varchar(300),
     CONSTRAINT PK_profile PRIMARY KEY (profile_id),
     CONSTRAINT FK_profile_user FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
