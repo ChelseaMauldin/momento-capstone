@@ -12,13 +12,28 @@ public class Profile {
     private String name;
     @JsonProperty("profile_image")
     private String profileImage;
+    @JsonProperty("profile_bio")
+    private String profileBio;
 
-    public Profile(int profileId, int userId, String email, String name, String profileImage) {
+    public Profile(int profileId, int userId, String email, String name, String profileImage, String profileBio) {
         this.profileId = profileId;
         this.userId = userId;
         this.email = email;
         this.name = name;
         this.profileImage = profileImage;
+        this.profileBio = profileBio;
+    }
+
+    public Profile() {
+
+    }
+
+    public String getProfileBio() {
+        return profileBio;
+    }
+
+    public void setProfileBio(String profileBio) {
+        this.profileBio = profileBio;
     }
 
     public int getProfileId() {
