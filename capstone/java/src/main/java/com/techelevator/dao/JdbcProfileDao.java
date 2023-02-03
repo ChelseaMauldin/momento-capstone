@@ -47,7 +47,7 @@ public class JdbcProfileDao implements ProfileDao {
     @Override
     public int createProfile(Profile profile) {
         String sql = "INSERT INTO profiles (user_id, email, name, profile_image, profile_bio) " +
-                     "VALUES (?, ?, ?, ?, ?)";
+                     "VALUES (?, ?, ?, ?, ?) RETURNING profile_id";
 
         int profileId;
 

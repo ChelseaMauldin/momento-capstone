@@ -10,13 +10,13 @@
     <div class="reactions" v-if="this.$route.name=='home'">
       <i
         id="likeIcon"
-        v-if="!liked"
+        v-if="!liked && $store.state.token != ''"
         v-on:click="addLike(post.post_id)"
         class="likeButton fa-regular fa-heart"
       ></i>
       <i
         class="likeButton fa-solid fa-heart"
-        v-if="liked"
+        v-if="liked && $store.state.token != ''"
         v-on:click="removeLike(post.post_id)"
       ></i>
 

@@ -74,7 +74,17 @@ public class JdbcPostDao implements PostDao{
     }
 
     @Override
-    public void createPost(Post post) {
+    public int createPost(Post post) {
+        String sql = "INSERT INTO posts (username, photo_url, likes, caption)\n" +
+                "VALUES (?, ?, ?, ?) RETURNING post_id";
+        int postId;
+        try{
+            postId=jdbcTemplate.queryForObject(sql, Integer.class, post.getUsername(), post.getPhotoUrl(), post.getLikes(), post.getCaption());
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return -1;
+        }
+        return postId;
 
     }
 

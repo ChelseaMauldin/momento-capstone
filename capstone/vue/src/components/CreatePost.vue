@@ -1,15 +1,11 @@
 <template>
-  <div class="create-main d-flex flex-column" >
+  <div class="create-main" >
       <!-- <form class="container " > -->
     
      
         <Cloudinary-Comp msg="Welcome to Your Vue.js App"/>
         
-        <textarea class="mt-5"
-        placeholder="Add a caption..."
-          id="caption-input"
-          rows="3"
-        ></textarea>
+        
      
       
 

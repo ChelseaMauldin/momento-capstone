@@ -34,4 +34,8 @@ export default {
         return axios.get(`/favorites/${username}`)
     },
 
+    createPost(post){
+        return axios.post('/posts/create', post)
+    }
+
 }

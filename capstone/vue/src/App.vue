@@ -30,8 +30,6 @@
            <create-post />
       </div>
      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -92,6 +90,9 @@ export default {
 }
 #create-modal-link{
   font-weight: bold;
+}
+#create-modal-link:hover{
+  cursor: pointer;
 }
 
 .title {
