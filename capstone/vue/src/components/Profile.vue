@@ -33,6 +33,7 @@
         v-bind:post="post"
       />
     </div>
+    
   </div>
 </template>
 

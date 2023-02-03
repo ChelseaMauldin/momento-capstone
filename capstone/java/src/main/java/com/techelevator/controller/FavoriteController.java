@@ -16,12 +16,17 @@ public class FavoriteController {
     private FavoriteDao dao;
 
     @RequestMapping(path="/favorites/{username}", method = RequestMethod.GET)
-        public List<Post> getFavorites(@PathVariable String username){
+    public List<Post> getFavorites(@PathVariable String username){
             return dao.getFavoriteListOfPosts(username);
         }
 
-        @RequestMapping(path = "/favorites/add", method = RequestMethod.POST)
-        public void addFavorite(@RequestBody Favorite favorite){
+    @RequestMapping(path="/favorites/{username}/ids", method = RequestMethod.GET)
+    public List<Integer> getFavoriteIDs(@PathVariable String username){
+        return dao.getFavoriteIds(username);
+    }
+
+    @RequestMapping(path = "/favorites/add", method = RequestMethod.POST)
+    public void addFavorite(@RequestBody Favorite favorite){
         dao.addFavorite(favorite.getUsername(), favorite.getPostId());
         }
 

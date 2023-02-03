@@ -33,5 +33,21 @@ export default {
     displayFavoritePosts(username) {
         return axios.get(`/favorites/${username}`)
     },
+    
+    displayFavoriteIds(username) {
+        return axios.get(`/favorites/${username}/ids`)
+    },
+
+    addFavoritePost(favorite){
+        return axios.post('/favorites/add', favorite)
+    },
+
+    deleteFavorite(id){
+        return axios.delete(`/favorites/${id}`)
+    }
+
+    createPost(post){
+        return axios.post('/posts/create', post)
+    }
 
 }

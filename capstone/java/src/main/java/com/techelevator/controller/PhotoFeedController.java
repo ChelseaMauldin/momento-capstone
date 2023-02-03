@@ -34,4 +34,9 @@ public class PhotoFeedController {
     public List<Comment> getComments(@PathVariable int id){
         return commentDao.getCommentsByPost(id);
     }
+
+    @RequestMapping(path="/posts/create", method= RequestMethod.POST)
+    public int createPost(@RequestBody Post post){
+        return dao.createPost(post);
+    }
 }
