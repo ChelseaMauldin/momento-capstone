@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import Profile from '../views/Profile.vue'
 import Edit from '../views/Edit.vue'
+
 Vue.use(Router)
 
 /**

@@ -1,13 +1,42 @@
 <template>
   <div id="app">
     <div id="nav">
-      <i class="fa-solid fa-house-user">&nbsp;<router-link class="link-text" v-bind:to="{ name: 'home' }">Home</router-link></i>
-      <i v-if="$store.state.token == ''" class="fa-solid fa-arrow-right-to-bracket">&nbsp;<router-link class="link-text" v-bind:to="{ name: 'login' }">Login</router-link></i>
-      <i v-if="$store.state.token != ''" class="fa-solid fa-arrow-right-to-bracket"><router-link class="link-text"
+      <i class="fa-solid fa-house-user">&nbsp;&nbsp;<router-link class="link-text" v-bind:to="{ name: 'home' }">Home</router-link></i>
+      <i v-if="$store.state.token == ''" class="fa-solid fa-arrow-right-to-bracket">&nbsp;&nbsp;<router-link class="link-text" v-bind:to="{ name: 'login' }">Login</router-link></i>
+      <i v-if="$store.state.token != ''" class="fa-solid fa-arrow-right-to-bracket">&nbsp;&nbsp;<router-link class="link-text"
         v-bind:to="{ name: 'logout' }"
         >Logout</router-link
       ></i>
+      
       <!-- &nbsp;|&nbsp; -->
+     <i v-if="$store.state.token != ''" class="fa-regular fa-square-plus" data-toggle="modal" data-target="#createModal">&nbsp;&nbsp;
+      <span id="create-modal-link" >Create</span>
+      </i>
+      <div class="modal fade" id="createModal" tabindex="-1">
+         <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create a Post</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           <create-post />
+      </div>
+     <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+      </div>
+      
       
     </div>
     <div id="page">
@@ -18,6 +47,14 @@
     </div>
   </div>
 </template>
+<script>
+import createPost from './views/CreatePost.vue'
+export default {
+    components: {
+        createPost
+    }
+}
+</script>
 
 <style>
 #app {
@@ -52,6 +89,9 @@
  
   width: 100%;
   
+}
+#create-modal-link{
+  font-weight: bold;
 }
 
 .title {
