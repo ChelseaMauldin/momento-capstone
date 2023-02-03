@@ -8,6 +8,8 @@ public interface FavoriteDao {
 
     public List<Post> getFavoriteListOfPosts(String username);
 
+    public List<Integer> getFavoriteIds(String username);
+
     public void addFavorite(String username, int postId);
 
     public void removeFavorite(int postId);

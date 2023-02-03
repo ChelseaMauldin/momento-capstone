@@ -13,7 +13,7 @@
 
 <script>
 import Post from '../components/Post.vue';
-import apiService from '../services/APIService'
+//import apiService from '../services/APIService'
 
 export default {
     name: 'favorite',
@@ -22,13 +22,11 @@ export default {
     },
     data() {
         return {
-            userCurrent: this.$store.state.user.username,
+            listOfIds: [],
         }
     },
     created() {
-        apiService.displayFavoritePosts(this.userCurrent).then((response) => {
-            this.$store.commit('SET_FAVORITES', response.data)
-        });
+    
     }
 
 }

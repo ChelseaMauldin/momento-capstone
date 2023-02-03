@@ -1,13 +1,32 @@
 <template>
   <div class="post-container">
-    <h3 v-if="this.$route.name=='home'" class="username-post">
-      <router-link
-        v-bind:to="{ name: 'profile', params: { username: post.username } }"
-        >{{ post.username }}</router-link
-      >
-    </h3>
+    <div class="post-header">
+      <h3 v-if="this.$route.name == 'home'" class="username-post">
+        <router-link
+          v-bind:to="{ name: 'profile', params: { username: post.username } }"
+          >{{ post.username }}</router-link
+        >
+      </h3>
+      <i
+        v-if="
+          !isFavorite && $store.state.token != '' && this.$route.name == 'home'
+        "
+        v-on:click="addFavorite(post)"
+        class="fa-regular fa-square-plus"
+      ></i>
+      <i
+        v-if="
+          (isFavorite &&
+            $store.state.token != '' &&
+            this.$route.name == 'home') ||
+          (isFavorite && this.$route.name == 'favorites')
+        "
+        v-on:click="removeFavorite(post)"
+        class="fa-regular fa-square-minus"
+      ></i>
+    </div>
     <img id="post-img" :src="post.photo_url" alt="`${post.username}'s image`" />
-    <div class="reactions" v-if="this.$route.name=='home'">
+    <div class="reactions" v-if="this.$route.name == 'home'">
       <i
         id="likeIcon"
         v-if="!liked && $store.state.token != ''"
@@ -23,11 +42,11 @@
       <p id="likes">{{ post.likes }} likes</p>
     </div>
 
-    <p id="caption" v-if="this.$route.name=='home'">
+    <p id="caption" v-if="this.$route.name == 'home'">
       <span class="username-post">{{ post.username }}</span
       >&nbsp;{{ post.caption }}
     </p>
-    <div class="comments" v-if="this.$route.name=='home'">
+    <div class="comments" v-if="this.$route.name == 'home'">
       <p v-for="comment in listOfComments" v-bind:key="comment.comment_id">
         <span id="commenter">{{ comment.commenter }}</span
         >&nbsp;{{ comment.comment }}
@@ -36,7 +55,7 @@
 
     <input
       class="comment-input"
-      v-if="$store.state.token != '' && this.$route.name=='home'"
+      v-if="$store.state.token != '' && this.$route.name == 'home'"
       type="text"
       placeholder="Write a comment..."
     />
@@ -71,6 +90,31 @@ export default {
           this.$store.commit("REMOVE_LIKE", this.post);
         }
       });
+    },
+    addFavorite(post) {
+      const postToAdd = {
+        username: this.$store.state.user.username,
+        post_id: post.post_id
+      };
+      apiService.addFavoritePost(postToAdd).then((response) => {
+        if (response.status == 200) {
+          alert("added!");
+          this.$store.commit("ADD_FAVORITE_POST", post, postToAdd);
+        }
+      });
+    },
+    removeFavorite(post) {
+      apiService.deleteFavorite(post.post_id).then((response) => {
+        if (response.status == 200) {
+          alert("removed!");
+          this.$store.commit("REMOVE_FAVORITE_POST", post);
+        }
+      });
+    },
+  },
+  computed: {
+    isFavorite() {
+      return this.$store.state.favoriteIds.includes(this.post.post_id);
     },
   },
 
@@ -113,7 +157,20 @@ export default {
   cursor: pointer;
 }
 
-#post-img{
+#post-img {
   border-radius: 10px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+}
+
+.post-header .username-post {
+  flex: 1;
+}
+
+.post-header i {
+  
 }
 </style>

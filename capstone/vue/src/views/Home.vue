@@ -25,12 +25,19 @@ export default {
   data() {
     return {
       listOfPosts: [],
+      userCurrent: this.$store.state.user.username,
     };
   },
   created() {
     apiService.displayPosts().then((response) => {
       console.log(response.data);
       this.listOfPosts = response.data;
+    });
+    apiService.displayFavoritePosts(this.userCurrent).then((response) => {
+      this.$store.commit("SET_FAVORITES", response.data);
+    });
+    apiService.displayFavoriteIds(this.userCurrent).then((response) => {
+      this.$store.commit("SET_FAV_IDS", response.data);
     });
   },
   // methods: {
