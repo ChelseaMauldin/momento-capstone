@@ -3,6 +3,21 @@
     <div id="nav">
       <i class="fa-solid fa-house-user">&nbsp;&nbsp;<router-link class="link-text" v-bind:to="{ name: 'home' }">Home</router-link></i>
       <i v-if="$store.state.token == ''" class="fa-solid fa-arrow-right-to-bracket">&nbsp;&nbsp;<router-link class="link-text" v-bind:to="{ name: 'login' }">Login</router-link></i>
+      <i
+        v-if="$store.state.token != ''"
+        class="fa-solid fa-heart"
+        >&nbsp;<router-link class="link-text" v-bind:to="{ name: 'favorites' }"
+          >Favorites</router-link
+        ></i
+      >
+      <i
+        v-if="$store.state.token != ''"
+        class="fa-solid fa-user"
+        ><router-link class="link-text" v-bind:to="{ name: 'profile', params: { username: this.$store.state.user.username
+        } }"
+          >Profile</router-link
+        ></i
+      >
       <i v-if="$store.state.token != ''" class="fa-solid fa-arrow-right-to-bracket">&nbsp;&nbsp;<router-link class="link-text"
         v-bind:to="{ name: 'logout' }"
         >Logout</router-link

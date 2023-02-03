@@ -34,6 +34,21 @@ public class JdbcFavoriteDao implements FavoriteDao{
         return posts;
     }
 
+    @Override
+    public List<Integer> getFavoriteIds(String username) {
+        String sql = "SELECT posts.post_id " +
+                "FROM posts " +
+                "JOIN favorites ON posts.post_id = favorites.post_id " +
+                "WHERE favorites.username =?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
+        List<Integer> ids = new ArrayList<>();
+        while(results.next()){
+            int id = results.getInt("post_id");
+            ids.add(id);
+        }
+        return ids;
+    }
+
     private Post mapRowToPost(SqlRowSet result){
         Post post = new Post();
         post.setPostId(result.getInt("post_id"));
