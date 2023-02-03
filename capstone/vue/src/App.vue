@@ -25,18 +25,12 @@
     <div id="page">
       <div class="title">
         <h1>TE-Gram</h1>
-        <div class="dropdown-search-menu">
+        <div class="search-for-users">
           <input
             v-model="searchQuery"
             type="text"
             placeholder="Search for User"
           />
-          <div class="options">
-            <ul>
-              <li>List Item</li>
-              <li>List Item</li>
-            </ul>
-          </div>
         </div>
       </div>
       <router-view />
@@ -84,33 +78,5 @@
   width: 100%;
 
   text-align: center;
-}
-
-.dropdown-search-menu {
-  max-width: 350px;
-  position: relative;
-  margin: 0 auto;
-}
-
-.selected-item {
-  height: 40px;
-  border: 2px solid lightgray;
-  border-radius: 5px;
-  padding: 5px 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.dropdown-popover {
-  position: absolute;
-  border: 2px solid lightgray;
-  top: 46px;
-  left: 0;
-  right: 0;
-  background-color: #fff;
-  max-width: 100%;
 }
 </style>
