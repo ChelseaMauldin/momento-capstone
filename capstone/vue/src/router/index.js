@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import Profile from '../views/Profile.vue'
 import Edit from '../views/Edit.vue'
+import Favorite from '../views/Favorite'
 Vue.use(Router)
 
 /**
@@ -66,6 +67,14 @@ const router = new Router({
       path: "/profile/:username/edit",
       name: "edit-profile",
       component: Edit,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/favorites",
+      name: "favorites",
+      component: Favorite,
       meta: {
         requiresAuth: true
       }

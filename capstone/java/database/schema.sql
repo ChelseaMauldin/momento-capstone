@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, profiles, posts, comments, ratings;
+DROP TABLE IF EXISTS users, profiles, posts, comments, ratings, favorites;
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -47,6 +47,14 @@ CREATE TABLE ratings (
     rating int NOT NULL,
     CONSTRAINT PK_rating PRIMARY KEY (rating_id),
     CONSTRAINT FK_rating_post FOREIGN KEY (post_id) REFERENCES posts (post_id)
+);
+
+CREATE TABLE favorites (
+username varchar(50),
+post_id int,
+CONSTRAINT PK_favorites PRIMARY KEY (username, post_id),
+CONSTRAINT FK_fav_username FOREIGN KEY (username) REFERENCES users (username),
+CONSTRAINT FK_fav_post FOREIGN KEY (post_id) REFERENCES posts (post_id)
 );
 
 COMMIT TRANSACTION;

@@ -20,7 +20,8 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    likes: Number
+    likes: Number,
+    favoritePosts: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -53,5 +54,8 @@ export default new Vuex.Store({
         }
       })
     },
+    SET_FAVORITES(state, favorites){
+      state.favoritePosts = favorites;
+    }
   }
 })
