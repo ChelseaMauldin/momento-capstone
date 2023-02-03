@@ -28,6 +28,10 @@ export default {
 
     displayPostsByUsername(username) {
         return axios.get(`profiles/${username}/posts`)
-    }
+    },
+
+    displayFavoritePosts(username) {
+        return axios.get(`/favorites/${username}`)
+    },
 
 }
