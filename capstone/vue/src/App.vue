@@ -49,18 +49,17 @@
 
 #page {
   grid-area: link;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+ 
+  width: 100%;
+  
 }
 
 .title {
   background-color: rgba(255, 51, 102, 0.20);
+  height: 75px;
   width: 100%;
 
   text-align: center;
 }
-.h1 {
-  height: 100%;
-}
+
 </style>

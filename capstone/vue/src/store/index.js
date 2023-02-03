@@ -53,8 +53,5 @@ export default new Vuex.Store({
         }
       })
     },
-    SET_PHOTO_FEED(state, post) {
-      apiService.
-    }
   }
 })

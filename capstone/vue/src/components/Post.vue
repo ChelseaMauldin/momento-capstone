@@ -1,13 +1,13 @@
 <template>
   <div class="post-container">
-    <h3 v-if="isPhotoFeed" class="username">
+    <h3 v-if="this.$route.name=='home'" class="username-post">
       <router-link
         v-bind:to="{ name: 'profile', params: { username: post.username } }"
         >{{ post.username }}</router-link
       >
     </h3>
-    <img :src="post.photo_url" alt="`${post.username}'s image`" />
-    <div class="reactions" v-if="isPhotoFeed">
+    <img id="post-img" :src="post.photo_url" alt="`${post.username}'s image`" />
+    <div class="reactions" v-if="this.$route.name=='home'">
       <i
         id="likeIcon"
         v-if="!liked"
@@ -23,11 +23,11 @@
       <p id="likes">{{ post.likes }} likes</p>
     </div>
 
-    <p id="caption" v-if="isPhotoFeed">
-      <span class="username">{{ post.username }}</span
+    <p id="caption" v-if="this.$route.name=='home'">
+      <span class="username-post">{{ post.username }}</span
       >&nbsp;{{ post.caption }}
     </p>
-    <div class="comments" v-if="isPhotoFeed">
+    <div class="comments" v-if="this.$route.name=='home'">
       <p v-for="comment in listOfComments" v-bind:key="comment.comment_id">
         <span id="commenter">{{ comment.commenter }}</span
         >&nbsp;{{ comment.comment }}
@@ -36,7 +36,7 @@
 
     <input
       class="comment-input"
-      v-if="$store.state.token != '' && isPhotoFeed"
+      v-if="$store.state.token != '' && this.$route.name=='home'"
       type="text"
       placeholder="Write a comment..."
     />
@@ -53,7 +53,6 @@ export default {
     return {
       listOfComments: [],
       liked: false,
-      isPhotoFeed: true,
     };
   },
   methods: {
@@ -88,7 +87,7 @@ export default {
   border-style: none;
 }
 #commenter,
-.username,
+.username-post,
 #likes {
   font-weight: bold;
 }
@@ -96,7 +95,7 @@ export default {
 .comments,
 #likes,
 #caption,
-.username {
+.username-post {
   text-align: left;
 }
 
@@ -112,5 +111,9 @@ export default {
 
 .likeButton:hover {
   cursor: pointer;
+}
+
+#post-img{
+  border-radius: 10px;
 }
 </style>

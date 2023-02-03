@@ -3,13 +3,13 @@
     <!-- <div class="title">
       <h1>Home</h1>
     </div> -->
-    <span class="post-container">
+    <div class="post-container">
       <post class="each-post"
         v-for="post in listOfPosts"
         v-bind:key="post.postId"
         v-bind:post="post"
       />
-    </span>
+    </div>
   </div>
 </template>
 
@@ -46,7 +46,9 @@ export default {
 
 <style>
 .home {
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-items: center;
 }
 
@@ -62,7 +64,5 @@ margin: 10px;
 border-bottom: 1px solid black;
 }
 
-img{
-  border-radius: 10px;
-}
+
 </style>

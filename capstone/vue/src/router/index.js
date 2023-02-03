@@ -6,6 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import Profile from '../views/Profile.vue'
+import Edit from '../views/Edit.vue'
 Vue.use(Router)
 
 /**
@@ -59,6 +60,14 @@ const router = new Router({
       component: Profile,
       meta: {
         requiresAuth: true 
+      }
+    },
+    {
+      path: "/profile/:username/edit",
+      name: "edit-profile",
+      component: Edit,
+      meta: {
+        requiresAuth: true
       }
     }
   ]
