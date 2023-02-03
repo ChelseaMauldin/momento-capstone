@@ -31,12 +31,14 @@ export default {
         this.myWidget.open();
       },
      addPost(){
-        
-        apiService.createPost(this.post).then(response => {
+        if(this.post.photo_url!==""){
+            apiService.createPost(this.post).then(response => {
             if(response.status==200){
                 this.$router.push(`/profile/${this.post.username}`)
             }
         })
+        }
+        
      }
   },
   mounted() {

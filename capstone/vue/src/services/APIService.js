@@ -44,7 +44,7 @@ export default {
 
     deleteFavorite(id){
         return axios.delete(`/favorites/${id}`)
-    }
+    },
 
     createPost(post){
         return axios.post('/posts/create', post)
