@@ -12,5 +12,5 @@ public interface ProfileDao {
 
     public int createProfile(Profile profile);
 
-
+    public void updateProfile(Profile profile);
 }

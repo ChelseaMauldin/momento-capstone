@@ -1,29 +1,17 @@
 <template>
-  <div class="create-main" >
-      <!-- <form class="container " > -->
-    
-     
-        <Cloudinary-Comp msg="Welcome to Your Vue.js App"/>
-        
-        
-     
-      
-
-      <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-    <!-- </form> -->
-    
+  <div class="create-main">
+    <Cloudinary-Comp msg="Welcome to Your Vue.js App" />
   </div>
 </template>
 
 <script>
-import CloudinaryComp from '../components/CloudinaryComp.vue'
+import CloudinaryComp from "../components/CloudinaryComp.vue";
 export default {
-    components: {
-        CloudinaryComp
-    }
-}
+  components: {
+    CloudinaryComp,
+  },
+};
 </script>
 
 <style>
-
 </style>

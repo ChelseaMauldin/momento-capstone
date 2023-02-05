@@ -48,6 +48,9 @@ export default {
 
     createPost(post){
         return axios.post('/posts/create', post)
+    },
+    updateProfile(profile){
+        return axios.put('/profiles/update', profile)
     }
 
 }

@@ -40,5 +40,9 @@ public class ProfileController {
     public List<Post> getPostsByUsername(@PathVariable String username) {
         return postDao.getPostsByUsername(username);
     }
+    @RequestMapping(path="/profiles/update", method = RequestMethod.PUT)
+    public void updateProfile(@RequestBody Profile profile){
+        dao.updateProfile(profile);
+    }
 
 }
