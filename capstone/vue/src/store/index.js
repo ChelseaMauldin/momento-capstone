@@ -23,6 +23,7 @@ export default new Vuex.Store({
     likes: Number,
     favoritePosts: [],
     favoriteIds: [],
+    profileImageUrl: ''
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -73,6 +74,9 @@ export default new Vuex.Store({
       if(index1 > -1) {
         state.favoriteIds.splice(index1, 1);
       }
+    },
+    SET_PROFILE_IMAGE_URL(state, newUrl){
+      state.profileImageUrl = newUrl
     }
   }
 })

@@ -76,6 +76,9 @@
     </div>
     <div id="page">
       <div class="title">
+        <div class="search-bar">
+          <input v-model="text" placeholder="Search a username" />
+        </div>
         <h1>TE-Gram</h1>
         <div class="search-for-users">
           <input
@@ -136,6 +139,12 @@ export default {
 }
 #create-modal-link:hover{
   cursor: pointer;
+}
+
+.search-bar {
+  /* display: flex; */
+  text-align: right;
+  margin-top: 5px;
 }
 
 .title {

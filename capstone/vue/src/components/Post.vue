@@ -170,7 +170,4 @@ export default {
   flex: 1;
 }
 
-.post-header i {
-  
-}
 </style>

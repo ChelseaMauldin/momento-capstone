@@ -59,6 +59,13 @@ public class JdbcProfileDao implements ProfileDao {
         return profileId;
     }
 
+    @Override
+    public void updateProfile(Profile profile) {
+        String sql = "UPDATE profiles SET email=?, name=?, profile_image=?, profile_bio=?" +
+                "WHERE profile_id=?";
+        jdbcTemplate.update(sql,profile.getEmail(), profile.getName(), profile.getProfileImage(), profile.getProfileBio(), profile.getProfileId());
+    }
+
     private static Profile mapRowToProfile(SqlRowSet result){
         Profile profile = new Profile();
         profile.setProfileId(result.getInt("profile_id"));
