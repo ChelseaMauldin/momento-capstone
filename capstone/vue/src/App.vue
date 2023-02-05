@@ -74,7 +74,20 @@
     <div id="page">
       <div class="title">
         <div class="search-bar">
-          <input v-model="text" placeholder="Search a username" />
+          <input
+            type="text"
+            id="usernameSearch"
+            v-model="filter.username"
+            placeholder="Search a username"
+          />
+          <router-link
+            v-bind:to="{
+              name: 'profile',
+              params: { username: filter.username },
+            }"
+          >
+            <button>Search</button>
+          </router-link>
         </div>
         <h1>TE-Gram</h1>
       </div>
@@ -85,9 +98,25 @@
 <script>
 import createPost from "./views/CreatePost.vue";
 export default {
+  data() {
+    return {
+      profile: {},
+      filter: {
+        username: "",
+      },
+    };
+  },
   components: {
     createPost,
   },
+  // methods: { -- leaving this here for now, it's not being used yet
+  //   search: {
+  //     searchForUser() {
+  //       const username = this.filter.username;
+  //       this.$router.push({ name: "profile", params: { username } });
+  //     },
+  //   },
+  // },
 };
 </script>
 
