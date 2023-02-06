@@ -6,6 +6,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,22 @@ public class JdbcCommentDao implements CommentDao{
         }
         System.out.println(comments);
         return comments;
+    }
+
+    @Override
+    public int createNewComment(Comment comment) {
+        String sql = "INSERT INTO comments (post_id, commenter, comment)\n" +
+                "VALUES (?, ?, ?) RETURNING comment_id";
+
+        int commentId;
+
+        try {
+            commentId = jdbcTemplate.queryForObject(sql, Integer.class, comment.getPostId(), comment.getCommenter(), comment.getComment());
+        } catch (NullPointerException e) {
+            commentId = -1;
+        }
+
+        return commentId;
     }
 
     private static Comment mapRowToComment(SqlRowSet result){

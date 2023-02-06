@@ -23,7 +23,8 @@ export default new Vuex.Store({
     likes: Number,
     favoritePosts: [],
     favoriteIds: [],
-    profileImageUrl: ''
+    profileImageUrl: '',
+    comments: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -56,27 +57,27 @@ export default new Vuex.Store({
         }
       })
     },
-    SET_FAVORITES(state, favorites){
+    SET_FAVORITES(state, favorites) {
       state.favoritePosts = favorites;
     },
-    SET_FAV_IDS(state, favoriteIds){
+    SET_FAV_IDS(state, favoriteIds) {
       state.favoriteIds = favoriteIds;
     },
-    ADD_FAVORITE_POST(state, post){
+    ADD_FAVORITE_POST(state, post) {
       state.favoritePosts.unshift(post);
       state.favoriteIds.unshift(post.post_id);
     },
-    REMOVE_FAVORITE_POST(state, post){
+    REMOVE_FAVORITE_POST(state, post) {
       const filtered = state.favoritePosts.filter(eachPost =>
-      eachPost.post_id != post.post_id);
+        eachPost.post_id != post.post_id);
       state.favoritePosts = filtered;
       const index1 = state.favoriteIds.indexOf(post.post_id);
-      if(index1 > -1) {
+      if (index1 > -1) {
         state.favoriteIds.splice(index1, 1);
       }
     },
-    SET_PROFILE_IMAGE_URL(state, newUrl){
+    SET_PROFILE_IMAGE_URL(state, newUrl) {
       state.profileImageUrl = newUrl
-    }
+    },
   }
 })

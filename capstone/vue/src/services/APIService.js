@@ -14,6 +14,10 @@ export default {
         return axios.get(`/post/${post_id}/comments`)
     },
 
+    createNewComment(comment) {
+        return axios.post('/post/create-comment', comment)
+    },
+
     like(post_id) {
         return axios.put(`/post/${post_id}/like`)
     },
@@ -33,23 +37,23 @@ export default {
     displayFavoritePosts(username) {
         return axios.get(`/favorites/${username}`)
     },
-    
+
     displayFavoriteIds(username) {
         return axios.get(`/favorites/${username}/ids`)
     },
 
-    addFavoritePost(favorite){
+    addFavoritePost(favorite) {
         return axios.post('/favorites/add', favorite)
     },
 
-    deleteFavorite(id){
+    deleteFavorite(id) {
         return axios.delete(`/favorites/${id}`)
     },
 
-    createPost(post){
+    createPost(post) {
         return axios.post('/posts/create', post)
     },
-    updateProfile(profile){
+    updateProfile(profile) {
         return axios.put('/profiles/update', profile)
     }
 

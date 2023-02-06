@@ -5,6 +5,7 @@ import com.techelevator.dao.PostDao;
 import com.techelevator.model.Comment;
 import com.techelevator.model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +34,12 @@ public class PhotoFeedController {
     @RequestMapping(path="/post/{id}/comments", method = RequestMethod.GET)
     public List<Comment> getComments(@PathVariable int id){
         return commentDao.getCommentsByPost(id);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path="/post/create-comment", method = RequestMethod.POST)
+    public int createNewComment(@RequestBody Comment comment) {
+        return commentDao.createNewComment(comment);
     }
 
     @RequestMapping(path="/posts/create", method= RequestMethod.POST)

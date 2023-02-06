@@ -47,18 +47,21 @@
       >&nbsp;{{ post.caption }}
     </p>
     <div class="comments" v-if="this.$route.name == 'home'">
-      <p v-for="comment in listOfComments" v-bind:key="comment.comment_id">
-        <span id="commenter">{{ comment.commenter }}</span
-        >&nbsp;{{ comment.comment }}
+      <p v-for="comm in listOfComments" v-bind:key="comm.id">
+        <span id="commenter">{{ comm.commenter }}</span
+        >&nbsp;{{ comm.comment }}
       </p>
     </div>
-
-    <input
-      class="comment-input"
-      v-if="$store.state.token != '' && this.$route.name == 'home'"
-      type="text"
-      placeholder="Write a comment..."
-    />
+    <div class="submit-new-comment">
+      <input
+        class="comment-input"
+        v-if="$store.state.token != '' && this.$route.name == 'home'"
+        type="text"
+        v-model="filter"
+        v-on:keyup.enter="createComment()"
+        placeholder="Write a comment..."
+      />
+    </div>
   </div>
 </template>
 
@@ -72,6 +75,12 @@ export default {
     return {
       listOfComments: [],
       liked: false,
+      filter: "",
+      newComment: {
+        post_id: this.post.post_id,
+        commenter: this.$store.state.user.username,
+        comment: "",
+      },
     };
   },
   methods: {
@@ -94,7 +103,7 @@ export default {
     addFavorite(post) {
       const postToAdd = {
         username: this.$store.state.user.username,
-        post_id: post.post_id
+        post_id: post.post_id,
       };
       apiService.addFavoritePost(postToAdd).then((response) => {
         if (response.status == 200) {
@@ -110,6 +119,18 @@ export default {
           this.$store.commit("REMOVE_FAVORITE_POST", post);
         }
       });
+    },
+    createComment() {
+      if (this.filter != "") {
+        this.newComment.comment = this.filter;
+        apiService.createNewComment(this.newComment).then((response) => {
+          if (response.status == 201) {
+            console.log(this.newComment.comment);
+            this.listOfComments.push(this.newComment);
+            this.filter = "";
+          }
+        });
+      }
     },
   },
   computed: {
@@ -127,9 +148,20 @@ export default {
 </script>
 
 <style>
+.submit-new-comment {
+  justify-content: flex-start;
+  display: flex;
+}
+
+.comment-input:focus {
+  outline: none;
+}
+
 .comment-input {
   border-style: none;
+  width: 100%;
 }
+
 #commenter,
 .username-post,
 #likes {
@@ -169,5 +201,4 @@ export default {
 .post-header .username-post {
   flex: 1;
 }
-
 </style>

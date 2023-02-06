@@ -9,5 +9,5 @@ public interface CommentDao {
 
     public List<Comment> getCommentsByPost(int postId);
 
-
+    public int createNewComment(Comment comment);
 }

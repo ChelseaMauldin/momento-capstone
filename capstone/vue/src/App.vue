@@ -73,6 +73,7 @@
     </div>
     <div id="page">
       <div class="title">
+        <h1>TE-Gram</h1>
         <div class="search-bar">
           <input
             type="text"
@@ -89,7 +90,6 @@
             <button>Search</button>
           </router-link>
         </div>
-        <h1>TE-Gram</h1>
       </div>
       <router-view />
     </div>
@@ -125,9 +125,10 @@ export default {
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-areas: "nav link";
-  margin: -8px;
+  /* margin: -8px; */
   padding: 0;
   min-height: 100vh;
+  width: 100%;
   flex-basis: 100%;
 }
 
@@ -160,17 +161,26 @@ export default {
   cursor: pointer;
 }
 
-.search-bar {
-  /* display: flex; */
-  text-align: right;
-  margin-top: 5px;
-}
-
 .title {
   background-color: rgba(255, 51, 102, 0.2);
   height: 75px;
   width: 100%;
-
+  display: flex;
   text-align: center;
+}
+
+h1,
+.search-bar {
+  flex: 1;
+}
+
+.search-bar {
+  text-align: right;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.app {
+  border: 1px solid black;
 }
 </style>
