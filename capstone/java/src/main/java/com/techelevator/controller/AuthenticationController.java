@@ -60,5 +60,11 @@ public class AuthenticationController {
         }
     }
 
+    @RequestMapping(value= "/update-password", method = RequestMethod.PUT)
+    public boolean updatePassword(@RequestBody UpdatePasswordDto user){
+        return userDao.updatePassword(user);
+    }
+
+
 }
 
