@@ -1,11 +1,11 @@
 <template>
   <div class="main-login">
     <div class="image">
-      <img
+      <!-- <img
         id="image-login"
         src="https://res.cloudinary.com/depdfgnxo/image/upload/v1675269863/pexels-photo-952264_hxjydg.webp"
         alt="camera hanging from strap"
-      />
+      /> -->
     </div>
     <div id="login" class="text-center">
       <form class="form-signin" @submit.prevent="login">
@@ -43,7 +43,7 @@
         <router-link class="need-account" :to="{ name: 'register' }"
           >Need an account?</router-link
         >
-        <button class="sign-in" type="submit">Sign in</button>
+        <button class="sign-in btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
     </div>
   </div>
@@ -88,11 +88,21 @@ export default {
 </script>
 
 <style>
-#login {
-  margin-left: 35px;
+#login.text-center {
+  /* margin-left: 35px; */
   /* display: flex; */
   /* flex-direction: column; */
   /* width: 50vh; */
+  /*new content below*/
+ background: white;
+ height: fit-content;
+ padding: 15px;
+ border-radius: 10px;
+ width: 18%;
+ position: absolute;
+ top: 250px;
+ right: 300px;
+ /*new content above*/
 }
 /* .mb-3 {
   background-color: rgba(255, 51, 102, 0.20);
@@ -102,7 +112,6 @@ export default {
 /* } */
 
 .form-signin {
-  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -115,15 +124,20 @@ export default {
 }
 
 .sign-in {
-  margin: 0 10px;
+  /* margin: 0 10px; */
 }
 
 .main-login {
-  margin-top: 100px;
+  /*new content */
+  background-image: url(https://res.cloudinary.com/depdfgnxo/image/upload/v1675269863/pexels-photo-952264_hxjydg.webp);
+  background-position-x: -150px;
+  background-position-y: -1400px;
+  /* new content above*/
+  /* margin-top: 100px; */
   display: flex;
   flex-direction: row;
-  
   justify-content:center;
+  height: 100vh;
 }
 #image-login {
   width: 200px;

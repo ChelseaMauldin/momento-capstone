@@ -180,7 +180,7 @@ h1,
   margin-top: 5px;
 }
 
-.app {
-  border: 1px solid black;
+.fa-solid.fa-heart {
+  color: black;
 }
 </style>

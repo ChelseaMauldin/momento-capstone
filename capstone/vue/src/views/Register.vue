@@ -90,4 +90,31 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+/*all new content below*/
+div#register {
+  background-image: url(https://res.cloudinary.com/dzt9ane7n/image/upload/v1675661575/pexels-photo-69970_ysll2m.jpg);
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.form-register{
+  display: flex;
+  position: absolute;
+  top: 250px;
+  right: 300px;
+  height: fit-content;
+  flex-direction: column;
+  margin: 0 10px;
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  width: 18%;
+}
+
+
+
+</style>

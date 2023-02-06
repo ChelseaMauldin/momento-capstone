@@ -25,7 +25,29 @@
         class="fa-regular fa-square-minus"
       ></i>
     </div>
-    <img id="post-img" :src="post.photo_url" alt="`${post.username}'s image`" />
+    <img
+      id="post-img"
+      :src="post.photo_url"
+      alt="`${post.username}'s image`"
+      data-toggle="modal"
+      :data-target="`#postDetails${post.post_id}`"
+    />
+    <div
+      class="modal fade"
+      ref="postDetailsModal"
+      :id="`postDetails${post.post_id}`"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" style="max-width: 70%">
+        <div class="modal-content" id="details-content">
+          <div class="modal-body" id="details-body">
+            <post-details :post="post" />
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="reactions" v-if="this.$route.name == 'home'">
       <i
         id="likeIcon"
@@ -67,10 +89,13 @@
 
 <script>
 import apiService from "../services/APIService.js";
-
+import PostDetails from "../views/PostDetails.vue";
 export default {
   name: "Post",
   props: ["post", "isPhotoFeed"],
+  components: {
+    PostDetails,
+  },
   data() {
     return {
       listOfComments: [],
@@ -157,6 +182,10 @@ export default {
   outline: none;
 }
 
+#details-body {
+  margin: 0;
+  padding: 0;
+}
 .comment-input {
   border-style: none;
   width: 100%;
@@ -196,6 +225,13 @@ export default {
 .post-header {
   display: flex;
   align-items: center;
+}
+
+.post-header i {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .post-header .username-post {
