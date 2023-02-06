@@ -1,75 +1,123 @@
 <template>
   <div id="app">
     <div id="nav">
-      <i class="fa-solid fa-house-user">&nbsp;&nbsp;<router-link class="link-text" v-bind:to="{ name: 'home' }">Home</router-link></i>
-      <i v-if="$store.state.token == ''" class="fa-solid fa-arrow-right-to-bracket">&nbsp;&nbsp;<router-link class="link-text" v-bind:to="{ name: 'login' }">Login</router-link></i>
+      <i class="fa-solid fa-house-user"
+        >&nbsp;&nbsp;<router-link class="link-text" v-bind:to="{ name: 'home' }"
+          >Home</router-link
+        ></i
+      >
       <i
-        v-if="$store.state.token != ''"
-        class="fa-solid fa-heart"
+        v-if="$store.state.token == ''"
+        class="fa-solid fa-arrow-right-to-bracket"
+        >&nbsp;&nbsp;<router-link
+          class="link-text"
+          v-bind:to="{ name: 'login' }"
+          >Login</router-link
+        ></i
+      >
+      <i v-if="$store.state.token != ''" class="fa-solid fa-heart"
         >&nbsp;<router-link class="link-text" v-bind:to="{ name: 'favorites' }"
           >Favorites</router-link
-        ></i
-      >
+        >
+      </i>
+      <i v-if="$store.state.token != ''" class="fa-solid fa-user"
+        ><router-link
+          class="link-text"
+          v-bind:to="{
+            name: 'profile',
+            params: { username: this.$store.state.user.username },
+          }"
+          >Profile</router-link
+        >
+      </i>
       <i
         v-if="$store.state.token != ''"
-        class="fa-solid fa-user"
-        ><router-link class="link-text" v-bind:to="{ name: 'profile', params: { username: this.$store.state.user.username
-        } }"
-          >Profile</router-link
-        ></i
-      >
-      <i v-if="$store.state.token != ''" class="fa-solid fa-arrow-right-to-bracket">&nbsp;&nbsp;<router-link class="link-text"
-        v-bind:to="{ name: 'logout' }"
-        >Logout</router-link
-      ></i>
-      
+        class="fa-solid fa-arrow-right-to-bracket"
+        >&nbsp;&nbsp;<router-link
+          class="link-text"
+          v-bind:to="{ name: 'logout' }"
+          >Logout</router-link
+        >
+      </i>
+
       <!-- &nbsp;|&nbsp; -->
-     <i v-if="$store.state.token != ''" class="fa-regular fa-square-plus" data-toggle="modal" data-target="#createModal">&nbsp;&nbsp;
-      <span id="create-modal-link" >Create</span>
+      <i
+        v-if="$store.state.token != ''"
+        class="fa-regular fa-square-plus"
+        data-toggle="modal"
+        data-target="#createModal"
+        >&nbsp;&nbsp;
+        <span id="create-modal-link">Create</span>
       </i>
       <div class="modal fade" id="createModal" tabindex="-1">
-         <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create a Post</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Create a Post</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <create-post />
+            </div>
+            <div class="modal-footer"></div>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-           <create-post />
-      </div>
-     <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-      </div>
-      
-      
     </div>
     <div id="page">
       <div class="title">
         <div class="search-bar">
-          <input v-model="text" placeholder="Search a username" />
+          <input
+            type="text"
+            id="usernameSearch"
+            v-model="filter.username"
+            placeholder="Search a username"
+          />
+          <router-link
+            v-bind:to="{
+              name: 'profile',
+              params: { username: filter.username },
+            }"
+          >
+            <button>Search</button>
+          </router-link>
         </div>
         <h1>TE-Gram</h1>
       </div>
-      <router-view/>
+      <router-view />
     </div>
   </div>
 </template>
 <script>
-import createPost from './views/CreatePost.vue'
+import createPost from "./views/CreatePost.vue";
 export default {
-    components: {
-        createPost
-    }
-}
+  data() {
+    return {
+      profile: {},
+      filter: {
+        username: "",
+      },
+    };
+  },
+  components: {
+    createPost,
+  },
+  // methods: { -- leaving this here for now, it's not being used yet
+  //   search: {
+  //     searchForUser() {
+  //       const username = this.filter.username;
+  //       this.$router.push({ name: "profile", params: { username } });
+  //     },
+  //   },
+  // },
+};
 </script>
 
 <style>
@@ -102,14 +150,13 @@ export default {
 
 #page {
   grid-area: link;
- 
+
   width: 100%;
-  
 }
-#create-modal-link{
+#create-modal-link {
   font-weight: bold;
 }
-#create-modal-link:hover{
+#create-modal-link:hover {
   cursor: pointer;
 }
 
@@ -120,11 +167,10 @@ export default {
 }
 
 .title {
-  background-color: rgba(255, 51, 102, 0.20);
+  background-color: rgba(255, 51, 102, 0.2);
   height: 75px;
   width: 100%;
 
   text-align: center;
 }
-
 </style>
