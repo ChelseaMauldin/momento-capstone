@@ -173,4 +173,8 @@ export default {
 
   text-align: center;
 }
+
+.fa-solid.fa-heart {
+  color: black;
+}
 </style>

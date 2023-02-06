@@ -166,6 +166,13 @@ export default {
   align-items: center;
 }
 
+.post-header i {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
 .post-header .username-post {
   flex: 1;
 }
