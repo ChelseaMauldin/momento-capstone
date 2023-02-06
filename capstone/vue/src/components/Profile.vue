@@ -1,8 +1,9 @@
 <template>
   <div class="main-profile">
     <div class="bio-header">
-      <div class="profile-picture-div">
+      <div id="profile-pic-div" class="profile-picture-div">
         <img
+          id="profile-pic"
           class="profile-picture"
           :src="profile.profile_image"
           alt="`${profile.username}'s image`"
@@ -49,7 +50,7 @@ export default {
 </script>
 
 <style>
-.profile-picture-div {
+#profile-pic-div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,7 +59,7 @@ export default {
   height: 185px;
   border: 3px rgb(240, 67, 119) solid;
 }
-.profile-picture {
+#profile-pic {
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
