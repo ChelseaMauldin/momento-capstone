@@ -54,17 +54,10 @@ export default {
 </script>
     
 <style>
-<<<<<<< HEAD
-.user-headline{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-bottom:1px solid rgb(223, 218, 218);
-=======
 .user-headline {
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgb(223, 218, 218);
->>>>>>> main
 }
 .modal-image-container {
   margin: 0;
