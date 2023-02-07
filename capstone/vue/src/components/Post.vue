@@ -31,7 +31,10 @@
           variant="Outline Success"
           no-caret
           text="..."
-          v-if="post.username == this.$store.state.user.username && this.$route.name == 'home'"
+          v-if="
+            post.username == this.$store.state.user.username &&
+            this.$route.name == 'home'
+          "
         >
           <b-dropdown-item v-on:click="changeCaptionStatus()"
             >Edit Caption</b-dropdown-item
@@ -227,6 +230,7 @@ export default {
           photo_url: this.post.photo_url,
           likes: this.post.likes,
           caption: this.newCaption,
+          date_time: this.post.date_time
         };
         apiService.editCaption(postToUpdate).then((response) => {
           if (response.status == 200) {

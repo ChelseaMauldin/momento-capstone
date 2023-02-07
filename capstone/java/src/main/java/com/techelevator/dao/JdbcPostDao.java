@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.sql.DataSource;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +59,9 @@ public class JdbcPostDao implements PostDao{
             post.setPhotoUrl(result.getString("photo_url"));
             post.setLikes(result.getInt("likes"));
             post.setCaption(result.getString("caption"));
+            if(result.getTimestamp("date_time") != null){
+                post.setDateTime(result.getTimestamp("date_time").toLocalDateTime());
+            }
             return post;
 
     }
@@ -75,11 +79,11 @@ public class JdbcPostDao implements PostDao{
 
     @Override
     public int createPost(Post post) {
-        String sql = "INSERT INTO posts (username, photo_url, likes, caption)\n" +
-                "VALUES (?, ?, ?, ?) RETURNING post_id";
+        String sql = "INSERT INTO posts (username, photo_url, likes, caption, date_time) \n" +
+                "VALUES (?, ?, ?, ?, ?) RETURNING post_id";
         int postId;
         try{
-            postId=jdbcTemplate.queryForObject(sql, Integer.class, post.getUsername(), post.getPhotoUrl(), post.getLikes(), post.getCaption());
+            postId=jdbcTemplate.queryForObject(sql, Integer.class, post.getUsername(), post.getPhotoUrl(), post.getLikes(), post.getCaption(), post.getDateTime());
         } catch(Exception e){
             System.out.println(e.getMessage());
             return -1;

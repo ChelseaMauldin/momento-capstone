@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -44,6 +47,8 @@ public class PhotoFeedController {
 
     @RequestMapping(path="/posts/create", method= RequestMethod.POST)
     public int createPost(@RequestBody Post post){
+        LocalDateTime dateTime = LocalDateTime.now();
+        post.setDateTime(dateTime);
         return dao.createPost(post);
     }
 }
