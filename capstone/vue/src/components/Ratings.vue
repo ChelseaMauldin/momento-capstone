@@ -39,7 +39,6 @@ export default {
       if (this.ratingValue != -1 && this.rate > 0) {
         apiService.updateRating(rating).then((response) => {
           if (response.status == 200) {
-            alert("success!");
             apiService
               .getRatingByUser(this.postId, this.$store.state.user.username)
               .then((response) => {
@@ -53,7 +52,6 @@ export default {
       } else if(this.rate > 0 && this.ratingValue == -1) {
         apiService.addRating(rating).then((response) => {
           if (response.status == 200) {
-            alert("added!");
             apiService
               .getRatingByUser(this.postId, this.$store.state.user.username)
               .then((response) => {
