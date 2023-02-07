@@ -32,14 +32,18 @@ import apiService from "../services/APIService.js";
 export default {
   data() {
     return {
-      comments: [],
       profile: {},
     };
   },
   props: ["post"],
-
-  created() {
+  computed: {
+    comments() {
+      return this.$store.state.comments;
+    },
+  },
+  mounted() {
     apiService.displayCommentsByPost(this.post.post_id).then((response) => {
+      console.log(this.post);
       this.comments = response.data;
     });
     apiService.displayProfile(this.post.username).then((response) => {

@@ -64,9 +64,11 @@
           ></i>
         </div>
         <div class="reactions-ratings">
-          <ratings v-bind:ratingsForPost="ratingsForPost"
-          v-bind:rateValue="rateValue"
-          v-bind:postId="post.post_id" />
+          <ratings
+            v-bind:ratingsForPost="ratingsForPost"
+            v-bind:rateValue="rateValue"
+            v-bind:postId="post.post_id"
+          />
         </div>
       </div>
 
@@ -99,7 +101,7 @@
 <script>
 import apiService from "../services/APIService.js";
 import PostDetails from "../views/PostDetails.vue";
-import Ratings from "./Ratings.vue"
+import Ratings from "./Ratings.vue";
 export default {
   name: "Post",
   props: ["post", "isPhotoFeed"],
@@ -165,6 +167,7 @@ export default {
           if (response.status == 201) {
             this.listOfComments.push(this.newComment);
             this.filter = "";
+            this.$store.commit("SET_COMMENTS_FOR_POST", this.listOfComments);
           }
         });
       }
@@ -187,9 +190,11 @@ export default {
       console.log(response.data);
       this.ratingsForPost = response.data;
     });
-    apiService.getRatingByUser(this.post.post_id, this.$store.state.user.username).then((response) => {
-      this.rateValue = response.data;
-    })
+    apiService
+      .getRatingByUser(this.post.post_id, this.$store.state.user.username)
+      .then((response) => {
+        this.rateValue = response.data;
+      });
   },
 };
 </script>
@@ -238,7 +243,8 @@ div.likes-ratings {
   justify-content: flex-start;
 }
 
-.reactions-likes, .reactions-ratings {
+.reactions-likes,
+.reactions-ratings {
   flex: 1;
   display: flex;
   justify-content: flex-start;

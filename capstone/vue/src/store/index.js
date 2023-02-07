@@ -26,8 +26,12 @@ export default new Vuex.Store({
     profileImageUrl: '',
     comments: [],
     ratings: [],
+    currentPost: {},
   },
   mutations: {
+    SET_COMMENTS_FOR_POST(state, payload) {
+      state.comments = payload;
+    },
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
       localStorage.setItem('token', token);
@@ -70,7 +74,7 @@ export default new Vuex.Store({
     },
     REMOVE_FAVORITE_POST(state, post) {
       const filtered = state.favoritePosts.filter(eachPost =>
-         eachPost.post_id != post.post_id);
+        eachPost.post_id != post.post_id);
       state.favoritePosts = filtered;
       const index1 = state.favoriteIds.indexOf(post.post_id);
       if (index1 > -1) {
