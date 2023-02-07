@@ -79,5 +79,9 @@ export default new Vuex.Store({
     SET_PROFILE_IMAGE_URL(state, newUrl) {
       state.profileImageUrl = newUrl
     }
+<<<<<<< HEAD
   },
+=======
+}
+>>>>>>> main
 })
