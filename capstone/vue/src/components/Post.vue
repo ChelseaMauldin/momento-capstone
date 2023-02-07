@@ -7,23 +7,40 @@
           >{{ post.username }}</router-link
         >
       </h3>
-      <i
-        v-if="
-          !isFavorite && $store.state.token != '' && this.$route.name == 'home'
-        "
-        v-on:click="addFavorite(post)"
-        class="fa-regular fa-square-plus"
-      ></i>
-      <i
-        v-if="
-          (isFavorite &&
+      <div class="top-right-options">
+        <i
+          v-if="
+            !isFavorite &&
             $store.state.token != '' &&
-            this.$route.name == 'home') ||
-          (isFavorite && this.$route.name == 'favorites')
-        "
-        v-on:click="removeFavorite(post)"
-        class="fa-regular fa-square-minus"
-      ></i>
+            this.$route.name == 'home'
+          "
+          v-on:click="addFavorite(post)"
+          class="fa-regular fa-square-plus"
+        ></i>
+        <i
+          v-if="
+            (isFavorite &&
+              $store.state.token != '' &&
+              this.$route.name == 'home') ||
+            (isFavorite && this.$route.name == 'favorites')
+          "
+          v-on:click="removeFavorite(post)"
+          class="fa-regular fa-square-minus"
+        ></i>
+        <b-dropdown
+          variant="Outline Success"
+          no-caret
+          text="..."
+          v-if="post.username == this.$store.state.user.username && this.$route.name == 'home'"
+        >
+          <b-dropdown-item v-on:click="changeCaptionStatus()"
+            >Edit Caption</b-dropdown-item
+          >
+          <b-dropdown-item v-on:click="removePhoto()"
+            >Remove photo</b-dropdown-item
+          >
+        </b-dropdown>
+      </div>
     </div>
     <img
       id="post-img"
@@ -64,19 +81,42 @@
           ></i>
         </div>
         <div class="reactions-ratings">
-          <ratings v-bind:ratingsForPost="ratingsForPost"
-          v-bind:rateValue="rateValue"
-          v-bind:postId="post.post_id" />
+          <ratings
+            v-bind:ratingsForPost="ratingsForPost"
+            v-bind:rateValue="rateValue"
+            v-bind:postId="post.post_id"
+          />
         </div>
       </div>
 
       <p id="likes">{{ post.likes }} likes</p>
     </div>
 
-    <p id="caption" v-if="this.$route.name == 'home'">
+    <p id="caption" v-if="this.$route.name == 'home' && !isEdit">
       <span class="username-post">{{ post.username }}</span
-      >&nbsp;{{ post.caption }}
+      >&nbsp;{{ caption }}
     </p>
+    <div
+      v-else-if="
+        this.$route.name == 'home' &&
+        isEdit &&
+        post.username == this.$store.state.user.username
+      "
+      id="caption2"
+    >
+      <p>
+        <span class="username-post>">{{ post.username }}</span> &nbsp;
+        <input
+          class="edit-caption"
+          v-model="newCaption"
+          type="text"
+          :placeholder="post.caption"
+          v-on:keyup.enter="editCaption()"
+        />
+      </p>
+      <button v-on:click="cancel()">Cancel</button>
+    </div>
+
     <div class="comments" v-if="this.$route.name == 'home'">
       <p v-for="comm in shortenedCommentsList(2)" v-bind:key="comm.id">
         <span id="commenter">{{ comm.commenter }}</span
@@ -99,13 +139,15 @@
 <script>
 import apiService from "../services/APIService.js";
 import PostDetails from "../views/PostDetails.vue";
-import Ratings from "./Ratings.vue"
+import Ratings from "./Ratings.vue";
+import { BDropdownItem } from "bootstrap-vue";
 export default {
   name: "Post",
   props: ["post", "isPhotoFeed"],
   components: {
     PostDetails,
     Ratings,
+    BDropdownItem,
   },
   data() {
     return {
@@ -119,6 +161,9 @@ export default {
       },
       ratingsForPost: [],
       rateValue: null,
+      isEdit: false,
+      newCaption: "",
+      caption: this.post.caption,
     };
   },
   methods: {
@@ -145,7 +190,6 @@ export default {
       };
       apiService.addFavoritePost(postToAdd).then((response) => {
         if (response.status == 200) {
-          alert("added!");
           this.$store.commit("ADD_FAVORITE_POST", post, postToAdd);
         }
       });
@@ -153,7 +197,6 @@ export default {
     removeFavorite(post) {
       apiService.deleteFavorite(post.post_id).then((response) => {
         if (response.status == 200) {
-          alert("removed!");
           this.$store.commit("REMOVE_FAVORITE_POST", post);
         }
       });
@@ -172,6 +215,42 @@ export default {
     shortenedCommentsList(commentsListSize) {
       return this.listOfComments.slice(0, commentsListSize);
     },
+    changeCaptionStatus() {
+      this.isEdit = true;
+    },
+    editCaption() {
+      if (this.newCaption != "") {
+        const postToUpdate = {
+          post_id: this.post.post_id,
+          username: this.post.username,
+          photo_url: this.post.photo_url,
+          likes: this.post.likes,
+          caption: this.newCaption,
+        };
+        apiService.editCaption(postToUpdate).then((response) => {
+          if (response.status == 200) {
+            this.caption = this.newCaption;
+            this.newCaption = "";
+            this.isEdit = false;
+          }
+        });
+      }
+    },
+    removePhoto() {
+      if (confirm("Do you want to remove photo?")) {
+        apiService.removePost(this.post.post_id).then((response) => {
+          if (response.status == 200) {
+            apiService.displayPosts().then((response) => {
+              this.$store.commit("SET_ALL_POSTS", response.data);
+            });
+          }
+        });
+      }
+    },
+    cancel() {
+      this.isEdit = false;
+      this.newCaption = "";
+    },
   },
   computed: {
     isFavorite() {
@@ -187,9 +266,11 @@ export default {
       console.log(response.data);
       this.ratingsForPost = response.data;
     });
-    apiService.getRatingByUser(this.post.post_id, this.$store.state.user.username).then((response) => {
-      this.rateValue = response.data;
-    })
+    apiService
+      .getRatingByUser(this.post.post_id, this.$store.state.user.username)
+      .then((response) => {
+        this.rateValue = response.data;
+      });
   },
 };
 </script>
@@ -215,6 +296,7 @@ export default {
 
 #commenter,
 .username-post,
+#caption2 span,
 #likes {
   font-weight: bold;
 }
@@ -222,6 +304,7 @@ export default {
 .comments,
 #likes,
 #caption,
+#caption2,
 .username-post {
   text-align: left;
 }
@@ -238,7 +321,8 @@ div.likes-ratings {
   justify-content: flex-start;
 }
 
-.reactions-likes, .reactions-ratings {
+.reactions-likes,
+.reactions-ratings {
   flex: 1;
   display: flex;
   justify-content: flex-start;
@@ -283,7 +367,24 @@ div.likes-ratings {
   width: 100%;
 }
 
-.post-header .username-post {
+.post-header h3.username-post {
   flex: 1;
+}
+
+.top-right-options {
+  display: flex;
+  align-items: center;
+}
+
+#caption2 {
+  display: flex;
+}
+
+div#caption2 button {
+  height: fit-content;
+}
+
+.top-right-options i:hover {
+  cursor: pointer;
 }
 </style>

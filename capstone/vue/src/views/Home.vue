@@ -5,7 +5,7 @@
     </div> -->
     <div class="post-container">
       <post class="each-post"
-        v-for="post in listOfPosts"
+        v-for="post in $store.state.allPosts"
         v-bind:key="post.postId"
         v-bind:post="post"
       />
@@ -30,8 +30,8 @@ export default {
   },
   created() {
     apiService.displayPosts().then((response) => {
-      console.log(response.data);
       this.listOfPosts = response.data;
+      this.$store.commit("SET_ALL_POSTS", response.data);
     });
   },
   // methods: {

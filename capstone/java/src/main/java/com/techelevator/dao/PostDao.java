@@ -17,4 +17,8 @@ public interface PostDao {
     public void likePost(int id);
 
     public void unLikePost(int id);
+
+    public void editCaption(Post post);
+
+    public void deletePost(int id);
 }

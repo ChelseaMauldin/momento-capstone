@@ -21,6 +21,7 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     likes: Number,
+    allPosts: [],
     favoritePosts: [],
     favoriteIds: [],
     profileImageUrl: '',
@@ -60,6 +61,9 @@ export default new Vuex.Store({
     },
     SET_FAVORITES(state, favorites) {
       state.favoritePosts = favorites;
+    },
+    SET_ALL_POSTS(state, posts){
+      state.allPosts = posts;
     },
     SET_FAV_IDS(state, favoriteIds) {
       state.favoriteIds = favoriteIds;

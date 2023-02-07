@@ -73,6 +73,12 @@ export default {
     },
     getAvgRating(id){
         return axios.get(`/ratings/${id}/avg`)
-    }
+    },
+    editCaption(post){
+        return axios.put('/post/caption', post)
+    },
+    removePost(id){
+        return axios.delete(`/post/${id}`)
+    },
 
 }

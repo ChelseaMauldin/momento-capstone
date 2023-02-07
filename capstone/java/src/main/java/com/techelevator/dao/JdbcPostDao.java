@@ -103,4 +103,19 @@ public class JdbcPostDao implements PostDao{
                 "WHERE post_id=?";
         jdbcTemplate.update(sql, id, id);
     }
+
+    @Override
+    public void editCaption(Post post) {
+        String sql = "UPDATE posts " +
+                "SET caption = ? " +
+                "WHERE post_id = ?";
+        jdbcTemplate.update(sql, post.getCaption() , post.getPostId());
+    }
+
+    @Override
+    public void deletePost(int id) {
+        String sql = "DELETE FROM posts " +
+                "WHERE post_id = ?";
+        jdbcTemplate.update(sql, id);
+    }
 }
