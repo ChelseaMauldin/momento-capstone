@@ -12,7 +12,7 @@
       <div class="name-and-bio">
         <div class="username-and-edit">
           <h2 class="profile-username">{{ this.$route.params.username }}</h2>
-          <router-link v-bind:to="{name: 'edit-profile', params: {username: this.$route.params.username}}"
+          <router-link v-if="this.$store.state.user.username==this.$route.params.username" v-bind:to="{name: 'edit-profile', params: {username: this.$route.params.username}}"
             ><button
               type="button"
               id="editBtn"

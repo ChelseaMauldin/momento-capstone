@@ -50,7 +50,6 @@ export default {
 </script>
     
 <style>
-
 .user-headline{
     padding-top: 10px;
     padding-bottom: 10px;
@@ -77,7 +76,6 @@ export default {
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
-
   width: 40px;
   height: 40px;
 }
@@ -88,11 +86,9 @@ export default {
 }
 #post-details-caption {
   margin-left: 10px;
-  
 }
 
 .post-details-main {
-  
   margin: 0;
   padding: 0;
 }
@@ -100,7 +96,6 @@ export default {
 #picture-details {
   margin: 0;
   padding: 0;
- 
 }
 
 #post-details-comments{
