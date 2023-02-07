@@ -73,7 +73,7 @@
     </div>
     <div id="page">
       <div class="title">
-        <h1>TE-Gram</h1>
+        <h1>Momento</h1>
         <div class="search-bar">
           <input
             type="text"

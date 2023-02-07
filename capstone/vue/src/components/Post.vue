@@ -78,7 +78,7 @@
       >&nbsp;{{ post.caption }}
     </p>
     <div class="comments" v-if="this.$route.name == 'home'">
-      <p v-for="comm in listOfComments" v-bind:key="comm.id">
+      <p v-for="comm in shortenedCommentsList(2)" v-bind:key="comm.id">
         <span id="commenter">{{ comm.commenter }}</span
         >&nbsp;{{ comm.comment }}
       </p>
@@ -163,12 +163,14 @@ export default {
         this.newComment.comment = this.filter;
         apiService.createNewComment(this.newComment).then((response) => {
           if (response.status == 201) {
-            console.log(this.newComment.comment);
             this.listOfComments.push(this.newComment);
             this.filter = "";
           }
         });
       }
+    },
+    shortenedCommentsList(commentsListSize) {
+      return this.listOfComments.slice(0, commentsListSize);
     },
   },
   computed: {

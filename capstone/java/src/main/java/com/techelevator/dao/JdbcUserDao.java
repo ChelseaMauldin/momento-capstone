@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.techelevator.model.UpdatePasswordDto;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -80,6 +81,28 @@ public class JdbcUserDao implements UserDao {
         String ssRole = role.toUpperCase().startsWith("ROLE_") ? role.toUpperCase() : "ROLE_" + role.toUpperCase();
 
         return jdbcTemplate.update(insertUserSql, username, password_hash, ssRole) == 1;
+    }
+
+    public boolean updatePassword(UpdatePasswordDto user){
+        String sql = "UPDATE users SET password_hash=? WHERE username=?";
+        String password_hash = new BCryptPasswordEncoder().encode(user.getPassword());
+        return jdbcTemplate.update(sql, password_hash, user.getUsername())==1;
+    }
+
+    @Override
+    public List<String> getAllUsernames() {
+        List<String> listOfUsernames = new ArrayList<>();
+
+        String sql = "SELECT username FROM users;";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
+
+        while(result.next()){
+            String username = result.getString("username");
+            listOfUsernames.add(username);
+        }
+
+        return listOfUsernames;
     }
 
     private User mapRowToUser(SqlRowSet rs) {
