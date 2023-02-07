@@ -8,12 +8,14 @@ public class Rating {
     private int ratingId;
     @JsonProperty("post_id")
     private int postId;
-    private int rating;
+    private double rating;
+    private String rater;
 
-    public Rating(int ratingId, int postId, int rating) {
+    public Rating(int ratingId, int postId, double rating, String rater) {
         this.ratingId = ratingId;
         this.postId = postId;
         this.rating = rating;
+        this.rater = rater;
     }
 
     public Rating() {
@@ -36,11 +38,19 @@ public class Rating {
         this.postId = postId;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public String getRater() {
+        return rater;
+    }
+
+    public void setRater(String rater) {
+        this.rater = rater;
     }
 }

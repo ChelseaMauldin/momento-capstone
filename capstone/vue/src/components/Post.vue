@@ -49,17 +49,28 @@
       </div>
     </div>
     <div class="reactions" v-if="this.$route.name == 'home'">
-      <i
-        id="likeIcon"
-        v-if="!liked && $store.state.token != ''"
-        v-on:click="addLike(post.post_id)"
-        class="likeButton fa-regular fa-heart"
-      ></i>
-      <i
-        class="likeButton fa-solid fa-heart"
-        v-if="liked && $store.state.token != ''"
-        v-on:click="removeLike(post.post_id)"
-      ></i>
+      <div class="likes-ratings">
+        <div class="reactions-likes">
+          <i
+            id="likeIcon"
+            v-if="!liked && $store.state.token != ''"
+            v-on:click="addLike(post.post_id)"
+            class="likeButton fa-regular fa-heart"
+          ></i>
+          <i
+            class="likeButton fa-solid fa-heart"
+            v-if="liked && $store.state.token != ''"
+            v-on:click="removeLike(post.post_id)"
+          ></i>
+        </div>
+        <div class="reactions-ratings">
+          <ratings
+            v-bind:ratingsForPost="ratingsForPost"
+            v-bind:rateValue="rateValue"
+            v-bind:postId="post.post_id"
+          />
+        </div>
+      </div>
 
       <p id="likes">{{ post.likes }} likes</p>
     </div>
@@ -69,7 +80,7 @@
       >&nbsp;{{ post.caption }}
     </p>
     <div class="comments" v-if="this.$route.name == 'home'">
-      <p v-for="comm in listOfComments" v-bind:key="comm.id">
+      <p v-for="comm in shortenedCommentsList(2)" v-bind:key="comm.id">
         <span id="commenter">{{ comm.commenter }}</span
         >&nbsp;{{ comm.comment }}
       </p>
@@ -90,11 +101,13 @@
 <script>
 import apiService from "../services/APIService.js";
 import PostDetails from "../views/PostDetails.vue";
+import Ratings from "./Ratings.vue";
 export default {
   name: "Post",
   props: ["post", "isPhotoFeed"],
   components: {
     PostDetails,
+    Ratings,
   },
   data() {
     return {
@@ -106,6 +119,8 @@ export default {
         commenter: this.$store.state.user.username,
         comment: "",
       },
+      ratingsForPost: [],
+      rateValue: null,
     };
   },
   methods: {
@@ -150,12 +165,15 @@ export default {
         this.newComment.comment = this.filter;
         apiService.createNewComment(this.newComment).then((response) => {
           if (response.status == 201) {
-            console.log(this.newComment.comment);
             this.listOfComments.push(this.newComment);
             this.filter = "";
+            this.$store.commit("SET_COMMENTS_FOR_POST", this.listOfComments);
           }
         });
       }
+    },
+    shortenedCommentsList(commentsListSize) {
+      return this.listOfComments.slice(0, commentsListSize);
     },
   },
   computed: {
@@ -168,6 +186,15 @@ export default {
     apiService.displayCommentsByPost(this.post.post_id).then((response) => {
       this.listOfComments = response.data;
     });
+    apiService.getRatingsById(this.post.post_id).then((response) => {
+      console.log(response.data);
+      this.ratingsForPost = response.data;
+    });
+    apiService
+      .getRatingByUser(this.post.post_id, this.$store.state.user.username)
+      .then((response) => {
+        this.rateValue = response.data;
+      });
   },
 };
 </script>
@@ -208,6 +235,34 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+div.likes-ratings {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.reactions-likes,
+.reactions-ratings {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-self: center;
+}
+
+.reactions-likes {
+  height: 100%;
+}
+
+.reactions-likes i.likeButton {
+  padding: 5px;
+  font-size: 30px;
+  color: red;
+}
+
+.reactions-ratings {
+  justify-content: flex-end;
 }
 
 .fa-heart {

@@ -25,3 +25,6 @@ VALUES (1, 'fakeemail1@yahoo.com', 'RickUser', 'https://res.cloudinary.com/depdf
 INSERT INTO profiles (user_id, email, name, profile_image, profile_bio)
 VALUES (2, 'fakeemail2@yahoo.com', 'NikeLover', 'https://res.cloudinary.com/depdfgnxo/image/upload/v1675111162/cld-sample-5.jpg', 'I like shoes');
 COMMIT TRANSACTION;
+
+INSERT INTO ratings (rating_id, post_id, rating, rater)
+VALUES (1, 1, 5, 'admin');

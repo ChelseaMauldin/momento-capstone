@@ -55,6 +55,24 @@ export default {
     },
     updateProfile(profile) {
         return axios.put('/profiles/update', profile)
+    },
+    getAllRatings(){
+        return axios.get('/ratings')
+    },
+    getRatingsById(id){
+        return axios.get(`/ratings/${id}`)
+    },
+    addRating(rating) {
+        return axios.post('/ratings', rating)
+    },
+    updateRating(rating){
+        return axios.put('/ratings', rating)
+    },
+    getRatingByUser(id, user){
+        return axios.get(`/ratings/${id}/${user}`)
+    },
+    getAvgRating(id){
+        return axios.get(`/ratings/${id}/avg`)
     }
 
 }

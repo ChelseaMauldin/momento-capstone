@@ -25,8 +25,13 @@ export default new Vuex.Store({
     favoriteIds: [],
     profileImageUrl: '',
     comments: [],
+    ratings: [],
+    currentPost: {},
   },
   mutations: {
+    SET_COMMENTS_FOR_POST(state, payload) {
+      state.comments = payload;
+    },
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
       localStorage.setItem('token', token);
@@ -79,5 +84,5 @@ export default new Vuex.Store({
     SET_PROFILE_IMAGE_URL(state, newUrl) {
       state.profileImageUrl = newUrl
     }
-}
+  },
 })

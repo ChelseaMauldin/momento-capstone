@@ -33,12 +33,6 @@ export default {
       console.log(response.data);
       this.listOfPosts = response.data;
     });
-    apiService.displayFavoritePosts(this.userCurrent).then((response) => {
-      this.$store.commit("SET_FAVORITES", response.data);
-    });
-    apiService.displayFavoriteIds(this.userCurrent).then((response) => {
-      this.$store.commit("SET_FAV_IDS", response.data);
-    });
   },
   // methods: {
   //   displayPost() {

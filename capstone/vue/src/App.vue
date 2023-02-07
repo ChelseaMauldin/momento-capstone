@@ -73,7 +73,7 @@
     </div>
     <div id="page">
       <div class="title">
-        <h1>TE-Gram</h1>
+        <h1>Momento</h1>
         <div class="search-bar">
           <input
             type="text"
@@ -97,6 +97,7 @@
 </template>
 <script>
 import createPost from "./views/CreatePost.vue";
+import apiService from "./services/APIService";
 export default {
   data() {
     return {
@@ -117,6 +118,18 @@ export default {
   //     },
   //   },
   // },
+  created() {
+    apiService
+      .displayFavoritePosts(this.$store.state.user.username)
+      .then((response) => {
+        this.$store.commit("SET_FAVORITES", response.data);
+      });
+    apiService
+      .displayFavoriteIds(this.$store.state.user.username)
+      .then((response) => {
+        this.$store.commit("SET_FAV_IDS", response.data);
+      });
+  },
 };
 </script>
 
