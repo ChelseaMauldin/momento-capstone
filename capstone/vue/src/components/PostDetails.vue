@@ -3,7 +3,7 @@
     <div class="col-md modal-image-container">
       <img id="post-details-img" :src="post.photo_url" />
     </div>
-    <div class="col-md d-flex flex-column " id="picture-details">
+    <div class="col-md d-flex flex-column" id="picture-details">
       <div class="user-headline d-flex">
         <div id="post-details-profile-picture-div">
           <img
@@ -18,9 +18,9 @@
         </p>
       </div>
       <div id="post-details-comments" class="comments">
-        <p v-for="comment in comments" v-bind:key="comment.comment_id">
-          <span id="commenter">{{ comment.commenter }}</span
-          >&nbsp;{{ comment.comment }}
+        <p v-for="comm in comments" v-bind:key="comm.id">
+          <span id="commenter">{{ comm.commenter }}</span
+          >&nbsp;{{ comm.comment }}
         </p>
       </div>
     </div>
@@ -50,14 +50,12 @@ export default {
 </script>
     
 <style>
-
-.user-headline{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-bottom:1px solid rgb(223, 218, 218);
+.user-headline {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(223, 218, 218);
 }
 .modal-image-container {
- 
   margin: 0;
   padding: 0;
 }
@@ -88,11 +86,9 @@ export default {
 }
 #post-details-caption {
   margin-left: 10px;
-  
 }
 
 .post-details-main {
-  
   margin: 0;
   padding: 0;
 }
@@ -100,12 +96,11 @@ export default {
 #picture-details {
   margin: 0;
   padding: 0;
- 
 }
 
-#post-details-comments{
-    margin-top:10px;
-    padding-left:9.9%;
+#post-details-comments {
+  margin-top: 10px;
+  padding-left: 9.9%;
   padding-right: auto;
 }
 </style>
