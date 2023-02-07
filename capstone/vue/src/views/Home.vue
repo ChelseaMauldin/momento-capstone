@@ -33,6 +33,16 @@ export default {
       this.listOfPosts = response.data;
       this.$store.commit("SET_ALL_POSTS", response.data);
     });
+    apiService
+      .displayFavoritePosts(this.$store.state.user.username)
+      .then((response) => {
+        this.$store.commit("SET_FAVORITES", response.data);
+      });
+    apiService
+      .displayFavoriteIds(this.$store.state.user.username)
+      .then((response) => {
+        this.$store.commit("SET_FAV_IDS", response.data);
+      });
   },
   // methods: {
   //   displayPost() {
