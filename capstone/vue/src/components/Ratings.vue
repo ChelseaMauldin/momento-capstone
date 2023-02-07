@@ -3,7 +3,8 @@
       <p>Avg Rating: {{ avgRating }}</p>
     <b-form-rating v-model="rate" 
     variant="warning"
-    v-on:change="addOrUpdate()"></b-form-rating>
+    v-on:change="addOrUpdate()"
+    v-if="$store.state.token != ''"></b-form-rating>
   </div>
 </template>
 
