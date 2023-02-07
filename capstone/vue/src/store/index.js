@@ -25,6 +25,7 @@ export default new Vuex.Store({
     favoriteIds: [],
     profileImageUrl: '',
     comments: [],
+    ratings: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -69,7 +70,7 @@ export default new Vuex.Store({
     },
     REMOVE_FAVORITE_POST(state, post) {
       const filtered = state.favoritePosts.filter(eachPost =>
-        eachPost.post_id != post.post_id);
+         eachPost.post_id != post.post_id);
       state.favoritePosts = filtered;
       const index1 = state.favoriteIds.indexOf(post.post_id);
       if (index1 > -1) {
@@ -78,11 +79,9 @@ export default new Vuex.Store({
     },
     SET_PROFILE_IMAGE_URL(state, newUrl) {
       state.profileImageUrl = newUrl
-<<<<<<< HEAD
     },
-  }
-=======
+    SET_RATINGS(state, ratings) {
+      state.ratings = ratings;
     }
 }
->>>>>>> 42f1d4c2a3df32c7e58d0ebf31c1dfd89d1a0cc6
 })

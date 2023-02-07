@@ -44,9 +44,11 @@ CREATE TABLE comments (
 CREATE TABLE ratings (
     rating_id SERIAL NOT NULL,
     post_id int NOT NULL,
-    rating int NOT NULL,
+    rating decimal(3,2) NOT NULL,
+    rater varchar(50) NOT NULL,
     CONSTRAINT PK_rating PRIMARY KEY (rating_id),
-    CONSTRAINT FK_rating_post FOREIGN KEY (post_id) REFERENCES posts (post_id)
+    CONSTRAINT FK_rating_post FOREIGN KEY (post_id) REFERENCES posts (post_id),
+    CONSTRAINT FK_rating_user FOREIGN KEY (rater) REFERENCES users (username)
 );
 
 CREATE TABLE favorites (
