@@ -78,11 +78,6 @@ export default new Vuex.Store({
     },
     SET_PROFILE_IMAGE_URL(state, newUrl) {
       state.profileImageUrl = newUrl
-<<<<<<< HEAD
-    },
-  }
-=======
     }
-}
->>>>>>> 42f1d4c2a3df32c7e58d0ebf31c1dfd89d1a0cc6
+  },
 })
