@@ -63,7 +63,7 @@
       <div class="modal-dialog modal-dialog-centered" style="max-width: 70%">
         <div class="modal-content" id="details-content">
           <div class="modal-body" id="details-body">
-            <post-details :post="post" />
+            <post-details :post="post" :listOfComments="listOfComments" />
           </div>
         </div>
       </div>
@@ -248,7 +248,6 @@ export default {
             apiService.displayPosts().then((response) => {
               this.$store.commit("SET_ALL_POSTS", response.data);
             });
-            // this.$router.push({name: 'home'});
           }
         });
       }
@@ -267,7 +266,6 @@ export default {
   created() {
     apiService.displayCommentsByPost(this.post.post_id).then((response) => {
       this.listOfComments = response.data;
-      this.$store.commit("SET_COMMENTS_FOR_POST", this.listOfComments)
     });
     apiService.getRatingsById(this.post.post_id).then((response) => {
       console.log(response.data);

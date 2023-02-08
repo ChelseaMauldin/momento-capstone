@@ -1,15 +1,11 @@
 <template>
   <div class="home d-flex">
-    <!-- <div class="title">
-      <h1>Home</h1>
-    </div> -->
-
     <div class="posts-container">
       <div class="post-container">
         <post
           class="each-post"
           v-for="post in this.$store.state.allPosts"
-          v-bind:key="post"
+          v-bind:key="post.post_id"
           v-bind:post="post"
         />
       </div>

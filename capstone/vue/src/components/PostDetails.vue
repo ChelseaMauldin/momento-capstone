@@ -18,7 +18,7 @@
         </p>
       </div>
       <div id="post-details-comments" class="comments">
-        <p v-for="comm in comments" v-bind:key="comm.id">
+        <p v-for="comm in listOfComments" v-bind:key="comm.id">
           <span id="commenter">{{ comm.commenter }}</span
           >&nbsp;{{ comm.comment }}
         </p>
@@ -35,17 +35,8 @@ export default {
       profile: {},
     };
   },
-  props: ["post"],
-  computed: {
-    comments() {
-      return this.$store.state.comments;
-    },
-  },
-  mounted() {
-    apiService.displayCommentsByPost(this.post.post_id).then((response) => {
-      console.log(this.post);
-      this.comments = response.data;
-    });
+  props: ["post", "listOfComments"],
+  created() {
     apiService.displayProfile(this.post.username).then((response) => {
       this.profile = response.data;
     });
