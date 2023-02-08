@@ -129,17 +129,21 @@ export default {
 
 .main-login {
   /*new content */
-  background-image: url(https://res.cloudinary.com/depdfgnxo/image/upload/v1675269863/pexels-photo-952264_hxjydg.webp);
-  background-position-x: -150px;
+  background-image: url(https://res.cloudinary.com/dkq5ktysl/image/upload/v1675876172/momentoApp_upqxds.jpg);
+/* background-position-x: -150px;
   background-position-y: -1400px;
-  /* new content above*/
-  /* margin-top: 100px; */
+  new content above
+   margin-top: 100px; 
   display: flex;
   flex-direction: row;
   justify-content:center;
-  height: 100vh;
+  /*height: 100vh;*/
+  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(238,174,202);
+  background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+
 }
 #image-login {
-  width: 200px;
+  width: 50px;
 }
 </style>

@@ -143,6 +143,9 @@ export default {
   min-height: 100vh;
   width: 100%;
   flex-basis: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(238,174,202);
+  background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
 }
 
 #nav {
@@ -150,7 +153,7 @@ export default {
   grid-area: nav;
   display: flex;
   flex-direction: column;
-  background: rgba(171, 71, 188, 0.2);
+  /* background: rgba(171, 71, 188, 0.2); */
   text-align: center;
 }
 #nav i {
@@ -175,7 +178,7 @@ export default {
 }
 
 .title {
-  background-color: rgba(255, 51, 102, 0.2);
+/*  background-color: rgba(255, 51, 102, 0.2);*/
   height: 75px;
   width: 100%;
   display: flex;
