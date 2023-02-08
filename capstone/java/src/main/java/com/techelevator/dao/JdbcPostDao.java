@@ -53,11 +53,11 @@ public class JdbcPostDao implements PostDao{
     }
 
     public List<Post> getPostsByRating(String order){
-        String sortByHighestRating = "SELECT p.post_id as post_id, username, photo_url, likes, caption, COALESCE(AVG(rating), 0) as avg\n" +
+        String sortByHighestRating = "SELECT p.post_id as post_id, username, photo_url, likes, caption, date_time, COALESCE(AVG(rating), 0) as avg\n" +
                 "FROM POSTS p LEFT JOIN ratings r ON p.post_id=r.post_id \n" +
                 "GROUP BY p.post_id ORDER BY avg DESC";
 
-        String sortByLowestRating = "SELECT p.post_id as post_id, username, photo_url, likes, caption, COALESCE(AVG(rating), 0) as avg\n" +
+        String sortByLowestRating = "SELECT p.post_id as post_id, username, photo_url, likes, caption, date_time, COALESCE(AVG(rating), 0) as avg\n" +
                 "FROM POSTS p LEFT JOIN ratings r ON p.post_id=r.post_id \n" +
                 "GROUP BY p.post_id ORDER BY avg ASC";
 
