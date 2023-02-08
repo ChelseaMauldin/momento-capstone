@@ -66,7 +66,7 @@ export default {
     orderByRating(order) {
       apiService.displayPostsByRating(order).then((response) => {
         if (response.status == 200) {
-          this.listOfPosts = response.data;
+          this.$store.commit("SET_ALL_POSTS", response.data);
         }
       });
     },
