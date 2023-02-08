@@ -46,4 +46,9 @@ public class PhotoFeedController {
     public int createPost(@RequestBody Post post){
         return dao.createPost(post);
     }
+
+    @RequestMapping(path="/posts/rating/{order}", method = RequestMethod.GET)
+    public List<Post> getPostsByRating(@PathVariable String order){
+        return dao.getPostsByRating(order);
+    }
 }

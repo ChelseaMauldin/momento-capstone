@@ -32,7 +32,7 @@ export default {
       myWidget: {},
       post: {
         photo_url: "",
-        username: this.$store.state.user.username,
+        username: "",
         likes: 0,
         caption: "",
       },
@@ -45,6 +45,7 @@ export default {
     },
     addPost() {
       if (this.post.photo_url !== "") {
+        this.post.username= this.$store.state.user.username;
         apiService.createPost(this.post).then((response) => {
           if (response.status == 200) {
             this.post.caption = "";

@@ -17,4 +17,6 @@ public interface PostDao {
     public void likePost(int id);
 
     public void unLikePost(int id);
+
+    public List<Post> getPostsByRating(String order);
 }

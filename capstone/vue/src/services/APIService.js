@@ -73,6 +73,10 @@ export default {
     },
     getAvgRating(id){
         return axios.get(`/ratings/${id}/avg`)
+    },
+
+    displayPostsByRating(order){
+        return axios.get(`/posts/rating/${order}`)
     }
 
 }

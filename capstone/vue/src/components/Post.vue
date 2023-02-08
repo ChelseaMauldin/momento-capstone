@@ -1,5 +1,5 @@
 <template>
-  <div class="post-container">
+  <div class="post-container-main">
     <div class="post-header">
       <h3 v-if="this.$route.name == 'home'" class="username-post">
         <router-link
@@ -203,6 +203,13 @@ export default {
 .submit-new-comment {
   justify-content: flex-start;
   display: flex;
+}
+
+.post-container-main{
+   display: flex;
+  flex-direction: column;
+  width: 80vh;
+  text-align: center;
 }
 
 .comment-input:focus {

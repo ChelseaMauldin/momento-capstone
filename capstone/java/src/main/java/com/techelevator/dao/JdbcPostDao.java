@@ -51,6 +51,35 @@ public class JdbcPostDao implements PostDao{
         return posts;
     }
 
+    public List<Post> getPostsByRating(String order){
+        String sortByHighestRating = "SELECT p.post_id as post_id, username, photo_url, likes, caption, COALESCE(AVG(rating), 0) as avg\n" +
+                "FROM POSTS p LEFT JOIN ratings r ON p.post_id=r.post_id \n" +
+                "GROUP BY p.post_id ORDER BY avg DESC";
+
+        String sortByLowestRating = "SELECT p.post_id as post_id, username, photo_url, likes, caption, COALESCE(AVG(rating), 0) as avg\n" +
+                "FROM POSTS p LEFT JOIN ratings r ON p.post_id=r.post_id \n" +
+                "GROUP BY p.post_id ORDER BY avg ASC";
+
+        String sql="";
+        if(order.toLowerCase().equals("desc")){
+            sql = sortByHighestRating;
+        }else if(order.toLowerCase().equals("asc")){
+            sql = sortByLowestRating;
+        }
+
+        List<Post> posts = new ArrayList<>();
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
+
+        while(result.next()) {
+            Post post = mapRowToPost(result);
+            posts.add(post);
+        }
+
+        return posts;
+
+    }
+
     private static Post mapRowToPost(SqlRowSet result){
             Post post = new Post();
             post.setPostId(result.getInt("post_id"));
@@ -103,4 +132,6 @@ public class JdbcPostDao implements PostDao{
                 "WHERE post_id=?";
         jdbcTemplate.update(sql, id, id);
     }
+
+
 }
