@@ -63,7 +63,8 @@
       <div class="modal-dialog modal-dialog-centered" style="max-width: 70%">
         <div class="modal-content" id="details-content">
           <div class="modal-body" id="details-body">
-            <post-details :post="post" :listOfComments="listOfComments" />
+            <post-details :post="post" />
+            <!-- <post-details :post="post" :listOfComments="listOfComments" /> -->
           </div>
         </div>
       </div>
@@ -120,8 +121,20 @@
       <button v-on:click="cancel()">Cancel</button>
     </div>
 
-    <div class="comments" v-if="this.$route.name == 'home'">
-      <p v-for="comm in shortenedCommentsList(2)" v-bind:key="comm.id">
+    <div
+      class="comments"
+      v-if="this.$route.name == 'home' && hasMoreThan1Comment"
+    >
+      <p v-for="comm in shortenedCommentsList()" v-bind:key="comm.id">
+        <span id="commenter">{{ comm.commenter }}</span
+        >&nbsp;{{ comm.comment }}
+      </p>
+    </div>
+    <div
+      class="comments"
+      v-if="this.$route.name == 'home' && !hasMoreThan1Comment"
+    >
+      <p v-for="comm in commentsForEachPost" v-bind:key="comm.id">
         <span id="commenter">{{ comm.commenter }}</span
         >&nbsp;{{ comm.comment }}
       </p>
@@ -209,14 +222,22 @@ export default {
         this.newComment.comment = this.filter;
         apiService.createNewComment(this.newComment).then((response) => {
           if (response.status == 201) {
-            this.listOfComments.push(this.newComment);
+            this.$store.commit("ADD_COMMENT", this.newComment);
+            // this.listOfComments.push(this.newComment);
             this.filter = "";
+            // this.$store.commit("SET_COMMENTS_FOR_POST", this.listOfComments);
+            apiService.displayAllComments().then((response) => {
+              this.$store.commit("SET_COMMENTS", response.data);
+            });
           }
         });
       }
     },
-    shortenedCommentsList(commentsListSize) {
-      return this.listOfComments.slice(0, commentsListSize);
+    shortenedCommentsList() {
+      const thisPostComments = this.$store.state.allComments.filter(
+        (eachComment) => eachComment.post_id == this.post.post_id
+      );
+      return thisPostComments.slice(this.listOfComments.length - 2);
     },
     changeCaptionStatus() {
       this.isEdit = true;
@@ -229,7 +250,7 @@ export default {
           photo_url: this.post.photo_url,
           likes: this.post.likes,
           caption: this.newCaption,
-          date_time: this.post.date_time
+          date_time: this.post.date_time,
         };
         apiService.editCaption(postToUpdate).then((response) => {
           if (response.status == 200) {
@@ -260,12 +281,20 @@ export default {
     isFavorite() {
       return this.$store.state.favoriteIds.includes(this.post.post_id);
     },
+    hasMoreThan1Comment() {
+      return this.commentsForEachPost.length > 1;
+    },
+    commentsForEachPost() {
+      return this.$store.state.allComments.filter(
+        (eachComment) => eachComment.post_id == this.post.post_id
+      );
+    },
   },
 
   created() {
-    apiService.displayCommentsByPost(this.post.post_id).then((response) => {
-      this.listOfComments = response.data;
-    });
+    // apiService.displayCommentsByPost(this.post.post_id).then((response) => {
+    //   this.listOfComments = response.data;
+    // });
     apiService.getRatingsById(this.post.post_id).then((response) => {
       console.log(response.data);
       this.ratingsForPost = response.data;
@@ -285,8 +314,8 @@ export default {
   display: flex;
 }
 
-.post-container-main{
-   display: flex;
+.post-container-main {
+  display: flex;
   flex-direction: column;
   width: 80vh;
   text-align: center;

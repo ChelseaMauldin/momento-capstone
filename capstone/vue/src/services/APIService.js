@@ -14,6 +14,10 @@ export default {
         return axios.get(`/post/${post_id}/comments`)
     },
 
+    displayAllComments(){
+        return axios.get('/comments')
+    },
+
     createNewComment(comment) {
         return axios.post('/post/create-comment', comment)
     },

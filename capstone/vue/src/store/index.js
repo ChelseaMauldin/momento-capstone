@@ -25,17 +25,17 @@ export default new Vuex.Store({
     favoritePosts: [],
     favoriteIds: [],
     profileImageUrl: '',
+    allComments: [],
     ratings: [],
     currentPost: {},
     profile: {}
   },
   mutations: {
-    SET_PROFILE(state, newProfile){
-      state.profile = newProfile;
+    SET_COMMENTS(state, comments) {
+      state.allComments = comments;
     },
-
-    SET_COMMENTS_FOR_POST(state, payload) {
-      state.comments = payload;
+    ADD_COMMENT(state, comment){
+      state.allComments.push(comment);
     },
     SET_AUTH_TOKEN(state, token) {
       state.token = token;

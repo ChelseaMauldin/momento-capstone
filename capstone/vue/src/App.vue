@@ -139,6 +139,9 @@ export default {
       .then((response) => {
         this.$store.commit("SET_FAV_IDS", response.data);
       });
+      apiService.displayAllComments().then((response) => {
+        this.$store.commit("SET_COMMENTS", response.data);
+      })
   },
 };
 </script>

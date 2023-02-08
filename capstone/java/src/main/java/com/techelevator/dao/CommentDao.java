@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface CommentDao {
 
+    public List<Comment> getAllComments();
 
     public List<Comment> getCommentsByPost(int postId);
 

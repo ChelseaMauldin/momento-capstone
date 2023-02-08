@@ -37,6 +37,11 @@ public class PhotoFeedController {
         return commentDao.getCommentsByPost(id);
     }
 
+    @RequestMapping(path="/comments", method = RequestMethod.GET)
+    public List<Comment> getAllComments(){
+        return commentDao.getAllComments();
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/post/create-comment", method = RequestMethod.POST)
     public int createNewComment(@RequestBody Comment comment) {

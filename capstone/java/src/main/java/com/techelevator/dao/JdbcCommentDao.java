@@ -19,6 +19,21 @@ public class JdbcCommentDao implements CommentDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Override
+    public List<Comment> getAllComments() {
+        String sql = "SELECT * FROM comments " +
+                "ORDER BY comment_id";
+        List<Comment> comments = new ArrayList<>();
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
+
+        while(result.next()){
+            Comment comment = mapRowToComment(result);
+            comments.add(comment);
+        }
+        System.out.println(comments);
+        return comments;
+    }
 
     @Override
     public List<Comment> getCommentsByPost(int postId) {
