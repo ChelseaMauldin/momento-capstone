@@ -53,11 +53,11 @@ public class JdbcPostDao implements PostDao{
     }
 
     public List<Post> getPostsByRating(String order){
-        String sortByHighestRating = "SELECT p.post_id as post_id, username, photo_url, likes, caption, COALESCE(AVG(rating), 0) as avg\n" +
+        String sortByHighestRating = "SELECT p.post_id as post_id, username, photo_url, likes, caption, date_time, COALESCE(AVG(rating), 0) as avg\n" +
                 "FROM POSTS p LEFT JOIN ratings r ON p.post_id=r.post_id \n" +
                 "GROUP BY p.post_id ORDER BY avg DESC";
 
-        String sortByLowestRating = "SELECT p.post_id as post_id, username, photo_url, likes, caption, COALESCE(AVG(rating), 0) as avg\n" +
+        String sortByLowestRating = "SELECT p.post_id as post_id, username, photo_url, likes, caption, date_time, COALESCE(AVG(rating), 0) as avg\n" +
                 "FROM POSTS p LEFT JOIN ratings r ON p.post_id=r.post_id \n" +
                 "GROUP BY p.post_id ORDER BY avg ASC";
 
@@ -80,6 +80,37 @@ public class JdbcPostDao implements PostDao{
         return posts;
 
     }
+
+    public List<Post> getPostsByTime(String order){
+        String sortByLatestPosts = "SELECT p.post_id as post_id, username, photo_url, likes, caption, date_time\n" +
+                "FROM POSTS p LEFT JOIN ratings r ON p.post_id=r.post_id \n" +
+                "GROUP BY p.post_id ORDER BY date_time DESC";
+
+        String sortByOldestPosts = "SELECT p.post_id as post_id, username, photo_url, likes, caption, date_time\n" +
+                "FROM POSTS p LEFT JOIN ratings r ON p.post_id=r.post_id \n" +
+                "GROUP BY p.post_id ORDER BY date_time ASC";
+
+        String sql="";
+
+        if(order.toLowerCase().equals("desc")){
+            sql = sortByLatestPosts;
+        }else if(order.toLowerCase().equals("asc")){
+            sql = sortByOldestPosts;
+        }
+
+        List<Post> posts = new ArrayList<>();
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
+
+        while(result.next()) {
+            Post post = mapRowToPost(result);
+            posts.add(post);
+        }
+
+        return posts;
+
+    }
+
 
     private static Post mapRowToPost(SqlRowSet result){
             Post post = new Post();

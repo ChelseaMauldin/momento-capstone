@@ -3,14 +3,13 @@
     <!-- <div class="title">
       <h1>Home</h1>
     </div> -->
-<<<<<<< HEAD
 
     <div class="posts-container">
       <div class="post-container">
         <post
           class="each-post"
-          v-for="post in listOfPosts"
-          v-bind:key="post"
+          v-for="post in this.$store.state.allPosts"
+          v-bind:key="post.post_id"
           v-bind:post="post"
         />
       </div>
@@ -28,18 +27,10 @@
         <a class="dropdown-item" type="button" v-on:click="orderByRating('asc')"
           >Lowest Rating</a>
         <div role="separator" class="dropdown-divider"></div>
-        <a class="dropdown-item" type="button">Newest Posts</a>
-        <a class="dropdown-item" type="button">Oldest Posts</a>
+        <a class="dropdown-item" type="button" v-on:click="orderByTime('desc')">Newest Posts</a>
+        <a class="dropdown-item" type="button" v-on:click="orderByTime('asc')">Oldest Posts</a>
       </div>
       </div>
-=======
-    <div class="post-container">
-      <post class="each-post"
-        v-for="post in $store.state.allPosts"
-        v-bind:key="post.postId"
-        v-bind:post="post"
-      />
->>>>>>> main
     </div>
   </div>
 </template>
@@ -80,9 +71,19 @@ export default {
       apiService.displayPostsByRating(order).then((response) => {
         if (response.status == 200) {
           this.listOfPosts = response.data;
+          this.$store.commit("SET_ALL_POSTS", response.data)
+
         }
       });
     },
+    orderByTime(order){
+      apiService.displayPostsByTime(order).then((response)=> {
+        if(response.status==200){
+          this.listOfPosts = response.data;
+          this.$store.commit("SET_ALL_POSTS", response.data)
+        }
+      })
+    }
   },
 };
 </script>

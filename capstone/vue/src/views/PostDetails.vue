@@ -1,6 +1,6 @@
 <template>
   <div class="post-details-main-view">
-      <post-details :post="post"/>
+      <post-details :post="post" :listOfComments="comments"/>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ export default {
     components: {
         PostDetails
     },
-    props: ["post"]
+    props: ["post", "listOfComments"]
 }
 </script>
 

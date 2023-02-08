@@ -63,7 +63,7 @@
       <div class="modal-dialog modal-dialog-centered" style="max-width: 70%">
         <div class="modal-content" id="details-content">
           <div class="modal-body" id="details-body">
-            <post-details :post="post" />
+            <post-details :post="post" :listOfComments="listOfComments"/>
           </div>
         </div>
       </div>

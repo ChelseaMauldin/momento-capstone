@@ -33,19 +33,16 @@ export default {
   data() {
     return {
       profile: {},
+      // comments: this.$store.state.comments.filter(eachComment => eachComment.post_id == this.post.post_id)
     };
   },
-  props: ["post"],
-  computed: {
-    comments() {
-      return this.$store.state.comments;
-    },
-  },
+  props: ["post", "comments"],
+  
   mounted() {
-    apiService.displayCommentsByPost(this.post.post_id).then((response) => {
-      console.log(this.post);
-      this.comments = response.data;
-    });
+    // apiService.displayCommentsByPost(this.post.post_id).then((response) => {
+    //   console.log(this.post);
+    //   this.comments = response.data;
+    // });
     apiService.displayProfile(this.post.username).then((response) => {
       this.profile = response.data;
     });

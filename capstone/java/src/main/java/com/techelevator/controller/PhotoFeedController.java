@@ -22,8 +22,6 @@ public class PhotoFeedController {
     @Autowired
     private CommentDao commentDao;
 
-
-
     @RequestMapping(path="/posts", method = RequestMethod.GET)
     public List<Post> getPosts(){
         return dao.getPosts();
@@ -55,5 +53,10 @@ public class PhotoFeedController {
     @RequestMapping(path="/posts/rating/{order}", method = RequestMethod.GET)
     public List<Post> getPostsByRating(@PathVariable String order){
         return dao.getPostsByRating(order);
+    }
+
+    @RequestMapping(path="/posts/time/{order}", method = RequestMethod.GET)
+    public List<Post> getPostsByTime(@PathVariable String order){
+        return dao.getPostsByTime(order);
     }
 }

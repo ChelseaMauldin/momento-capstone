@@ -74,18 +74,19 @@ export default {
     getAvgRating(id){
         return axios.get(`/ratings/${id}/avg`)
     },
-<<<<<<< HEAD
 
     displayPostsByRating(order){
         return axios.get(`/posts/rating/${order}`)
-    }
-=======
+    },
     editCaption(post){
         return axios.put('/post/caption', post)
     },
     removePost(id){
         return axios.delete(`/post/${id}`)
     },
->>>>>>> main
+
+    displayPostsByTime(order){
+        return axios.get(`/posts/time/${order}`)
+    }
 
 }

@@ -18,6 +18,7 @@ public interface PostDao {
 
     public void unLikePost(int id);
 
+    public List<Post> getPostsByTime(String order);
 
     public List<Post> getPostsByRating(String order);
 
