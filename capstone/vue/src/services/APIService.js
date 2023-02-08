@@ -14,7 +14,7 @@ export default {
         return axios.get(`/post/${post_id}/comments`)
     },
 
-    displayAllComments(){
+    displayAllComments() {
         return axios.get('/comments')
     },
 
@@ -60,32 +60,32 @@ export default {
     updateProfile(profile) {
         return axios.put('/profiles/update', profile)
     },
-    getAllRatings(){
+    getAllRatings() {
         return axios.get('/ratings')
     },
-    getRatingsById(id){
+    getRatingsById(id) {
         return axios.get(`/ratings/${id}`)
     },
     addRating(rating) {
         return axios.post('/ratings', rating)
     },
-    updateRating(rating){
+    updateRating(rating) {
         return axios.put('/ratings', rating)
     },
-    getRatingByUser(id, user){
+    getRatingByUser(id, user) {
         return axios.get(`/ratings/${id}/${user}`)
     },
-    getAvgRating(id){
+    getAvgRating(id) {
         return axios.get(`/ratings/${id}/avg`)
     },
 
-    displayPostsByRating(order){
+    displayPostsByRating(order) {
         return axios.get(`/posts/rating/${order}`)
     },
-    editCaption(post){
+    editCaption(post) {
         return axios.put('/post/caption', post)
     },
-    removePost(id){
+    removePost(id) {
         return axios.delete(`/post/${id}`)
     },
 
