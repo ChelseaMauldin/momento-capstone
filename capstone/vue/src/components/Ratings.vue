@@ -50,7 +50,7 @@ export default {
         })
           }
         });
-      } else if(this.rate > 0 && this.ratingValue == -1) {
+      } else if(this.rate > 0 && this.rateValue == -1) {
         apiService.addRating(rating).then((response) => {
           if (response.status == 200) {
             apiService

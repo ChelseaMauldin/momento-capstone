@@ -1,6 +1,10 @@
 <template>
   <div class="post-details-main-view">
+<<<<<<< HEAD
       <post-details :post="post" :listOfComments="comments"/>
+=======
+      <post-details :post="post" :listOfComments="listOfComments"/>
+>>>>>>> main
   </div>
 </template>
 
