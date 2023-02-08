@@ -3,6 +3,7 @@
     <!-- <div class="title">
       <h1>Home</h1>
     </div> -->
+<<<<<<< HEAD
 
     <div class="posts-container">
       <div class="post-container">
@@ -31,6 +32,14 @@
         <a class="dropdown-item" type="button">Oldest Posts</a>
       </div>
       </div>
+=======
+    <div class="post-container">
+      <post class="each-post"
+        v-for="post in $store.state.allPosts"
+        v-bind:key="post.postId"
+        v-bind:post="post"
+      />
+>>>>>>> main
     </div>
   </div>
 </template>
@@ -52,9 +61,19 @@ export default {
   },
   created() {
     apiService.displayPosts().then((response) => {
-      console.log(response.data);
       this.listOfPosts = response.data;
+      this.$store.commit("SET_ALL_POSTS", response.data);
     });
+    apiService
+      .displayFavoritePosts(this.$store.state.user.username)
+      .then((response) => {
+        this.$store.commit("SET_FAVORITES", response.data);
+      });
+    apiService
+      .displayFavoriteIds(this.$store.state.user.username)
+      .then((response) => {
+        this.$store.commit("SET_FAV_IDS", response.data);
+      });
   },
   methods: {
     orderByRating(order) {

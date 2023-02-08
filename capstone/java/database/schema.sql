@@ -27,6 +27,7 @@ CREATE TABLE posts (
     photo_url varchar(100) NOT NULL,
     likes integer NOT NULL,
     caption varchar(300),
+    date_time TIMESTAMPTZ,
     CONSTRAINT PK_post PRIMARY KEY (post_id),
     CONSTRAINT FK_post_user FOREIGN KEY (username) REFERENCES users (username)
 );

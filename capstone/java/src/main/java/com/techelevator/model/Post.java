@@ -1,6 +1,10 @@
 package com.techelevator.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.internal.util.privilegedactions.LoadClass;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Post {
 
@@ -11,13 +15,16 @@ public class Post {
     private String photoUrl;
     private int likes;
     private String caption;
+    @JsonProperty("date_time")
+    private LocalDateTime dateTime;
 
-    public Post(int postId, String username, String photoUrl, int likes, String caption) {
+    public Post(int postId, String username, String photoUrl, int likes, String caption, LocalDateTime dateTime) {
         this.postId = postId;
         this.username = username;
         this.photoUrl = photoUrl;
         this.likes = likes;
         this.caption = caption;
+        this.dateTime = dateTime;
     }
 
     public Post(){
@@ -62,5 +69,13 @@ public class Post {
 
     public void setCaption(String caption) {
         this.caption = caption;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 }

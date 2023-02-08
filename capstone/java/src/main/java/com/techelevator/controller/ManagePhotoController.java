@@ -21,4 +21,14 @@ public class ManagePhotoController {
     public void removeLike(@PathVariable int id){
         dao.unLikePost(id);
     }
+
+    @RequestMapping(path="/post/caption", method = RequestMethod.PUT)
+    public void editCaption(@RequestBody Post post) {
+        dao.editCaption(post);
+    }
+
+    @RequestMapping(path="/post/{id}", method = RequestMethod.DELETE)
+    public void deletePost(@PathVariable int id){
+        dao.deletePost(id);
+    }
 }

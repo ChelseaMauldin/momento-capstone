@@ -20,7 +20,7 @@ public class JdbcFavoriteDao implements FavoriteDao{
 
     @Override
     public List<Post> getFavoriteListOfPosts(String username) {
-        String sql = "SELECT posts.post_id, posts.username, photo_url, likes, caption " +
+        String sql = "SELECT posts.post_id, posts.username, photo_url, likes, caption, date_time " +
                 "FROM posts " +
                 "JOIN favorites ON posts.post_id = favorites.post_id " +
                 "WHERE favorites.username = ?";
@@ -56,6 +56,9 @@ public class JdbcFavoriteDao implements FavoriteDao{
         post.setPhotoUrl(result.getString("photo_url"));
         post.setLikes(result.getInt("likes"));
         post.setCaption(result.getString("caption"));
+        if(result.getTimestamp("date_time") != null){
+            post.setDateTime(result.getTimestamp("date_time").toLocalDateTime());
+        }
         return post;
 
     }
