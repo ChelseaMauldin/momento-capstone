@@ -248,6 +248,7 @@ export default {
             apiService.displayPosts().then((response) => {
               this.$store.commit("SET_ALL_POSTS", response.data);
             });
+            // this.$router.push({name: 'home'});
           }
         });
       }
@@ -266,6 +267,7 @@ export default {
   created() {
     apiService.displayCommentsByPost(this.post.post_id).then((response) => {
       this.listOfComments = response.data;
+      this.$store.commit("SET_COMMENTS_FOR_POST", this.listOfComments)
     });
     apiService.getRatingsById(this.post.post_id).then((response) => {
       console.log(response.data);

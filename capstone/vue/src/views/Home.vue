@@ -3,13 +3,12 @@
     <!-- <div class="title">
       <h1>Home</h1>
     </div> -->
-<<<<<<< HEAD
 
     <div class="posts-container">
       <div class="post-container">
         <post
           class="each-post"
-          v-for="post in listOfPosts"
+          v-for="post in this.$store.state.allPosts"
           v-bind:key="post"
           v-bind:post="post"
         />
@@ -32,14 +31,6 @@
         <a class="dropdown-item" type="button">Oldest Posts</a>
       </div>
       </div>
-=======
-    <div class="post-container">
-      <post class="each-post"
-        v-for="post in $store.state.allPosts"
-        v-bind:key="post.postId"
-        v-bind:post="post"
-      />
->>>>>>> main
     </div>
   </div>
 </template>
