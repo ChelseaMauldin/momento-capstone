@@ -80,15 +80,8 @@
             id="usernameSearch"
             v-model="filter.username"
             placeholder="Search a username"
+            v-on:keyup.enter="getSearchResult"
           />
-          <router-link
-            v-bind:to="{
-              name: 'profile',
-              params: { username: filter.username },
-            }"
-          >
-            <button>Search</button>
-          </router-link>
         </div>
       </div>
       <router-view />
@@ -107,6 +100,23 @@ export default {
       },
     };
   },
+  methods: {
+    getSearchResult(){
+      apiService.displayProfile(this.filter.username).then(response =>{
+        if(response.status==200){
+          this.$store.commit("SET_PROFILE", response.data)
+        }
+      })
+
+      apiService
+      .displayPostsByUsername(this.filter.username)
+      .then((response) => {
+        this.$store.commit("SET_ALL_POSTS", response.data)
+      });
+      this.$router.push(`/profile/${this.filter.username}`);
+      
+    }
+  },
   components: {
     createPost,
   },
@@ -118,7 +128,7 @@ export default {
   //     },
   //   },
   // },
-  created() {
+  mounted() {
     apiService
       .displayFavoritePosts(this.$store.state.user.username)
       .then((response) => {

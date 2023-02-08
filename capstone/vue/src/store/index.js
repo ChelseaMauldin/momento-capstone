@@ -25,11 +25,15 @@ export default new Vuex.Store({
     favoritePosts: [],
     favoriteIds: [],
     profileImageUrl: '',
-    comments: [],
     ratings: [],
     currentPost: {},
+    profile: {}
   },
   mutations: {
+    SET_PROFILE(state, newProfile){
+      state.profile = newProfile;
+    },
+
     SET_COMMENTS_FOR_POST(state, payload) {
       state.comments = payload;
     },

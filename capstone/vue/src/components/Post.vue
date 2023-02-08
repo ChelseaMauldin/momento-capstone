@@ -211,7 +211,6 @@ export default {
           if (response.status == 201) {
             this.listOfComments.push(this.newComment);
             this.filter = "";
-            this.$store.commit("SET_COMMENTS_FOR_POST", this.listOfComments);
           }
         });
       }
