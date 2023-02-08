@@ -120,8 +120,14 @@
       <button v-on:click="cancel()">Cancel</button>
     </div>
 
-    <div class="comments" v-if="this.$route.name == 'home'">
-      <p v-for="comm in shortenedCommentsList(2)" v-bind:key="comm.id">
+    <div class="comments" v-if="this.$route.name == 'home' && hasMoreThan1Comment">
+      <p v-for="comm in shortenedCommentsList()" v-bind:key="comm.id">
+        <span id="commenter">{{ comm.commenter }}</span
+        >&nbsp;{{ comm.comment }}
+      </p>
+    </div>
+    <div class="comments" v-if="this.$route.name == 'home' && !hasMoreThan1Comment">
+      <p v-for="comm in this.listOfComments" v-bind:key="comm.id">
         <span id="commenter">{{ comm.commenter }}</span
         >&nbsp;{{ comm.comment }}
       </p>
@@ -216,8 +222,8 @@ export default {
         });
       }
     },
-    shortenedCommentsList(commentsListSize) {
-      return this.listOfComments.slice(0, commentsListSize);
+    shortenedCommentsList() {
+      return this.listOfComments.slice(this.listOfComments.length -2);
     },
     changeCaptionStatus() {
       this.isEdit = true;
@@ -261,6 +267,9 @@ export default {
     isFavorite() {
       return this.$store.state.favoriteIds.includes(this.post.post_id);
     },
+    hasMoreThan1Comment() {
+      return this.listOfComments.length > 1;
+    }
   },
 
   created() {
