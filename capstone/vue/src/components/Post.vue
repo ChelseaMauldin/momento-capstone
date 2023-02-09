@@ -31,7 +31,7 @@
         <b-dropdown
           variant="Outline Success"
           no-caret
-          text="..."
+          text="·V·"
           v-if="
             post.username == this.$store.state.user.username &&
             this.$route.name == 'home'
@@ -60,6 +60,7 @@
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
+      v-if="$store.state.token != ''"
     >
       <div class="modal-dialog modal-dialog-centered" style="max-width: 70%">
         <div class="modal-content" id="details-content">
@@ -120,7 +121,7 @@
           v-on:keyup.enter="editCaption()"
         />
       </p>
-      <button v-on:click="cancel()">Cancel</button>
+      <button id="cancel" v-on:click="cancel()">Cancel</button>
     </div>
 
     <div
@@ -414,6 +415,7 @@ div.likes-ratings {
 .post-header {
   display: flex;
   align-items: center;
+  padding: 3px 8px;
 }
 
 .post-header i {
@@ -440,7 +442,25 @@ div#caption2 button {
   height: fit-content;
 }
 
+.edit-caption {
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.edit-caption:focus {
+  outline: none;
+  border-bottom: 1px solid black;
+}
+
+#cancel {
+  border-radius: 15px;
+  margin-left: 5px;
+  background: rgba(119, 114, 199, 0.349);
+}
+
 .top-right-options i:hover {
   cursor: pointer;
 }
+
+
 </style>

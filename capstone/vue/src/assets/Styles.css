@@ -1,3 +1,18 @@
 html {
     font-family: 'Mukta', sans-serif;
 }
+
+*::-webkit-scrollbar {
+    height: 100%;
+}
+
+*::-webkit-scrollbar-track {
+    background: rgba(207, 207, 207, 0.568);
+    border-radius:15px;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color:rgba(5, 62, 168, 0.473);    
+    border: 1px solid rgb(245, 245, 245);
+    border-radius: 10px;
+  }

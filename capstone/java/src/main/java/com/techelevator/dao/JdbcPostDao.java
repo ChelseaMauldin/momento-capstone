@@ -37,6 +37,7 @@ public class JdbcPostDao implements PostDao{
         return posts;
     }
 
+    @Override
     public List<Post> getPostsByUsername(String username) {
         String sql = "SELECT * FROM posts WHERE username = ?" +
                 "ORDER BY post_id DESC";
@@ -52,6 +53,7 @@ public class JdbcPostDao implements PostDao{
         return posts;
     }
 
+    @Override
     public List<Post> getPostsByRating(String order){
         String sortByHighestRating = "SELECT p.post_id as post_id, username, photo_url, likes, caption, date_time, COALESCE(AVG(rating), 0) as avg\n" +
                 "FROM POSTS p LEFT JOIN ratings r ON p.post_id=r.post_id \n" +
@@ -81,6 +83,7 @@ public class JdbcPostDao implements PostDao{
 
     }
 
+    @Override
     public List<Post> getPostsByTime(String order){
         String sortByLatestPosts = "SELECT p.post_id as post_id, username, photo_url, likes, caption, date_time\n" +
                 "FROM POSTS p LEFT JOIN ratings r ON p.post_id=r.post_id \n" +

@@ -95,12 +95,16 @@ export default {
 
 #picture-details {
   margin: 0;
-  padding: 0;
+  padding-right: 15px;
 }
 
 #post-details-comments {
   margin-top: 10px;
   padding-left: 9.9%;
   padding-right: auto;
+  overflow-y: scroll;
+  max-height: 380px;
 }
+
+
 </style>
