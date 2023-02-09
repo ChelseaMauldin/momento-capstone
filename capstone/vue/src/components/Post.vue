@@ -70,6 +70,7 @@
         </div>
       </div>
     </div>
+    <div class="post-info">
     <div class="reactions" v-if="this.$route.name == 'home'">
       <div class="likes-ratings">
         <div class="reactions-likes">
@@ -149,6 +150,7 @@
         v-on:keyup.enter="createComment()"
         placeholder="Write a comment..."
       />
+    </div>
     </div>
   </div>
 </template>
@@ -310,6 +312,12 @@ export default {
 </script>
 
 <style>
+
+.post-info{
+  padding-left:1.5%;
+  padding-right:1.5%;
+  padding-bottom:1.5%;
+}
 .submit-new-comment {
   justify-content: flex-start;
   display: flex;
@@ -320,10 +328,11 @@ export default {
   flex-direction: column;
   width: 80vh;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 1);
   border-radius: 10px;
   object-fit: cover;
   object-position: center;
+  box-shadow: 2px 4px 4px rgb(204, 204, 204);
 }
 
 .comment-input:focus {
