@@ -12,20 +12,36 @@
     </div>
     <div class="sort-container d-flex flex-column">
       <div class="sort-div">
-      <button id="sort-btn" class="btn btn-lg btn-outline-secondary dropdown-toggle align-self-start" type="button"
-        data-toggle="dropdown"
-        aria-expanded="false"
-      >Sort By
-      </button>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" type="button" v-on:click="orderByRating('desc')"
-          >Highest Rating</a>
-        <a class="dropdown-item" type="button" v-on:click="orderByRating('asc')"
-          >Lowest Rating</a>
-        <div role="separator" class="dropdown-divider"></div>
-        <a class="dropdown-item" type="button">Newest Posts</a>
-        <a class="dropdown-item" type="button">Oldest Posts</a>
-      </div>
+        <button
+          id="sort-btn"
+          class="
+            btn btn-lg btn-outline-secondary
+            dropdown-toggle
+            align-self-start
+          "
+          type="button"
+          data-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Sort By
+        </button>
+        <div class="dropdown-menu">
+          <a
+            class="dropdown-item"
+            type="button"
+            v-on:click="orderByRating('desc')"
+            >Highest Rating</a
+          >
+          <a
+            class="dropdown-item"
+            type="button"
+            v-on:click="orderByRating('asc')"
+            >Lowest Rating</a
+          >
+          <div role="separator" class="dropdown-divider"></div>
+          <a class="dropdown-item" type="button">Newest Posts</a>
+          <a class="dropdown-item" type="button">Oldest Posts</a>
+        </div>
       </div>
     </div>
   </div>
@@ -75,10 +91,17 @@ export default {
 </script>
 
 <style>
-.sort-container{
-    width:100%;
+.sort-container {
+  width: 100%;
   align-items: center;
 }
+
+#sort-btn {
+  border: none;
+  color: rgb(255, 255, 255);
+  background-color: rgba(171, 71, 188, 0.2);
+}
+
 #sort-btn:hover {
   background-color: rgba(171, 71, 188, 0.2);
   color: rgb(173, 171, 171);
