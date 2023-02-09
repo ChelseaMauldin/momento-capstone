@@ -91,6 +91,10 @@ export default new Vuex.Store({
     },
     SET_PROFILE_IMAGE_URL(state, newUrl) {
       state.profileImageUrl = newUrl
+    },
+
+    SET_PROFILE(state, profile){
+      state.profile=profile;
     }
   },
 })
