@@ -94,7 +94,7 @@
           />
         </div>
       </div>
-      <router-view />
+      <router-view id="pages-view" />
     </div>
   </div>
 </template>
@@ -187,7 +187,7 @@ export default {
 .nav-items {
   padding-bottom: 20px;
   font-size: 30px;
-  border-bottom: solid rgba(255, 255, 255, 0.7) 1px;
+  border-bottom: solid rgba(255, 255, 255, 0.459) 1px;
   margin-bottom: 70px;
   margin-right: 4%;
   margin-left: 4%;
@@ -208,24 +208,36 @@ export default {
  0%,
     rgba(255, 51, 102, 0.2) 100%
   ); */
-
-  background: rgba(253, 244, 248, 1);
-
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 4fr;
   grid-template-areas: "nav link";
   /* margin: -8px; */
-  padding: 0;
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
-  flex-basis: 100%;
+  /* flex-basis: 100%; */
   font-family: Arial, Helvetica, sans-serif;
+<<<<<<< HEAD
   background: rgb(238, 174, 202);
   background: linear-gradient(
     90deg,
     rgba(238, 174, 202, 1) 0%,
     rgba(148, 187, 233, 1) 100%
   );
+=======
+  background: rgb(238,174,202);
+  background: linear-gradient(90deg, rgba(238, 174, 202, 0.753) 0%, rgba(202, 148, 233, 0.671) 100%);
+  overflow-y: hidden;
+}
+
+#pages-view {
+  background: rgba(255, 255, 255, 0.562);
+  margin-top: 0px;
+  padding: 10px;
+  padding-left: 9.9%;
+  padding-right: auto;
+  overflow-y: scroll;
+  height: 95vh;
+>>>>>>> main
 }
 
 #nav {
@@ -235,7 +247,8 @@ export default {
   flex-direction: column;
   /* background: rgba(171, 71, 188, 0.2); */
   text-align: center;
-  border: lavenderblush 1px solid;
+  border: rgba(255, 255, 255, 0.459) 1px solid;
+  height: 100%;
 }
 /* #nav i {
   margin: 5px 10px 10px 10px;
@@ -252,6 +265,7 @@ export default {
 #page {
   grid-area: link;
   width: 100%;
+  height: 100%;
 }
 #create-modal-link {
   font-weight: bold;
