@@ -88,6 +88,10 @@ export default {
 </script>
 
 <style>
+.main-login {
+  height: 100%;
+}
+
 #login.text-center {
   /* margin-left: 35px; */
   /* display: flex; */

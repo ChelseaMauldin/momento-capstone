@@ -5,7 +5,7 @@
         <router-link
           class="username-for-post"
           v-bind:to="{ name: 'profile', params: { username: post.username } }"
-          >{{ post.username }}</router-link
+          ><span class="username-for-post-text">{{ post.username }}</span></router-link
         >
       </h3>
       <div class="top-right-options">
@@ -329,7 +329,7 @@ export default {
   flex-direction: column;
   width: 80vh;
   text-align: center;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0.726);
   border-radius: 10px;
   object-fit: cover;
   object-position: center;
@@ -366,6 +366,20 @@ export default {
   text-align: left;
 }
 
+.username-for-post {
+  text-decoration: none;
+}
+
+.username-for-post:hover {
+  text-decoration: none;
+  /* text-decoration-color: rgb(243, 170, 250); */
+}
+
+.username-for-post-text {
+  text-decoration: none;
+  color: black;
+}
+
 .reactions {
   display: flex;
   flex-direction: column;
@@ -376,7 +390,8 @@ div.likes-ratings {
   display: flex;
   width: 100%;
   justify-content: flex-start;
-}
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.082);*/
+} 
 
 .reactions-likes,
 .reactions-ratings {
