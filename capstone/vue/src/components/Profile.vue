@@ -12,12 +12,15 @@
       <div class="name-and-bio">
         <div class="username-and-edit">
           <h2 class="profile-username">{{ this.$route.params.username }}</h2>
-          <router-link v-if="this.$store.state.user.username==this.$route.params.username" v-bind:to="{name: 'edit-profile', params: {username: this.$route.params.username}}"
-            ><button
-              type="button"
-              id="editBtn"
-              class="btn"
-            >
+          <router-link
+            v-if="
+              this.$store.state.user.username == this.$route.params.username
+            "
+            v-bind:to="{
+              name: 'edit-profile',
+              params: { username: this.$route.params.username },
+            }"
+            ><button type="button" id="editBtn" class="btn">
               Edit Profile
             </button>
           </router-link>
@@ -28,13 +31,13 @@
       </div>
     </div>
     <div class="profile-posts">
-      <post class="post-images"
+      <post
+        class="post-images"
         v-for="post in listOfPosts"
         v-bind:key="post.post_id"
         v-bind:post="post"
       />
     </div>
-    
   </div>
 </template>
 
@@ -74,31 +77,31 @@ export default {
   margin-left: 30px;
   background-image: linear-gradient(to right, #e2336b, #fcac46);
   width: 150px;
-  
-  color:white;
+
+  color: white;
 }
 
-.post-images{
+.post-images {
   width: 600px;
 }
 
 .main-profile {
   display: flex;
   flex-direction: column;
-  
- 
+
   width: 90%;
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 40px;
-  
-  
+
   padding: 0;
+  font-family: "Mukta", sans-serif;
+  font-weight: bold;
 }
 
 .bio-header {
   display: flex;
-  
+
   align-self: center;
 }
 
@@ -106,7 +109,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  
+
   margin-left: 70px;
   width: 200px;
 }

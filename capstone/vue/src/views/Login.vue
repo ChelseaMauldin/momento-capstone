@@ -5,7 +5,7 @@
         id="image-login"
         src="https://res.cloudinary.com/dkq5ktysl/image/upload/v1675876172/momentoApp_upqxds.jpg"
         alt="camera hanging from strap"
-      /> 
+      />
     </div>
     <div id="login" class="text-center">
       <form class="form-signin" @submit.prevent="login">
@@ -43,7 +43,9 @@
         <router-link class="need-account" :to="{ name: 'register' }"
           >Need an account?</router-link
         >
-        <button class="sign-in btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="sign-in btn btn-lg btn-primary btn-block" type="submit">
+          Sign in
+        </button>
       </form>
     </div>
   </div>
@@ -98,15 +100,15 @@ export default {
   /* flex-direction: column; */
   /* width: 50vh; */
   /*new content below*/
- background: white;
- height: fit-content;
- padding: 15px;
- border-radius: 10px;
- width: 18%;
- position: absolute;
- top: 250px;
- right: 300px;
- /*new content above*/
+  background: white;
+  height: fit-content;
+  padding: 15px;
+  border-radius: 10px;
+  width: 18%;
+  position: absolute;
+  top: 250px;
+  right: 300px;
+  /*new content above*/
 }
 /* .mb-3 {
   background-color: rgba(255, 51, 102, 0.20);
@@ -128,7 +130,7 @@ export default {
 }
 
 .sign-in {
-  /* margin: 0 10px; */
+  background-image: linear-gradient(to right, #e2336b, #fcac46);
 }
 
 /* .main-login {
@@ -146,9 +148,9 @@ background-position-x: -150px;
 
 }*/
 #image-login {
-  width: 500px;
+  width: 400px;
   padding: 50px;
   margin-top: 40px;
- right: 10px;
+  right: 10px;
 }
 </style>
