@@ -216,14 +216,6 @@ export default {
   width: 100%;
   /* flex-basis: 100%; */
   font-family: Arial, Helvetica, sans-serif;
-<<<<<<< HEAD
-  background: rgb(238, 174, 202);
-  background: linear-gradient(
-    90deg,
-    rgba(238, 174, 202, 1) 0%,
-    rgba(148, 187, 233, 1) 100%
-  );
-=======
   background: rgb(238,174,202);
   background: linear-gradient(90deg, rgba(238, 174, 202, 0.753) 0%, rgba(202, 148, 233, 0.671) 100%);
   overflow-y: hidden;
@@ -237,7 +229,6 @@ export default {
   padding-right: auto;
   overflow-y: scroll;
   height: 95vh;
->>>>>>> main
 }
 
 #nav {
