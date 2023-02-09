@@ -1,11 +1,19 @@
 <template>
   <div id="app">
     <div id="nav">
-      <i class="nav-items fa-solid fa-house-user"
-        >&nbsp;&nbsp;<router-link class="link-text" v-bind:to="{ name: 'home' }"
-          >Home</router-link
-        ></i
-      >
+      <i
+        ><router-link class="link-text" v-bind:to="{ name: 'home' }">
+          <img
+            class="home-image"
+            src="https://res.cloudinary.com/dkq5ktysl/image/upload/v1675876172/momentoApp_upqxds.jpg"
+            alt="Hand-drawn camera polaroid" /></router-link
+      ></i>
+      <i>&nbsp;</i>
+      <i class="nav-items fa-solid fa-house">
+        <router-link class="link-text" v-bind:to="{ name: 'home' }">
+          Home
+        </router-link>
+      </i>
       <i
         v-if="$store.state.token == ''"
         class="nav-items fa-solid fa-arrow-right-to-bracket"
@@ -103,21 +111,20 @@ export default {
     };
   },
   methods: {
-    getSearchResult(){
-      apiService.displayProfile(this.filter.username).then(response =>{
-        if(response.status==200){
-          this.$store.commit("SET_PROFILE", response.data)
+    getSearchResult() {
+      apiService.displayProfile(this.filter.username).then((response) => {
+        if (response.status == 200) {
+          this.$store.commit("SET_PROFILE", response.data);
         }
-      })
+      });
 
       apiService
-      .displayPostsByUsername(this.filter.username)
-      .then((response) => {
-        this.$store.commit("SET_ALL_POSTS", response.data)
-      });
+        .displayPostsByUsername(this.filter.username)
+        .then((response) => {
+          this.$store.commit("SET_ALL_POSTS", response.data);
+        });
       this.$router.push(`/profile/${this.filter.username}`);
-      
-    }
+    },
   },
   components: {
     createPost,
@@ -149,9 +156,33 @@ export default {
 </script>
 
 <style>
-.nav-items.fa-solid.fa-house-user {
-  padding-top: 70px;
+/* .home-link {
+  padding-bottom: 100px;
+} */
+
+.home-text {
+  text-decoration: none;
+  font-family: "Mukta", sans-serif;
+  font-size: 30px;
+  color: black;
 }
+
+.home-image {
+  /* border: 1px solid #ddd;
+  border-radius: 4px; */
+  margin-top: 0px;
+  width: 100px;
+  padding-bottom: 20px;
+  padding-top: 0px;
+}
+
+.home-image:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+/* .nav-items.fa-solid.fa-house-user {
+  padding-top: 70px;
+} */
 
 .nav-items {
   padding-bottom: 20px;
@@ -164,7 +195,7 @@ export default {
 
 .momento-title {
   margin-left: 450px;
-  font-family: 'Caveat', cursive;
+  font-family: "Caveat", cursive;
   font-size: 65px;
   /* font-weight: bold; */
 }
@@ -185,6 +216,14 @@ export default {
   width: 100%;
   /* flex-basis: 100%; */
   font-family: Arial, Helvetica, sans-serif;
+<<<<<<< HEAD
+  background: rgb(238, 174, 202);
+  background: linear-gradient(
+    90deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
+=======
   background: rgb(238,174,202);
   background: linear-gradient(90deg, rgba(238, 174, 202, 0.753) 0%, rgba(202, 148, 233, 0.671) 100%);
   overflow-y: hidden;
@@ -198,10 +237,11 @@ export default {
   padding-right: auto;
   overflow-y: scroll;
   height: 95vh;
+>>>>>>> main
 }
 
 #nav {
-  padding-top: 100px;
+  padding-top: 40px;
   grid-area: nav;
   display: flex;
   flex-direction: column;
@@ -238,7 +278,7 @@ export default {
 }
 
 .title {
-/*  background-color: rgba(255, 51, 102, 0.2);*/
+  /*  background-color: rgba(255, 51, 102, 0.2);*/
   height: 75px;
   width: 100%;
   display: flex;
