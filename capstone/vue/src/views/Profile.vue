@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <profile v-bind:profile="profile" v-bind:listOfPosts="listOfPosts" />
+    <profile v-bind:profile="profile" v-bind:listOfPosts="listOfPosts"/>
   </div>
 </template>
 
@@ -13,18 +13,29 @@ export default {
   },
   data() {
     return {
-      profile: {},
-      listOfPosts: [],
+
     };
   },
-  created() {
+
+  computed: {
+    profile(){
+      return this.$store.state.profile;
+    },
+    listOfPosts(){
+      return this.$store.state.allPosts.filter(post => post.username==this.$route.params.username)
+    }
+  },
+ created() {
     apiService.displayProfile(this.$route.params.username).then((response) => {
-      this.profile = response.data;
+      if(response.status==200){
+        this.$store.commit("SET_PROFILE", response.data);
+      }
+      
     });
     apiService
       .displayPostsByUsername(this.$route.params.username)
       .then((response) => {
-        this.listOfPosts = response.data;
+        this.$store.commit("SET_ALL_POSTS", response.data)
       });
   },
 };

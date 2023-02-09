@@ -1,5 +1,9 @@
 <template>
   <div class="home d-flex">
+    <!-- <div class="title">
+      <h1>Home</h1>
+    </div> -->
+
     <div class="posts-container">
       <div class="post-container">
         <post
@@ -39,8 +43,15 @@
             >Lowest Rating</a
           >
           <div role="separator" class="dropdown-divider"></div>
-          <a class="dropdown-item" type="button">Newest Posts</a>
-          <a class="dropdown-item" type="button">Oldest Posts</a>
+          <a
+            class="dropdown-item"
+            type="button"
+            v-on:click="orderByTime('desc')"
+            >Newest Posts</a
+          >
+          <a class="dropdown-item" type="button" v-on:click="orderByTime('asc')"
+            >Oldest Posts</a
+          >
         </div>
       </div>
     </div>
@@ -82,6 +93,15 @@ export default {
     orderByRating(order) {
       apiService.displayPostsByRating(order).then((response) => {
         if (response.status == 200) {
+          this.listOfPosts = response.data;
+          this.$store.commit("SET_ALL_POSTS", response.data);
+        }
+      });
+    },
+    orderByTime(order) {
+      apiService.displayPostsByTime(order).then((response) => {
+        if (response.status == 200) {
+          this.listOfPosts = response.data;
           this.$store.commit("SET_ALL_POSTS", response.data);
         }
       });

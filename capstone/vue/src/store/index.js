@@ -28,6 +28,7 @@ export default new Vuex.Store({
     allComments: [],
     ratings: [],
     currentPost: {},
+    profile: {}
   },
   mutations: {
     SET_COMMENTS(state, comments) {

@@ -89,4 +89,8 @@ export default {
         return axios.delete(`/post/${id}`)
     },
 
+    displayPostsByTime(order){
+        return axios.get(`/posts/time/${order}`)
+    }
+
 }
