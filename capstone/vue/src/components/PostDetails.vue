@@ -22,6 +22,16 @@
           <span id="commenter">{{ comm.commenter }}</span
           >&nbsp;{{ comm.comment }}
         </p>
+        <div class="submit-new-comment-pd">
+          <input
+            class="comment-input"
+            v-if="$store.state.token != '' && this.$route.name == 'home'"
+            type="text"
+            v-model="filter"
+            v-on:keyup.enter="createComment()"
+            placeholder="Write a comment..."
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -33,14 +43,40 @@ export default {
   data() {
     return {
       profile: {},
+      filter: "",
       // comments: this.$store.state.comments.filter(eachComment => eachComment.post_id == this.post.post_id)
+      newComment: {
+        post_id: this.post.post_id,
+        commenter: this.$store.state.user.username,
+        comment: "",
+      },
     };
   },
   props: ["post"],
   computed: {
-    commentsForEachPost(){
-      return this.$store.state.allComments.filter(eachComment => eachComment.post_id == this.post.post_id);
-    }
+    commentsForEachPost() {
+      return this.$store.state.allComments.filter(
+        (eachComment) => eachComment.post_id == this.post.post_id
+      );
+    },
+  },
+  methods: {
+    createComment() {
+      if (this.filter != "") {
+        this.newComment.comment = this.filter;
+        apiService.createNewComment(this.newComment).then((response) => {
+          if (response.status == 201) {
+            this.$store.commit("ADD_COMMENT", this.newComment);
+            // this.listOfComments.push(this.newComment);
+            this.filter = "";
+            // this.$store.commit("SET_COMMENTS_FOR_POST", this.listOfComments);
+            apiService.displayAllComments().then((response) => {
+              this.$store.commit("SET_COMMENTS", response.data);
+            });
+          }
+        });
+      }
+    },
   },
   created() {
     apiService.displayProfile(this.post.username).then((response) => {
@@ -51,6 +87,13 @@ export default {
 </script>
     
 <style>
+.submit-new-comment-pd {
+  border-top: 1px solid rgba(0, 0, 0, 0.192);
+  padding: 5px 0px 10px 0px;
+  justify-content: flex-start;
+  display: flex;
+}
+
 .user-headline {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -105,6 +148,4 @@ export default {
   overflow-y: scroll;
   max-height: 380px;
 }
-
-
 </style>
