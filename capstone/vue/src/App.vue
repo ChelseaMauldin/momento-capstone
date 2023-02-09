@@ -73,9 +73,9 @@
         </div>
       </div>
     </div>
-    <div id="page">
+    <div id="page d-flex flex-column">
       <div class="title">
-        <h1 class="momento-title">M o m e n t o</h1>
+        <h1 class="momento-title">Momento</h1>
         <div class="search-bar">
           <input
             type="text"
@@ -163,18 +163,23 @@ export default {
 }
 
 .momento-title {
-  font-family: "La Belle Aurore", cursive;
+  margin-left: 450px;
+  font-family: 'Caveat', cursive;
   font-size: 65px;
   /* font-weight: bold; */
 }
 
 #app {
   /* background: rgb(238, 174, 202); */
-  background: linear-gradient(
+  /* background: linear-gradient(
     90deg,
-    rgba(238, 174, 202, 1) 0%,
+    rgba(247, 216, 230, 1)
+ 0%,
     rgba(255, 51, 102, 0.2) 100%
-  );
+  ); */
+
+  background: rgba(253, 244, 248, 1);
+
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-areas: "nav link";
@@ -211,7 +216,6 @@ export default {
 
 #page {
   grid-area: link;
-
   width: 100%;
 }
 #create-modal-link {
