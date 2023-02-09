@@ -33,6 +33,7 @@ export default {
   data() {
     return {
       profile: {},
+      // comments: this.$store.state.comments.filter(eachComment => eachComment.post_id == this.post.post_id)
     };
   },
   props: ["post"],

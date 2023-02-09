@@ -1,27 +1,29 @@
 <template>
   <div id="app">
     <div id="nav">
-      <i class="fa-solid fa-house-user"
+      <i class="nav-items fa-solid fa-house-user"
         >&nbsp;&nbsp;<router-link class="link-text" v-bind:to="{ name: 'home' }"
           >Home</router-link
         ></i
       >
       <i
         v-if="$store.state.token == ''"
-        class="fa-solid fa-arrow-right-to-bracket"
+        class="nav-items fa-solid fa-arrow-right-to-bracket"
         >&nbsp;&nbsp;<router-link
           class="link-text"
           v-bind:to="{ name: 'login' }"
           >Login</router-link
         ></i
       >
-      <i v-if="$store.state.token != ''" class="fa-solid fa-heart"
-        >&nbsp;<router-link class="link-text" v-bind:to="{ name: 'favorites' }"
+      <i v-if="$store.state.token != ''" class="nav-items fa-solid fa-heart"
+        >&nbsp;&nbsp;<router-link
+          class="link-text"
+          v-bind:to="{ name: 'favorites' }"
           >Favorites</router-link
         >
       </i>
-      <i v-if="$store.state.token != ''" class="fa-solid fa-user"
-        ><router-link
+      <i v-if="$store.state.token != ''" class="nav-items fa-solid fa-user"
+        >&nbsp;&nbsp;<router-link
           class="link-text"
           v-bind:to="{
             name: 'profile',
@@ -32,7 +34,7 @@
       </i>
       <i
         v-if="$store.state.token != ''"
-        class="fa-solid fa-arrow-right-to-bracket"
+        class="nav-items fa-solid fa-arrow-right-to-bracket"
         >&nbsp;&nbsp;<router-link
           class="link-text"
           v-bind:to="{ name: 'logout' }"
@@ -43,10 +45,10 @@
       <!-- &nbsp;|&nbsp; -->
       <i
         v-if="$store.state.token != ''"
-        class="fa-regular fa-square-plus"
+        class="nav-items fa-regular fa-square-plus"
         data-toggle="modal"
         data-target="#createModal"
-        >&nbsp;&nbsp;
+        >&nbsp;
         <span id="create-modal-link">Create</span>
       </i>
       <div class="modal fade" id="createModal" tabindex="-1">
@@ -73,22 +75,15 @@
     </div>
     <div id="page">
       <div class="title">
-        <h1>Momento</h1>
+        <h1 class="momento-title">M o m e n t o</h1>
         <div class="search-bar">
           <input
             type="text"
             id="usernameSearch"
             v-model="filter.username"
             placeholder="Search a username"
+            v-on:keyup.enter="getSearchResult"
           />
-          <router-link
-            v-bind:to="{
-              name: 'profile',
-              params: { username: filter.username },
-            }"
-          >
-            <button>Search</button>
-          </router-link>
         </div>
       </div>
       <router-view />
@@ -107,6 +102,23 @@ export default {
       },
     };
   },
+  methods: {
+    getSearchResult(){
+      apiService.displayProfile(this.filter.username).then(response =>{
+        if(response.status==200){
+          this.$store.commit("SET_PROFILE", response.data)
+        }
+      })
+
+      apiService
+      .displayPostsByUsername(this.filter.username)
+      .then((response) => {
+        this.$store.commit("SET_ALL_POSTS", response.data)
+      });
+      this.$router.push(`/profile/${this.filter.username}`);
+      
+    }
+  },
   components: {
     createPost,
   },
@@ -118,7 +130,7 @@ export default {
   //     },
   //   },
   // },
-  created() {
+  mounted() {
     apiService
       .displayFavoritePosts(this.$store.state.user.username)
       .then((response) => {
@@ -129,15 +141,40 @@ export default {
       .then((response) => {
         this.$store.commit("SET_FAV_IDS", response.data);
       });
-      apiService.displayAllComments().then((response) => {
-        this.$store.commit("SET_COMMENTS", response.data);
-      })
+    apiService.displayAllComments().then((response) => {
+      this.$store.commit("SET_COMMENTS", response.data);
+    });
   },
 };
 </script>
 
 <style>
+.nav-items.fa-solid.fa-house-user {
+  padding-top: 70px;
+}
+
+.nav-items {
+  padding-bottom: 20px;
+  font-size: 30px;
+  border-bottom: solid rgba(255, 255, 255, 0.7) 1px;
+  margin-bottom: 70px;
+  margin-right: 4%;
+  margin-left: 4%;
+}
+
+.momento-title {
+  font-family: "La Belle Aurore", cursive;
+  font-size: 65px;
+  /* font-weight: bold; */
+}
+
 #app {
+  /* background: rgb(238, 174, 202); */
+  background: linear-gradient(
+    90deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(255, 51, 102, 0.2) 100%
+  );
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-areas: "nav link";
@@ -152,20 +189,24 @@ export default {
 }
 
 #nav {
-  padding-top: 50px;
+  padding-top: 100px;
   grid-area: nav;
   display: flex;
   flex-direction: column;
   /* background: rgba(171, 71, 188, 0.2); */
   text-align: center;
+  border: lavenderblush 1px solid;
 }
-#nav i {
+/* #nav i {
   margin: 5px 10px 10px 10px;
-}
+} */
 
 #nav i .link-text {
   text-decoration: none;
+  font-family: "Mukta", sans-serif;
+  font-size: 30px;
   color: black;
+  padding-bottom: 100px;
 }
 
 #page {
@@ -175,6 +216,9 @@ export default {
 }
 #create-modal-link {
   font-weight: bold;
+  font-family: "Mukta", sans-serif;
+  font-size: 30px;
+  color: black;
 }
 #create-modal-link:hover {
   cursor: pointer;
@@ -186,6 +230,9 @@ export default {
   width: 100%;
   display: flex;
   text-align: center;
+  border-right: white 1px solid;
+  border-top: white 1px solid;
+  border-bottom: white 1px solid;
 }
 
 h1,

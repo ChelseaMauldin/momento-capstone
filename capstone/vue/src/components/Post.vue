@@ -3,6 +3,7 @@
     <div class="post-header">
       <h3 v-if="this.$route.name == 'home'" class="username-post">
         <router-link
+          class="username-for-post"
           v-bind:to="{ name: 'profile', params: { username: post.username } }"
           >{{ post.username }}</router-link
         >
@@ -319,6 +320,10 @@ export default {
   flex-direction: column;
   width: 80vh;
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .comment-input:focus {
@@ -332,6 +337,8 @@ export default {
 .comment-input {
   border-style: none;
   width: 100%;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 #commenter,
@@ -391,9 +398,9 @@ div.likes-ratings {
   cursor: pointer;
 }
 
-#post-img {
+/* #post-img {
   border-radius: 10px;
-}
+} */
 
 .post-header {
   display: flex;
