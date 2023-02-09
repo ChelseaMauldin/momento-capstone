@@ -1,11 +1,11 @@
 <template>
   <div class="main-login">
     <div class="image">
-      <!-- <img
+      <img
         id="image-login"
-        src="https://res.cloudinary.com/depdfgnxo/image/upload/v1675269863/pexels-photo-952264_hxjydg.webp"
+        src="https://res.cloudinary.com/dkq5ktysl/image/upload/v1675876172/momentoApp_upqxds.jpg"
         alt="camera hanging from strap"
-      /> -->
+      /> 
     </div>
     <div id="login" class="text-center">
       <form class="form-signin" @submit.prevent="login">
@@ -127,21 +127,24 @@ export default {
   /* margin: 0 10px; */
 }
 
-.main-login {
-  /*new content */
-  background-image: url(https://res.cloudinary.com/dkq5ktysl/image/upload/v1675876172/momentoApp_upqxds.jpg);
-/* background-position-x: -150px;
+/* .main-login {
+  
+  background-image: 
+background-position-x: -150px;
   background-position-y: -1400px;
   new content above
    margin-top: 100px; 
   display: flex;
   flex-direction: row;
   justify-content:center;
-  /*height: 100vh;*/
+  /*height: 100vh;
   
 
-}
+}*/
 #image-login {
-  width: 50px;
+  width: 500px;
+  padding: 50px;
+  margin-top: 40px;
+ right: 10px;
 }
 </style>
