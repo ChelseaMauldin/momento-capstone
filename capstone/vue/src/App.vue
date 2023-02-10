@@ -112,7 +112,7 @@
         <div class="search-bar">
           <input
             type="text"
-            id="usernameSearch"
+            id="username-search"
             v-model="filter.username"
             placeholder="Search a username"
             v-on:keyup.enter="getSearchResult"
@@ -279,10 +279,9 @@ p.contact-us {
   display: flex;
   flex-direction: column;
   text-align: center;
-  border: rgba(255, 255, 255, 0.459) 1px solid;
+  border: rgba(255, 255, 255, 0.8) 1px solid;
   height: 100%;
-  align-items: center;
-  width: 100%;
+  font-family: "Mukta", sans-serif;
 }
 
 #nav i .link-text {
@@ -332,5 +331,10 @@ h1,
 
 .fa-solid.fa-heart {
   color: black;
+}
+
+#username-search {
+  font-family: "Mukta", sans-serif;
+  font-weight: bold;
 }
 </style>

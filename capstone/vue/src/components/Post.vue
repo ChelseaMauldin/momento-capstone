@@ -5,7 +5,9 @@
         <router-link
           class="username-for-post"
           v-bind:to="{ name: 'profile', params: { username: post.username } }"
-          ><span class="username-for-post-text">{{ post.username }}</span></router-link
+          ><span class="username-for-post-text">{{
+            post.username
+          }}</span></router-link
         >
       </h3>
       <div class="top-right-options">
@@ -72,86 +74,86 @@
       </div>
     </div>
     <div class="post-info">
-    <div class="reactions" v-if="this.$route.name == 'home'">
-      <div class="likes-ratings">
-        <div class="reactions-likes">
-          <i
-            id="likeIcon"
-            v-if="!liked && $store.state.token != ''"
-            v-on:click="addLike(post.post_id)"
-            class="likeButton fa-regular fa-heart"
-          ></i>
-          <i
-            class="likeButton fa-solid fa-heart"
-            v-if="liked && $store.state.token != ''"
-            v-on:click="removeLike(post.post_id)"
-          ></i>
+      <div class="reactions" v-if="this.$route.name == 'home'">
+        <div class="likes-ratings">
+          <div class="reactions-likes">
+            <i
+              id="likeIcon"
+              v-if="!liked && $store.state.token != ''"
+              v-on:click="addLike(post.post_id)"
+              class="likeButton fa-regular fa-heart"
+            ></i>
+            <i
+              class="likeButton fa-solid fa-heart"
+              v-if="liked && $store.state.token != ''"
+              v-on:click="removeLike(post.post_id)"
+            ></i>
+          </div>
+          <div class="reactions-ratings">
+            <ratings
+              v-bind:ratingsForPost="ratingsForPost"
+              v-bind:rateValue="rateValue"
+              v-bind:postId="post.post_id"
+            />
+          </div>
         </div>
-        <div class="reactions-ratings">
-          <ratings
-            v-bind:ratingsForPost="ratingsForPost"
-            v-bind:rateValue="rateValue"
-            v-bind:postId="post.post_id"
-          />
-        </div>
+
+        <p id="likes">{{ post.likes }} likes</p>
       </div>
 
-      <p id="likes">{{ post.likes }} likes</p>
-    </div>
+      <p id="caption" v-if="this.$route.name == 'home' && !isEdit">
+        <span class="username-post">{{ post.username }}</span
+        >&nbsp;{{ caption }}
+      </p>
+      <div
+        v-else-if="
+          this.$route.name == 'home' &&
+          isEdit &&
+          post.username == this.$store.state.user.username
+        "
+        id="caption2"
+      >
+        <p>
+          <span class="username-post>">{{ post.username }}</span> &nbsp;
+          <input
+            class="edit-caption"
+            v-model="newCaption"
+            type="text"
+            :placeholder="post.caption"
+            v-on:keyup.enter="editCaption()"
+          />
+        </p>
+        <button id="cancel" v-on:click="cancel()">Cancel</button>
+      </div>
 
-    <p id="caption" v-if="this.$route.name == 'home' && !isEdit">
-      <span class="username-post">{{ post.username }}</span
-      >&nbsp;{{ caption }}
-    </p>
-    <div
-      v-else-if="
-        this.$route.name == 'home' &&
-        isEdit &&
-        post.username == this.$store.state.user.username
-      "
-      id="caption2"
-    >
-      <p>
-        <span class="username-post>">{{ post.username }}</span> &nbsp;
+      <div
+        class="comments"
+        v-if="this.$route.name == 'home' && hasMoreThan1Comment"
+      >
+        <p v-for="comm in shortenedCommentsList()" v-bind:key="comm.id">
+          <span id="commenter">{{ comm.commenter }}</span
+          >&nbsp;{{ comm.comment }}
+        </p>
+      </div>
+      <div
+        class="comments"
+        v-if="this.$route.name == 'home' && !hasMoreThan1Comment"
+      >
+        <p v-for="comm in commentsForEachPost" v-bind:key="comm.id">
+          <span id="commenter">{{ comm.commenter }}</span
+          >&nbsp;{{ comm.comment }}
+        </p>
+      </div>
+      <div class="submit-new-comment">
         <input
-          class="edit-caption"
-          v-model="newCaption"
+          class="comment-input"
+          v-if="$store.state.token != '' && this.$route.name == 'home'"
           type="text"
-          :placeholder="post.caption"
-          v-on:keyup.enter="editCaption()"
+          v-model="filter"
+          v-on:keyup.enter="createComment()"
+          placeholder="Write a comment..."
         />
-      </p>
-      <button id="cancel" v-on:click="cancel()">Cancel</button>
-    </div>
-
-    <div
-      class="comments"
-      v-if="this.$route.name == 'home' && hasMoreThan1Comment"
-    >
-      <p v-for="comm in shortenedCommentsList()" v-bind:key="comm.id">
-        <span id="commenter">{{ comm.commenter }}</span
-        >&nbsp;{{ comm.comment }}
-      </p>
-    </div>
-    <div
-      class="comments"
-      v-if="this.$route.name == 'home' && !hasMoreThan1Comment"
-    >
-      <p v-for="comm in commentsForEachPost" v-bind:key="comm.id">
-        <span id="commenter">{{ comm.commenter }}</span
-        >&nbsp;{{ comm.comment }}
-      </p>
-    </div>
-    <div class="submit-new-comment">
-      <input
-        class="comment-input"
-        v-if="$store.state.token != '' && this.$route.name == 'home'"
-        type="text"
-        v-model="filter"
-        v-on:keyup.enter="createComment()"
-        placeholder="Write a comment..."
-      />
-    </div>
+      </div>
     </div>
   </div>
 </template>
@@ -313,11 +315,10 @@ export default {
 </script>
 
 <style>
-
-.post-info{
-  padding-left:1.5%;
-  padding-right:1.5%;
-  padding-bottom:1.5%;
+.post-info {
+  padding-left: 1.5%;
+  padding-right: 1.5%;
+  padding-bottom: 1.5%;
 }
 .submit-new-comment {
   justify-content: flex-start;
@@ -334,6 +335,8 @@ export default {
   object-fit: cover;
   object-position: center;
   box-shadow: 2px 4px 4px rgb(204, 204, 204);
+  font-family: "Mukta", sans-serif;
+  font-weight: bold;
 }
 
 .comment-input:focus {
@@ -353,9 +356,13 @@ export default {
 
 #commenter,
 .username-post,
-#caption2 span,
-#likes {
+#caption2 span {
   font-weight: bold;
+  color: rgb(123, 12, 167);
+}
+
+#likes {
+  color: red;
 }
 
 .comments,
@@ -377,7 +384,7 @@ export default {
 
 .username-for-post-text {
   text-decoration: none;
-  color: black;
+  color: rgb(123, 12, 167);
 }
 
 .reactions {
@@ -391,7 +398,7 @@ div.likes-ratings {
   width: 100%;
   justify-content: flex-start;
   /* border-bottom: 1px solid rgba(0, 0, 0, 0.082);*/
-} 
+}
 
 .reactions-likes,
 .reactions-ratings {
@@ -476,6 +483,4 @@ div#caption2 button {
 .top-right-options i:hover {
   cursor: pointer;
 }
-
-
 </style>
