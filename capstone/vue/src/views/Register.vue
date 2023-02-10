@@ -1,75 +1,84 @@
 <template>
   <div id="register" class="text-center">
-    <form class="form-register" @submit.prevent="register">
-      <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
-      <div class="alert alert-danger" role="alert" v-if="registrationErrors">
-        {{ registrationErrorMsg }}
-      </div>
-      <label for="username" class="sr-only">Username</label>
-      <input
-        type="text"
-        id="username"
-        class="form-control"
-        placeholder="Username"
-        v-model="user.username"
-        required
-        autofocus
+    <div class="image">
+      <img
+        id="image-register"
+        src="https://res.cloudinary.com/dkq5ktysl/image/upload/v1675876172/momentoApp_upqxds.jpg"
+        alt="camera hanging from strap"
       />
-      <label for="password" class="sr-only">Password</label>
-      <input
-        type="password"
-        id="password"
-        class="form-control"
-        placeholder="Password"
-        v-model="user.password"
-        required
-      />
-      <input
-        type="password"
-        id="confirmPassword"
-        class="form-control"
-        placeholder="Confirm Password"
-        v-model="user.confirmPassword"
-        required
-      />
-      <router-link :to="{ name: 'login' }">Have an account?</router-link>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
-        Create Account
-      </button>
-    </form>
+    </div>
+    <div class="register-container">
+      <form class="form-register" @submit.prevent="register">
+        <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+        <div class="alert alert-danger" role="alert" v-if="registrationErrors">
+          {{ registrationErrorMsg }}
+        </div>
+        <label for="username" class="sr-only">Username</label>
+        <input
+          type="text"
+          id="username"
+          class="form-control"
+          placeholder="Username"
+          v-model="user.username"
+          required
+          autofocus
+        />
+        <label for="password" class="sr-only">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          placeholder="Password"
+          v-model="user.password"
+          required
+        />
+        <input
+          type="password"
+          id="confirmPassword"
+          class="form-control"
+          placeholder="Confirm Password"
+          v-model="user.confirmPassword"
+          required
+        />
+        <router-link class="have-account" :to="{ name: 'login' }">Have an account?</router-link>
+        <button class="sign-in btn btn-lg btn-primary btn-block" type="submit">
+          Create Account
+        </button>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
-import authService from '../services/AuthService';
+import authService from "../services/AuthService";
 
 export default {
-  name: 'register',
+  name: "register",
   data() {
     return {
       user: {
-        username: '',
-        password: '',
-        confirmPassword: '',
-        role: 'user',
+        username: "",
+        password: "",
+        confirmPassword: "",
+        role: "user",
       },
       registrationErrors: false,
-      registrationErrorMsg: 'There were problems registering this user.',
+      registrationErrorMsg: "There were problems registering this user.",
     };
   },
   methods: {
     register() {
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
-        this.registrationErrorMsg = 'Password & Confirm Password do not match.';
+        this.registrationErrorMsg = "Password & Confirm Password do not match.";
       } else {
         authService
           .register(this.user)
           .then((response) => {
             if (response.status == 201) {
               this.$router.push({
-                path: '/login',
-                query: { registration: 'success' },
+                path: "/login",
+                query: { registration: "success" },
               });
             }
           })
@@ -77,44 +86,53 @@ export default {
             const response = error.response;
             this.registrationErrors = true;
             if (response.status === 400) {
-              this.registrationErrorMsg = 'Bad Request: Validation Errors';
+              this.registrationErrorMsg = "Bad Request: Validation Errors";
             }
           });
       }
     },
     clearErrors() {
       this.registrationErrors = false;
-      this.registrationErrorMsg = 'There were problems registering this user.';
+      this.registrationErrorMsg = "There were problems registering this user.";
     },
   },
 };
 </script>
 
 <style>
-/*all new content below*/
-div#register {
-  background-image: url(https://res.cloudinary.com/dzt9ane7n/image/upload/v1675661575/pexels-photo-69970_ysll2m.jpg);
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+#register.text-center {
+  height: 100%;
 }
 
-.form-register{
-  display: flex;
+.form-control,
+.have-account {
+  margin: 10px;
+  padding: 3px;
+  border-width: 1px;
+  border-radius: 25px;
+}
+
+.register-container {
+  background: white;
+  height: fit-content;
+  padding: 15px;
+  border-radius: 10px;
+  width: 18%;
   position: absolute;
   top: 250px;
   right: 300px;
-  height: fit-content;
-  flex-direction: column;
-  margin: 0 10px;
-  background: white;
-  border-radius: 10px;
-  padding: 15px;
-  width: 18%;
 }
 
+.form-register {
+  display: flex;
+  flex-direction: column;
+}
 
-
+#image-register {
+  width: 450px;
+  padding: 50px;
+  margin-top: 40px;
+  margin-left: -50rem;
+  margin-left: -800px
+}
 </style>

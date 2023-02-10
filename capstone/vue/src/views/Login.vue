@@ -95,11 +95,6 @@ export default {
 }
 
 #login.text-center {
-  /* margin-left: 35px; */
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* width: 50vh; */
-  /*new content below*/
   background: white;
   height: fit-content;
   padding: 15px;
@@ -108,14 +103,7 @@ export default {
   position: absolute;
   top: 250px;
   right: 300px;
-  /*new content above*/
 }
-/* .mb-3 {
-  background-color: rgba(255, 51, 102, 0.20);
-  width: 100vh;
-  margin: 0;
-  padding: 0;
-/* } */
 
 .form-signin {
   display: flex;
@@ -133,24 +121,10 @@ export default {
   background-image: linear-gradient(to right, #e2336b, #fcac46);
 }
 
-/* .main-login {
-  
-  background-image: 
-background-position-x: -150px;
-  background-position-y: -1400px;
-  new content above
-   margin-top: 100px; 
-  display: flex;
-  flex-direction: row;
-  justify-content:center;
-  /*height: 100vh;
-  
-
-}*/
 #image-login {
-  width: 400px;
+  width: 450px;
   padding: 50px;
   margin-top: 40px;
-  right: 10px;
+  margin-left: 53.5px;
 }
 </style>
