@@ -1,6 +1,7 @@
 <template>
   <div class="upload-main d-flex flex-column">
-    <button v-if="!urlPosted" v-on:click="upload">Upload a Picture</button
+    <button class="upload-picture-button" v-if="!urlPosted" v-on:click="upload">
+      Upload a Picture</button
     ><br />
     <p v-if="urlPosted">Upload Complete!</p>
     <textarea
@@ -11,9 +12,11 @@
       id="caption-input"
       rows="3"
     ></textarea>
+    <br />
     <button
       v-if="this.$route.name != 'edit-profile'"
       type="button"
+      id="save-changes-button"
       class="btn btn-primary"
       data-dismiss="modal"
       v-on:click="addPost"
@@ -45,7 +48,7 @@ export default {
     },
     addPost() {
       if (this.post.photo_url !== "") {
-        this.post.username= this.$store.state.user.username;
+        this.post.username = this.$store.state.user.username;
         apiService.createPost(this.post).then((response) => {
           if (response.status == 200) {
             this.$store.commit("ADD_PHOTO", this.post.photo_url)
@@ -83,4 +86,15 @@ export default {
 </script>
 
 <style>
+.upload-picture-button {
+  background-image: linear-gradient(to right, #e2336b, #fcac46);
+  color: white;
+  border: none;
+  border-radius: 8px;
+}
+
+#save-changes-button {
+  background-image: linear-gradient(to right, #e2336b, #fcac46);
+  border: none;
+}
 </style>

@@ -131,11 +131,14 @@ export default {
   margin-right: auto;
   margin-top: 40px;
   padding: 0;
+  font-family: "Mukta", sans-serif;
+  font-weight: bold;
 }
 
 .bio-header {
   display: flex;
   font-family: "Mukta", sans-serif;
+
   align-self: center;
 }
 .profile-username {
@@ -146,7 +149,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-weight: bold;
   margin-left: 70px;
   width: 200px;
 }
