@@ -6,7 +6,7 @@
           ><router-link class="link-text" v-bind:to="{ name: 'home' }">
             <img
               class="home-image"
-              src="https://res.cloudinary.com/dkq5ktysl/image/upload/v1675876172/momentoApp_upqxds.jpg"
+              src="https://res.cloudinary.com/dzt9ane7n/image/upload/v1675996605/Momento_cbwk2o.jpg"
               alt="Hand-drawn camera polaroid" /></router-link
         ></i>
         <i>&nbsp;</i>
@@ -183,8 +183,8 @@ export default {
 
 .home-image {
   margin-top: 0px;
-  width: 100px;
-  margin-bottom: 20px;
+  width: 175px;
+  margin-bottom: 15px;
   padding-top: 0px;
 }
 
@@ -196,7 +196,7 @@ export default {
   padding-bottom: 15px;
   font-size: 30px;
   border-bottom: solid rgba(255, 255, 255, 0.459) 1px;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
   margin-right: 4%;
   margin-left: 4%;
 }

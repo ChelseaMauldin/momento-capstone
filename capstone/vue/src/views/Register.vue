@@ -126,13 +126,14 @@ export default {
 .form-register {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 #image-register {
-  width: 450px;
+  width: 475px;
   padding: 50px;
   margin-top: 40px;
   margin-left: -50rem;
-  margin-left: -800px
+  margin-left: -600px
 }
 </style>

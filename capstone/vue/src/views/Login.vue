@@ -108,6 +108,7 @@ export default {
 .form-signin {
   display: flex;
   flex-direction: column;
+  align-items:center;
 }
 .form-control,
 .need-account {
@@ -122,9 +123,9 @@ export default {
 }
 
 #image-login {
-  width: 450px;
+  width: 475px;
   padding: 50px;
   margin-top: 40px;
-  margin-left: 53.5px;
+  margin-left: 141px;
 }
 </style>
