@@ -218,6 +218,8 @@ export default {
         username: this.$store.state.user.username,
         post_id: post.post_id,
       };
+      this.$store.commit("ADD_FAV_PHOTO",post.photo_url)
+     
       apiService.addFavoritePost(postToAdd).then((response) => {
         if (response.status == 200) {
           this.$store.commit("ADD_FAVORITE_POST", post, postToAdd);
@@ -227,6 +229,7 @@ export default {
     removeFavorite(post) {
       apiService.deleteFavorite(post.post_id).then((response) => {
         if (response.status == 200) {
+          this.$store.commit("REMOVE_FAV_PHOTO", post.photo_url)
           this.$store.commit("REMOVE_FAVORITE_POST", post);
         }
       });

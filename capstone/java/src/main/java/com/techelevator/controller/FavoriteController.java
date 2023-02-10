@@ -35,4 +35,8 @@ public class FavoriteController {
         dao.removeFavorite(id);
     }
 
+    @RequestMapping(path="/favorites/{username}/photos", method = RequestMethod.GET)
+    public List<String> getPhotosByUser(@PathVariable String username){
+        return dao.getFavoritePhotos(username);
+    }
 }

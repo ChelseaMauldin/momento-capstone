@@ -13,4 +13,6 @@ public interface FavoriteDao {
     public void addFavorite(String username, int postId);
 
     public void removeFavorite(int postId);
+
+    public List<String> getFavoritePhotos(String username);
 }

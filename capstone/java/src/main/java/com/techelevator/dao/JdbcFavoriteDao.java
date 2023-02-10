@@ -77,4 +77,18 @@ public class JdbcFavoriteDao implements FavoriteDao{
                 "WHERE post_id = ?";
         jdbcTemplate.update(sql, postId);
     }
+
+    @Override
+    public List<String> getFavoritePhotos(String username) {
+        String sql = "SELECT photo_url FROM posts p JOIN favorites f ON p.post_id=f.post_id WHERE f.username=?";
+        List<String> photoUrls = new ArrayList<>();
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
+
+        while(result.next()){
+            photoUrls.add(result.getString("photo_url"));
+        }
+
+        return photoUrls;
+    }
 }

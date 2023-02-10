@@ -35,10 +35,9 @@
         class="profile-photos-divs"
         v-for="photo in listOfPhotos"
         v-bind:key="photo.id"
-        data-toggle="modal"
-        :data-target="`#postDetails${getPost(photo).post_id}`"
       >
-        <img class="profile-posts" :src="photo" />
+        <img data-toggle="modal"
+        :data-target="`#postDetails${getPost(photo).post_id}`" class="profile-posts" :src="photo" />
         <div
           class="modal fade"
           ref="postDetailsModal"
@@ -126,10 +125,10 @@ export default {
 .main-profile {
   display: flex;
   flex-direction: column;
-
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  margin-right: 0;
   margin-top: 40px;
+  width:100%;
   padding: 0;
   font-family: "Mukta", sans-serif;
   font-weight: bold;
@@ -138,7 +137,6 @@ export default {
 .bio-header {
   display: flex;
   font-family: "Mukta", sans-serif;
-
   align-self: center;
 }
 .profile-username {
@@ -156,19 +154,20 @@ export default {
 .profile-photos-container {
   display: flex;
   flex-wrap: wrap;
+  width:100%;
   margin-top: 50px;
   justify-content: flex-start;
 }
 
 .profile-photos-divs {
-  width: 429px;
+  width: 450px;
   margin-bottom: 1.66%;
   margin-left:2.5%;
   height: 100%;
 }
 
 .profile-posts {
-  height: 288px;
+  height: 300px;
   width: 100%;
   object-fit: cover;
 }

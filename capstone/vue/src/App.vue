@@ -59,7 +59,7 @@
           <span id="create-modal-link">Create</span>
         </i>
         <div class="modal fade" id="createModal" tabindex="-1">
-          <div class="modal-dialog">
+          <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
@@ -267,10 +267,11 @@ p.contact-us {
   background: rgba(255, 255, 255, 0.562);
   margin-top: 0px;
   padding: 10px;
-  padding-left: 9.9%;
-  padding-right: auto;
+  padding-left: 0;
+  padding-right: 0;
   overflow-y: scroll;
   height: 95vh;
+
 }
 
 #nav {

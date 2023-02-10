@@ -83,6 +83,11 @@ export default {
       .then((response) => {
         this.$store.commit("SET_FAVORITES", response.data);
       });
+    apiService.displayFavoritePhotos(this.$store.state.user.username).then(response=>{
+      if(response.status==200){
+        this.$store.commit("SET_FAV_PHOTOS", response.data)
+      }
+    });  
     apiService
       .displayFavoriteIds(this.$store.state.user.username)
       .then((response) => {

@@ -29,9 +29,21 @@ export default new Vuex.Store({
     ratings: [],
     currentPost: {},
     profile: {},
-    userPhotos:[]
+    userPhotos:[],
+    favoritePhotos: []
   },
   mutations: {
+    ADD_FAV_PHOTO(state, photoUrl){
+      state.favoritePhotos.push(photoUrl)
+    },
+
+    REMOVE_FAV_PHOTO(state, photoUrl){
+      state.favoritePhotos=state.favoritePhotos.filter(photo => photo !=photoUrl)
+    },
+
+    SET_FAV_PHOTOS(state, photos){
+      state.favoritePhotos = photos;
+    },
     SET_USER_PHOTOS(state, photos){
       state.userPhotos = photos;
     },

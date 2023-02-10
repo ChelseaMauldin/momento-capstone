@@ -2,24 +2,23 @@
   <div class="main-favorites">
     <h3 class="favorite-title">Favorites</h3>
     <div class="favorite-posts-container">
-      <post
+      <div
         class="favorite-post"
-        v-for="eachPost in this.$store.state.favoritePosts"
-        v-bind:key="eachPost.post_id"
-        v-bind:post="eachPost"
-      />
+        v-for="eachPhoto in this.$store.state.favoritePhotos"
+        v-bind:key="eachPhoto.post_id"
+      ><img id="favorite-image" :src="eachPhoto"/></div>
     </div>
   </div>
 </template>
 
 <script>
-import Post from "../components/Post.vue";
+// import Post from "../components/Post.vue";
 //import apiService from '../services/APIService'
 
 export default {
   name: "favorite",
   components: {
-    Post,
+    // Post,
   },
   data() {
     return {
@@ -52,15 +51,26 @@ div.main-favorites {
 
 div.favorite-posts-container {
   align-self: center;
+  justify-content:flex-start;
   display: flex;
-  flex-basis: 100%;
+  margin-top:50px;
+  width:100%;
   flex-wrap: wrap;
-  width: 150vh;
+ 
 }
 
 .favorite-post {
-  width: 25%;
-  margin: 10px;
+  width: 450px;
+  margin-bottom: 1.66%;
+  margin-left:2.5%;
   height: fit-content;
+  padding:0;
+}
+
+#favorite-image{
+  width:100%;
+  height:300px;
+  object-fit: cover;
+  
 }
 </style>

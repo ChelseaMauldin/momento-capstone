@@ -42,6 +42,10 @@ export default {
         return axios.get(`/favorites/${username}`)
     },
 
+    displayFavoritePhotos(username){
+        return axios.get(`/favorites/${username}/photos`)
+    },
+
     displayFavoriteIds(username) {
         return axios.get(`/favorites/${username}/ids`)
     },
