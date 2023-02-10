@@ -91,10 +91,16 @@ export default {
   color: white;
   border: none;
   border-radius: 8px;
+  margin-left:auto;
+  margin-right:auto;
+  width:50%;
 }
 
 #save-changes-button {
   background-image: linear-gradient(to right, #e2336b, #fcac46);
   border: none;
+  margin-left:auto;
+  margin-right:auto;
+  width:50%;
 }
 </style>

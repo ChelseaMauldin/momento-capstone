@@ -202,7 +202,7 @@ export default {
 }
 
 .momento-title {
-  margin-left: 300px;
+  margin-left: 5%;
   font-family: "Caveat", cursive;
   font-size: 65px;
 }
