@@ -92,6 +92,9 @@ export default {
 <style>
 .main-login {
   height: 100%;
+  display:flex;
+  justify-content:flex-start;
+  align-items: center;
 }
 
 #login.text-center {
@@ -100,9 +103,6 @@ export default {
   padding: 15px;
   border-radius: 10px;
   width: 18%;
-  position: absolute;
-  top: 250px;
-  right: 300px;
 }
 
 .form-signin {
@@ -122,10 +122,12 @@ export default {
   background-image: linear-gradient(to right, #e2336b, #fcac46);
 }
 
+#login{
+  margin-left:33%;
+}
+
 #image-login {
-  width: 475px;
-  padding: 50px;
-  margin-top: 40px;
-  margin-left: 141px;
+  width: 375px;
+  margin-left:90%;
 }
 </style>

@@ -357,7 +357,7 @@ export default {
   border-radius: 10px;
   object-fit: cover;
   object-position: center;
-  box-shadow: 2px 4px 4px rgb(204, 204, 204);
+  box-shadow: 2px 4px 4px rgb(215, 186, 243);
   font-family: "Mukta", sans-serif;
   font-weight: bold;
 }
@@ -405,6 +405,10 @@ export default {
   text-align: left;
 }
 
+#caption{
+  text-align: left;
+}
+
 .username-for-post {
   text-decoration: none;
 }
@@ -417,6 +421,7 @@ export default {
 .username-for-post-text {
   text-decoration: none;
   color: rgb(123, 12, 167);
+  margin-left:1%;
 }
 
 .reactions {
@@ -482,6 +487,8 @@ div.likes-ratings {
 .post-header h3.username-post {
   flex: 1;
 }
+
+
 
 .top-right-options {
   display: flex;
