@@ -13,4 +13,6 @@ public interface ProfileDao {
     public int createProfile(Profile profile);
 
     public void updateProfile(Profile profile);
+
+    public List<String> getPhotosByUser(String username);
 }

@@ -91,6 +91,9 @@ export default {
 
     displayPostsByTime(order){
         return axios.get(`/posts/time/${order}`)
+    },
+    displayPhotosByUser(username){
+        return axios.get(`/profiles/${username}/photos`)
     }
 
 }

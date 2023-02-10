@@ -48,6 +48,7 @@ export default {
         this.post.username= this.$store.state.user.username;
         apiService.createPost(this.post).then((response) => {
           if (response.status == 200) {
+            this.$store.commit("ADD_PHOTO", this.post.photo_url)
             this.post.caption = "";
             this.post.photo_url = "";
             this.$router.push(`/profile/${this.post.username}`);

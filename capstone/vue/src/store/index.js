@@ -28,9 +28,22 @@ export default new Vuex.Store({
     allComments: [],
     ratings: [],
     currentPost: {},
-    profile: {}
+    profile: {},
+    userPhotos:[]
   },
   mutations: {
+    SET_USER_PHOTOS(state, photos){
+      state.userPhotos = photos;
+    },
+
+    ADD_PHOTO(state, photoUrl){
+      state.userPhotos.push(photoUrl);
+    },
+
+    REMOVE_PHOTO(state, photoUrl){
+      state.userPhotos=state.userPhotos.filter(photo => photo !=photoUrl)
+    },
+
     SET_COMMENTS(state, comments) {
       state.allComments = comments;
     },

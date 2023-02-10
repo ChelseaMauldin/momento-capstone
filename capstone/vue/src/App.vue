@@ -52,7 +52,7 @@
         <span id="create-modal-link">Create</span>
       </i>
       <div class="modal fade" id="createModal" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Create a Post</h5>

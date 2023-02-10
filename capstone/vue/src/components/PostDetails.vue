@@ -1,9 +1,9 @@
 <template>
-  <div class="post-details-main row">
-    <div class="col-md modal-image-container">
+  <div class="post-details-main d-flex">
+    <div class="modal-image-container">
       <img id="post-details-img" :src="post.photo_url" />
     </div>
-    <div class="col-md d-flex flex-column" id="picture-details">
+    <div class="d-flex flex-column" id="picture-details">
       <div class="user-headline d-flex">
         <div id="post-details-profile-picture-div">
           <img
@@ -33,7 +33,6 @@ export default {
   data() {
     return {
       profile: {},
-      // comments: this.$store.state.comments.filter(eachComment => eachComment.post_id == this.post.post_id)
     };
   },
   props: ["post"],
@@ -55,13 +54,23 @@ export default {
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgb(223, 218, 218);
+  padding-left:10px;
+ 
+  
 }
 .modal-image-container {
   margin: 0;
   padding: 0;
+  width:100%;
+  height: 100%;
+
 }
 .modal-image-container img {
-  width: 700px;
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  
 }
 #post-details-profile-picture-div {
   display: flex;
@@ -83,6 +92,7 @@ export default {
 #post-details-container {
   margin: 0;
   padding: 0;
+
 }
 #post-details-caption {
   margin-left: 10px;
@@ -91,11 +101,19 @@ export default {
 .post-details-main {
   margin: 0;
   padding: 0;
+  height:100%;
+
+}
+
+.post-details-main > * {
+  flex:1;
 }
 
 #picture-details {
   margin: 0;
-  padding-right: 15px;
+  
+  /* padding-right: 15px; */
+
 }
 
 #post-details-comments {
@@ -103,7 +121,7 @@ export default {
   padding-left: 9.9%;
   padding-right: auto;
   overflow-y: scroll;
-  max-height: 380px;
+  max-height: 350px;
 }
 
 
