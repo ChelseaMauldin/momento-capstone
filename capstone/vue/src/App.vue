@@ -6,7 +6,7 @@
           ><router-link class="link-text" v-bind:to="{ name: 'home' }">
             <img
               class="home-image"
-              src="https://res.cloudinary.com/dkq5ktysl/image/upload/v1675876172/momentoApp_upqxds.jpg"
+              src="https://res.cloudinary.com/dzt9ane7n/image/upload/v1675996605/Momento_cbwk2o.jpg"
               alt="Hand-drawn camera polaroid" /></router-link
         ></i>
         <i>&nbsp;</i>
@@ -110,11 +110,12 @@
       <div class="title">
         <h1 class="momento-title">Momento</h1>
         <div class="search-bar">
+          <svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24" ><g><path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z" ></path></g></svg>
           <input
-            type="text"
+            type="search"
             id="username-search"
             v-model="filter.username"
-            placeholder="Search a username"
+            placeholder="Search"
             v-on:keyup.enter="getSearchResult"
           />
         </div>
@@ -182,8 +183,8 @@ export default {
 
 .home-image {
   margin-top: 0px;
-  width: 100px;
-  margin-bottom: 20px;
+  width: 175px;
+  margin-bottom: 15px;
   padding-top: 0px;
 }
 
@@ -195,13 +196,13 @@ export default {
   padding-bottom: 15px;
   font-size: 30px;
   border-bottom: solid rgba(255, 255, 255, 0.459) 1px;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
   margin-right: 4%;
   margin-left: 4%;
 }
 
 .momento-title {
-  margin-left: 450px;
+  margin-left: 300px;
   font-family: "Caveat", cursive;
   font-size: 65px;
 }
@@ -218,7 +219,8 @@ export default {
     rgba(238, 174, 202, 0.753) 0%,
     rgba(202, 148, 233, 0.671) 100%
   );
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Mukta", sans-serif;
+  font-weight: bolder;
   overflow-y: hidden;
 }
 
@@ -293,6 +295,50 @@ p.contact-us {
   padding-bottom: 100px;
 }
 
+.search-bar {
+display: flex;
+ line-height: 28px;
+ align-items: center;
+ position: relative;
+ max-width: 190px;
+}
+
+.search-icon {
+  position: absolute;
+ left: 1rem;
+ fill: rgba(73, 55, 55, 0.733);
+ width: 1rem;
+ height: 1rem;
+}
+
+#username-search {
+  font-family: "Mukta", sans-serif;
+  font-weight: bold;
+ width: 100%;
+ height: 35px;
+ padding: 0 10px;
+ padding-left: 40px;
+ border-radius: 10px;
+ background-color: rgba(255, 255, 255, 0.904);
+ color: #0d0c22;
+ margin-right: 10px;
+ border: 2px solid rgba(202, 148, 233, 0.651);
+ outline: none;
+transition: .25s ease;
+}
+
+#username-search::placeholder {
+  color: rgba(73, 55, 55, 0.733)
+}
+
+#username-search:focus, #username-search:hover {
+  outline: none;
+ border-color: rgba(86, 0, 247, 0.541);
+ background-color: rgba(255, 255, 255, 0.904);
+ box-shadow: 0 0 0 3px rgba(249, 239, 255, 0.849);
+}
+
+
 #page {
   grid-area: link;
   width: 100%;
@@ -324,18 +370,9 @@ h1,
   flex: 1;
 }
 
-.search-bar {
-  text-align: right;
-  width: 100%;
-  margin-top: 5px;
-}
 
 .fa-solid.fa-heart {
   color: black;
 }
 
-#username-search {
-  font-family: "Mukta", sans-serif;
-  font-weight: bold;
-}
 </style>

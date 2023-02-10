@@ -27,7 +27,7 @@
           data-toggle="dropdown"
           aria-expanded="false"
         >
-          Sort By
+          <span>Sort By</span>
         </button>
         <div class="dropdown-menu">
           <a
@@ -126,7 +126,11 @@ export default {
   border-bottom: 1px solid rgb(189, 187, 187);
   color: white;
   background-image: linear-gradient(to right, #e2336b, #fcac46);
-  width: 200px;
+  width: 170px;
+}
+
+#sort-btn span {
+  font-weight: bold;
 }
 
 #sort-btn:hover {
@@ -149,6 +153,10 @@ export default {
   align-items: center;
   justify-items: center;
   /* border:1px black solid; */
+}
+
+.dropdown-menu .dropdown-item {
+  font-weight: bold;
 }
 
 .each-post {
