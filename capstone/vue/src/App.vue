@@ -87,17 +87,17 @@
           <p class="contact-us">CONTACT US</p>
           <div class="contact-items">
             <a href="http://linkedin.com/in/chelsea-mauldin" target="blank"
-                ><i class="fa-brands fa-linkedin"></i
-              ></a>
+              ><i class="fa-brands fa-linkedin"></i
+            ></a>
             <a href="https://www.linkedin.com/in/edward-momanyi/" target="blank"
-                ><i class="fa-brands fa-linkedin"></i
-              ></a>
+              ><i class="fa-brands fa-linkedin"></i
+            ></a>
             <a href="https://www.linkedin.com/in/heewwoo/" target="blank"
-                ><i class="fa-brands fa-linkedin"></i
-              ></a>
+              ><i class="fa-brands fa-linkedin"></i
+            ></a>
             <a href="https://www.linkedin.com/in/vanessa-j-reed/" target="blank"
-                ><i class="fa-brands fa-linkedin"></i
-              ></a>
+              ><i class="fa-brands fa-linkedin"></i
+            ></a>
           </div>
         </div>
         <div id="cpr">
@@ -110,13 +110,19 @@
       <div class="title">
         <h1 class="momento-title">Momento</h1>
         <div class="search-bar">
-          <svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24" ><g><path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z" ></path></g></svg>
+          <svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24">
+            <g>
+              <path
+                d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"
+              ></path>
+            </g>
+          </svg>
           <input
             type="search"
             id="username-search"
             v-model="filter.username"
             placeholder="Search"
-            v-on:keyup.enter="getSearchResult"
+            v-on:keyup.enter="getSearchResult()"
           />
         </div>
       </div>
@@ -150,6 +156,19 @@ export default {
           this.$store.commit("SET_ALL_POSTS", response.data);
         });
       this.$router.push(`/profile/${this.filter.username}`);
+      apiService
+        .displayPostsByUsername(this.$route.params.username)
+        .then((response) => {
+          this.$store.commit("SET_ALL_POSTS", response.data);
+        });
+
+      apiService
+        .displayPhotosByUser(this.$route.params.username)
+        .then((response) => {
+          if (response.status == 200) {
+            this.$store.commit("SET_USER_PHOTOS", response.data);
+          }
+        });
     },
   },
   components: {
@@ -237,7 +256,7 @@ export default {
   text-justify: center;
   height: 100%;
   width: 100%;
-  font-family: 'Mukta', sans-serif;
+  font-family: "Mukta", sans-serif;
 }
 
 p.contact-us {
@@ -261,9 +280,8 @@ p.contact-us {
   display: flex;
   flex-direction: row;
   height: 100%;
-  font-family: 'Mukta', sans-serif;
+  font-family: "Mukta", sans-serif;
 }
-
 
 #pages-view {
   background: rgba(255, 255, 255, 0.562);
@@ -273,7 +291,6 @@ p.contact-us {
   padding-right: 0;
   overflow-y: scroll;
   height: 95vh;
-
 }
 
 #nav {
@@ -296,48 +313,48 @@ p.contact-us {
 }
 
 .search-bar {
-display: flex;
- line-height: 28px;
- align-items: center;
- position: relative;
- max-width: 190px;
+  display: flex;
+  line-height: 28px;
+  align-items: center;
+  position: relative;
+  max-width: 190px;
 }
 
 .search-icon {
   position: absolute;
- left: 1rem;
- fill: rgba(73, 55, 55, 0.733);
- width: 1rem;
- height: 1rem;
+  left: 1rem;
+  fill: rgba(73, 55, 55, 0.733);
+  width: 1rem;
+  height: 1rem;
 }
 
 #username-search {
   font-family: "Mukta", sans-serif;
   font-weight: bold;
- width: 100%;
- height: 35px;
- padding: 0 10px;
- padding-left: 40px;
- border-radius: 10px;
- background-color: rgba(255, 255, 255, 0.904);
- color: #0d0c22;
- margin-right: 10px;
- border: 2px solid rgba(202, 148, 233, 0.651);
- outline: none;
-transition: .25s ease;
+  width: 100%;
+  height: 35px;
+  padding: 0 10px;
+  padding-left: 40px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.904);
+  color: #0d0c22;
+  margin-right: 10px;
+  border: 2px solid rgba(202, 148, 233, 0.651);
+  outline: none;
+  transition: 0.25s ease;
 }
 
 #username-search::placeholder {
-  color: rgba(73, 55, 55, 0.733)
+  color: rgba(73, 55, 55, 0.733);
 }
 
-#username-search:focus, #username-search:hover {
+#username-search:focus,
+#username-search:hover {
   outline: none;
- border-color: rgba(86, 0, 247, 0.541);
- background-color: rgba(255, 255, 255, 0.904);
- box-shadow: 0 0 0 3px rgba(249, 239, 255, 0.849);
+  border-color: rgba(86, 0, 247, 0.541);
+  background-color: rgba(255, 255, 255, 0.904);
+  box-shadow: 0 0 0 3px rgba(249, 239, 255, 0.849);
 }
-
 
 #page {
   grid-area: link;
@@ -370,9 +387,7 @@ h1,
   flex: 1;
 }
 
-
 .fa-solid.fa-heart {
   color: black;
 }
-
 </style>
