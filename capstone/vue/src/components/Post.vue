@@ -33,7 +33,7 @@
         <b-dropdown
           variant="Outline Success"
           no-caret
-          text="·V·"
+          text="▼"
           v-if="
             post.username == this.$store.state.user.username &&
             this.$route.name == 'home'
@@ -478,6 +478,10 @@ div#caption2 button {
   border-radius: 15px;
   margin-left: 5px;
   background: rgba(119, 114, 199, 0.349);
+}
+
+.top-right-options button {
+  padding-top: 8px;
 }
 
 .top-right-options i:hover {
