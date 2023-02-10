@@ -47,6 +47,10 @@ public class ProfileController {
         dao.updateProfile(profile);
     }
 
+    @RequestMapping(path="/profiles/{username}/photos", method = RequestMethod.GET)
+    public List<String> getPhotosByUser(@PathVariable String username){
+        return dao.getPhotosByUser(username);
+    }
 
 
 }

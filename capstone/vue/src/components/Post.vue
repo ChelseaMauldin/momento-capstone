@@ -1,6 +1,13 @@
 <template>
-  <div class="post-container-main">
-    <div class="post-header">
+  <div class="post-container-main home-page">
+    <div v-if="this.$route.name == 'home'" class="post-header">
+      <div v-if="this.$route.name == 'home'" id="post-details-profile-picture-div">
+          <img
+            id="post-details-profile-picture"
+            :src="profile.profile_image"
+            alt="`${profile.username}'s image`"
+          />
+        </div>
       <h3 v-if="this.$route.name == 'home'" class="username-post">
         <router-link
           class="username-for-post"
@@ -173,6 +180,7 @@ export default {
   },
   data() {
     return {
+      profile: {},
       listOfComments: [],
       liked: false,
       filter: "",
@@ -271,6 +279,9 @@ export default {
       if (confirm("Do you want to remove photo?")) {
         apiService.removePost(this.post.post_id).then((response) => {
           if (response.status == 200) {
+            if(this.$store.state.userPhotos.length!=0){
+              this.$store.commit("REMOVE_PHOTO", this.photoUrl);
+            }
             apiService.displayPosts().then((response) => {
               this.$store.commit("SET_ALL_POSTS", response.data);
             });
@@ -295,6 +306,9 @@ export default {
         (eachComment) => eachComment.post_id == this.post.post_id
       );
     },
+      photoUrl(){
+        return this.post.photo_url
+      }
   },
 
   created() {
@@ -310,6 +324,12 @@ export default {
       .then((response) => {
         this.rateValue = response.data;
       });
+      apiService.displayProfile(this.post.username).then((response) => {
+      if(response.status==200){
+        this.profile= response.data;
+      }
+      
+    });
   },
 };
 </script>
@@ -342,11 +362,20 @@ export default {
 .comment-input:focus {
   outline: none;
 }
-
+#details-content{
+  margin:0;
+  padding:0;
+ 
+}
 #details-body {
   margin: 0;
   padding: 0;
 }
+.modal.fade{
+   padding:0;
+   margin:0;
+}
+
 .comment-input {
   border-style: none;
   width: 100%;

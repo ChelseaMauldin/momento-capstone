@@ -66,6 +66,22 @@ public class JdbcProfileDao implements ProfileDao {
         jdbcTemplate.update(sql,profile.getEmail(), profile.getName(), profile.getProfileImage(), profile.getProfileBio(), profile.getProfileId());
     }
 
+
+    public List<String> getPhotosByUser(String username){
+        String sql = "SELECT photo_url FROM posts WHERE username=?";
+
+        List<String> photoUrls = new ArrayList<>();
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
+
+        while(result.next()){
+            photoUrls.add(result.getString("photo_url"));
+        }
+
+        return photoUrls;
+
+    }
+
     private static Profile mapRowToProfile(SqlRowSet result){
         Profile profile = new Profile();
         profile.setProfileId(result.getInt("profile_id"));

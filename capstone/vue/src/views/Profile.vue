@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <profile v-bind:profile="profile" v-bind:listOfPosts="listOfPosts"/>
+    <profile v-bind:profile="profile" v-bind:listOfPosts="listOfPosts" :listOfPhotos="listOfPhotos"/>
   </div>
 </template>
 
@@ -23,6 +23,9 @@ export default {
     },
     listOfPosts(){
       return this.$store.state.allPosts.filter(post => post.username==this.$route.params.username)
+    },
+    listOfPhotos(){
+      return this.$store.state.userPhotos
     }
   },
  created() {
@@ -37,6 +40,12 @@ export default {
       .then((response) => {
         this.$store.commit("SET_ALL_POSTS", response.data)
       });
+
+    apiService.displayPhotosByUser(this.$route.params.username).then((response => {
+      if(response.status==200){
+        this.$store.commit("SET_USER_PHOTOS", response.data)
+      }
+    }))
   },
 };
 </script>
