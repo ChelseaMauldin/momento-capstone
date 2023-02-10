@@ -1,83 +1,108 @@
 <template>
   <div id="app">
     <div id="nav">
-      <i
-        ><router-link class="link-text" v-bind:to="{ name: 'home' }">
-          <img
-            class="home-image"
-            src="https://res.cloudinary.com/dkq5ktysl/image/upload/v1675876172/momentoApp_upqxds.jpg"
-            alt="Hand-drawn camera polaroid" /></router-link
-      ></i>
-      <i>&nbsp;</i>
-      <i class="nav-items fa-solid fa-house">
-        <router-link class="link-text" v-bind:to="{ name: 'home' }">
-          Home
-        </router-link>
-      </i>
-      <i
-        v-if="$store.state.token == ''"
-        class="nav-items fa-solid fa-arrow-right-to-bracket"
-        >&nbsp;&nbsp;<router-link
-          class="link-text"
-          v-bind:to="{ name: 'login' }"
-          >Login</router-link
-        ></i
-      >
-      <i v-if="$store.state.token != ''" class="nav-items fa-solid fa-heart"
-        >&nbsp;&nbsp;<router-link
-          class="link-text"
-          v-bind:to="{ name: 'favorites' }"
-          >Favorites</router-link
+      <div id="upper-nav">
+        <i
+          ><router-link class="link-text" v-bind:to="{ name: 'home' }">
+            <img
+              class="home-image"
+              src="https://res.cloudinary.com/dkq5ktysl/image/upload/v1675876172/momentoApp_upqxds.jpg"
+              alt="Hand-drawn camera polaroid" /></router-link
+        ></i>
+        <i>&nbsp;</i>
+        <i class="nav-items fa-solid fa-house">
+          <router-link class="link-text" v-bind:to="{ name: 'home' }">
+            Home
+          </router-link>
+        </i>
+        <i
+          v-if="$store.state.token == ''"
+          class="nav-items fa-solid fa-arrow-right-to-bracket"
+          >&nbsp;&nbsp;<router-link
+            class="link-text"
+            v-bind:to="{ name: 'login' }"
+            >Login</router-link
+          ></i
         >
-      </i>
-      <i v-if="$store.state.token != ''" class="nav-items fa-solid fa-user"
-        >&nbsp;&nbsp;<router-link
-          class="link-text"
-          v-bind:to="{
-            name: 'profile',
-            params: { username: this.$store.state.user.username },
-          }"
-          >Profile</router-link
-        >
-      </i>
-      <i
-        v-if="$store.state.token != ''"
-        class="nav-items fa-solid fa-arrow-right-to-bracket"
-        >&nbsp;&nbsp;<router-link
-          class="link-text"
-          v-bind:to="{ name: 'logout' }"
-          >Logout</router-link
-        >
-      </i>
-
-      <!-- &nbsp;|&nbsp; -->
-      <i
-        v-if="$store.state.token != ''"
-        class="nav-items fa-regular fa-square-plus"
-        data-toggle="modal"
-        data-target="#createModal"
-        >&nbsp;
-        <span id="create-modal-link">Create</span>
-      </i>
-      <div class="modal fade" id="createModal" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Create a Post</h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
+        <i v-if="$store.state.token != ''" class="nav-items fa-solid fa-heart"
+          >&nbsp;&nbsp;<router-link
+            class="link-text"
+            v-bind:to="{ name: 'favorites' }"
+            >Favorites</router-link
+          >
+        </i>
+        <i v-if="$store.state.token != ''" class="nav-items fa-solid fa-user"
+          >&nbsp;&nbsp;<router-link
+            class="link-text"
+            v-bind:to="{
+              name: 'profile',
+              params: { username: this.$store.state.user.username },
+            }"
+            >Profile</router-link
+          >
+        </i>
+        <i
+          v-if="$store.state.token != ''"
+          class="nav-items fa-solid fa-arrow-right-to-bracket"
+          >&nbsp;&nbsp;<router-link
+            class="link-text"
+            v-bind:to="{ name: 'logout' }"
+            >Logout</router-link
+          >
+        </i>
+        <i
+          v-if="$store.state.token != ''"
+          class="nav-items fa-regular fa-square-plus"
+          data-toggle="modal"
+          data-target="#createModal"
+          >&nbsp;
+          <span id="create-modal-link">Create</span>
+        </i>
+        <div class="modal fade" id="createModal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Create a Post
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <create-post />
+              </div>
+              <div class="modal-footer"></div>
             </div>
-            <div class="modal-body">
-              <create-post />
-            </div>
-            <div class="modal-footer"></div>
           </div>
+        </div>
+      </div>
+      <div id="footer">
+        <div class="contact">
+          <p class="contact-us">CONTACT US</p>
+          <div class="contact-items">
+            <a href="http://linkedin.com/in/chelsea-mauldin" target="blank"
+                ><i class="fa-brands fa-linkedin"></i
+              ></a>
+            <a href="https://www.linkedin.com/in/edward-momanyi/" target="blank"
+                ><i class="fa-brands fa-linkedin"></i
+              ></a>
+            <a href="https://www.linkedin.com/in/heewwoo/" target="blank"
+                ><i class="fa-brands fa-linkedin"></i
+              ></a>
+            <a href="https://www.linkedin.com/in/vanessa-j-reed/" target="blank"
+                ><i class="fa-brands fa-linkedin"></i
+              ></a>
+          </div>
+        </div>
+        <div id="cpr">
+          <i class="fa-regular fa-copyright"></i>&nbsp;
+          <span class="copyright">2023 Momento</span>
         </div>
       </div>
     </div>
@@ -129,14 +154,6 @@ export default {
   components: {
     createPost,
   },
-  // methods: { -- leaving this here for now, it's not being used yet
-  //   search: {
-  //     searchForUser() {
-  //       const username = this.filter.username;
-  //       this.$router.push({ name: "profile", params: { username } });
-  //     },
-  //   },
-  // },
   mounted() {
     apiService
       .displayFavoritePosts(this.$store.state.user.username)
@@ -156,10 +173,6 @@ export default {
 </script>
 
 <style>
-/* .home-link {
-  padding-bottom: 100px;
-} */
-
 .home-text {
   text-decoration: none;
   font-family: "Mukta", sans-serif;
@@ -168,8 +181,6 @@ export default {
 }
 
 .home-image {
-  /* border: 1px solid #ddd;
-  border-radius: 4px; */
   margin-top: 0px;
   width: 100px;
   margin-bottom: 20px;
@@ -180,15 +191,11 @@ export default {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
-/* .nav-items.fa-solid.fa-house-user {
-  padding-top: 70px;
-} */
-
 .nav-items {
-  padding-bottom: 20px;
+  padding-bottom: 15px;
   font-size: 30px;
   border-bottom: solid rgba(255, 255, 255, 0.459) 1px;
-  margin-bottom: 70px;
+  margin-bottom: 60px;
   margin-right: 4%;
   margin-left: 4%;
 }
@@ -197,33 +204,64 @@ export default {
   margin-left: 450px;
   font-family: "Caveat", cursive;
   font-size: 65px;
-  /* font-weight: bold; */
 }
 
 #app {
-  /* background: rgb(238, 174, 202); */
-  /* background: linear-gradient(
-    90deg,
-    rgba(247, 216, 230, 1)
- 0%,
-    rgba(255, 51, 102, 0.2) 100%
-  ); */
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-template-areas: "nav link";
-  /* margin: -8px; */
   height: 100vh;
-  width: 100%;
-  /* flex-basis: 100%; */
-  font-family: Arial, Helvetica, sans-serif;
+  width: 100vw;
   background: rgb(238, 174, 202);
   background: linear-gradient(
     90deg,
     rgba(238, 174, 202, 0.753) 0%,
     rgba(202, 148, 233, 0.671) 100%
   );
+  font-family: Arial, Helvetica, sans-serif;
   overflow-y: hidden;
 }
+
+#upper-nav {
+  display: flex;
+  flex-direction: column;
+  widows: 100%;
+}
+
+#footer .contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-justify: center;
+  height: 100%;
+  width: 100%;
+  font-family: 'Mukta', sans-serif;
+}
+
+p.contact-us {
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 100%;
+}
+.contact div.contact-items {
+  display: flex;
+  margin: 0px 5px;
+}
+
+.contact-items i {
+  font-size: 30px;
+  color: rgb(63, 54, 54);
+  margin: 0 10px;
+}
+
+#footer .cpr {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  font-family: 'Mukta', sans-serif;
+}
+
 
 #pages-view {
   background: rgba(255, 255, 255, 0.562);
@@ -240,14 +278,12 @@ export default {
   grid-area: nav;
   display: flex;
   flex-direction: column;
-  /* background: rgba(171, 71, 188, 0.2); */
   text-align: center;
   border: rgba(255, 255, 255, 0.459) 1px solid;
   height: 100%;
+  align-items: center;
+  width: 100%;
 }
-/* #nav i {
-  margin: 5px 10px 10px 10px;
-} */
 
 #nav i .link-text {
   text-decoration: none;

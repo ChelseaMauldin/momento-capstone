@@ -25,7 +25,7 @@
         <div class="submit-new-comment-pd">
           <input
             class="comment-input"
-            v-if="$store.state.token != '' && this.$route.name == 'home'"
+            v-if="$store.state.token != '' && (this.$route.name == 'home' || this.$route.name == 'profile')"
             type="text"
             v-model="filter"
             v-on:keyup.enter="createComment()"
