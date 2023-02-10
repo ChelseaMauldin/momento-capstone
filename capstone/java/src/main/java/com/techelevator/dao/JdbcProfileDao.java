@@ -68,7 +68,7 @@ public class JdbcProfileDao implements ProfileDao {
 
 
     public List<String> getPhotosByUser(String username){
-        String sql = "SELECT photo_url FROM posts WHERE username=?";
+        String sql = "SELECT photo_url FROM posts WHERE username=? ORDER BY post_id DESC";
 
         List<String> photoUrls = new ArrayList<>();
 

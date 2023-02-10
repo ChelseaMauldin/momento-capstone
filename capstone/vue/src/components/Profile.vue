@@ -6,7 +6,6 @@
           id="profile-pic"
           class="profile-picture"
           :src="profile.profile_image"
-          :alt="`${profile.name}'s profile image`"
         />
       </div>
       <div class="name-and-bio">
